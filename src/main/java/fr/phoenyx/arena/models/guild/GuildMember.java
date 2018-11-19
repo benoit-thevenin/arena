@@ -25,4 +25,8 @@ public class GuildMember extends GenericEntity {
 
     @Enumerated(EnumType.STRING)
     private GuildRole guildRole;
+
+    @OneToOne
+    @JoinColumn(name = "ID_GUILD")
+    private Guild guild;
 }

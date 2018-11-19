@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import fr.phoenyx.arena.enums.item.Power;
 import fr.phoenyx.arena.enums.item.Rarity;
 import fr.phoenyx.arena.models.GenericEntity;
 import lombok.Data;
@@ -40,6 +41,5 @@ public class Item extends GenericEntity {
     @JoinColumn(name = "ID_ITEM")
     private List<Bonus> bonuses = new ArrayList<>();
 
-    //TODO
     private Power power;
 }

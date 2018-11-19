@@ -6,7 +6,7 @@ import java.util.Set;
 
 import fr.phoenyx.arena.models.Build;
 import fr.phoenyx.arena.models.Player;
-import fr.phoenyx.arena.models.guild.Guild;
+import fr.phoenyx.arena.models.guild.GuildMember;
 import fr.phoenyx.arena.models.item.Item;
 
 public class PlayerBuilder {
@@ -87,8 +87,8 @@ public class PlayerBuilder {
         return this;
     }
 
-    public PlayerBuilder guild(Guild guild) {
-        player.setGuild(guild);
+    public PlayerBuilder guildMember(GuildMember guildMember) {
+        player.setGuildMember(guildMember);
         return this;
     }
 

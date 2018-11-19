@@ -13,11 +13,11 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import fr.phoenyx.arena.models.guild.Guild;
+import fr.phoenyx.arena.models.guild.GuildMember;
 import fr.phoenyx.arena.models.item.Item;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -61,8 +61,8 @@ public class Player extends GenericEntity {
     private List<Build> builds = new ArrayList<>();
 
     //FIXME manage the GuildMember link
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Guild guild;
+    @OneToOne(fetch = FetchType.LAZY)
+    private GuildMember guildMember;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "PLAYER_FRIEND",

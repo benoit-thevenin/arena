@@ -32,9 +32,5 @@ public class Battle extends GenericEntity {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_BATTLE")
-    private Set<Hero> heroes = new HashSet<>();
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_BATTLE")
     private Set<Round> rounds = new HashSet<>();
 }

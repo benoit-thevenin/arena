@@ -28,6 +28,10 @@ public class Round extends GenericEntity implements Comparable<Round> {
     @JoinColumn(name = "ID_ROUND")
     private Set<Action> actionsPerformed = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID_BATTLE")
+    private Set<Hero> heroes = new HashSet<>();
+
     @Override
     public int compareTo(Round other) {
         return Integer.compare(roundNumber, other.getRoundNumber());
