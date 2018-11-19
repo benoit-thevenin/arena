@@ -23,3 +23,9 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+~.mv.db
+~.trace.db
+.vscode/launch.json
+.vscode/launch.test.json
+.vscode/settings.json
+.vscode/temp.sql
