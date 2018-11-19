@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import fr.phoenyx.arena.models.GenericEntity;
@@ -20,13 +21,13 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "ACTION")
+@Table(name = "ACTIONS")
 public class Action extends GenericEntity implements Comparable<Action> {
 
-    @Column(name = "ORDER")
-    private int order;
+    @Column(name = "ACTION_ORDER")
+    private int actionOrder;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_CASTER")
     private Hero caster;
 
@@ -46,6 +47,6 @@ public class Action extends GenericEntity implements Comparable<Action> {
 
     @Override
     public int compareTo(Action other) {
-        return Integer.compare(order, other.getOrder());
+        return Integer.compare(actionOrder, other.getActionOrder());
     }
 }

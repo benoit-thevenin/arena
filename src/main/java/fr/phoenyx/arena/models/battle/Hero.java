@@ -1,6 +1,7 @@
 package fr.phoenyx.arena.models.battle;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -18,6 +19,9 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "HERO")
 public class Hero extends GenericEntity {
+
+    @Column(name = "LEVEL")
+    private int level;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_BUILD")

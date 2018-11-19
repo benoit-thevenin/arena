@@ -3,7 +3,9 @@ package fr.phoenyx.arena.models.guild;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,14 +21,14 @@ import lombok.EqualsAndHashCode;
 @Table(name = "GUILD_MEMBER")
 public class GuildMember extends GenericEntity {
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_PLAYER")
     private Player player;
 
     @Enumerated(EnumType.STRING)
     private GuildRole guildRole;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_GUILD")
     private Guild guild;
 }
