@@ -1,5 +1,17 @@
 package fr.phoenyx.arena.models.battle;
 
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_AGILITY;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_CURRENT_HEALTH;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_CURRENT_MANA;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_EFFECT;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_SHEET;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_INIT_HEALTH;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_INIT_MANA;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_INTELLIGENCE;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_STRENGTH;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.TABLE_SHEETS;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.TABLE_SHEETS_EFFECTS;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +23,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import fr.phoenyx.arena.enums.skill.Effect;
@@ -21,34 +34,36 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "SHEET")
+@Table(name = TABLE_SHEETS)
 public class Sheet extends GenericEntity {
 
-    //FIXME one sheet per round?
-    @Column(name = "INIT_HEALTH")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "sheet")
+    private Hero hero;
+
+    @Column(name = COLUMN_INIT_HEALTH, nullable = false)
     private int initHealth;
 
-    @Column(name = "INIT_MANA")
+    @Column(name = COLUMN_INIT_MANA, nullable = false)
     private int initMana;
 
-    @Column(name = "STRENGTH")
+    @Column(name = COLUMN_STRENGTH, nullable = false)
     private int strength;
 
-    @Column(name = "AGILITY")
+    @Column(name = COLUMN_AGILITY, nullable = false)
     private int agility;
 
-    @Column(name = "INTELLIGENCE")
+    @Column(name = COLUMN_INTELLIGENCE, nullable = false)
     private int intelligence;
 
-    @Column(name = "CURRENT_HEALTH")
+    @Column(name = COLUMN_CURRENT_HEALTH, nullable = false)
     private int currentHealth;
 
-    @Column(name = "CURRENT_MANA")
+    @Column(name = COLUMN_CURRENT_MANA, nullable = false)
     private int currentMana;
 
     @ElementCollection(fetch = FetchType.LAZY, targetClass = Effect.class)
-    @JoinTable(name = "SHEET_EFFECT", joinColumns = @JoinColumn(name = "ID_SHEET"))
-    @Column(name = "EFFECT")
+    @JoinTable(name = TABLE_SHEETS_EFFECTS, joinColumns = @JoinColumn(name = COLUMN_ID_SHEET))
+    @Column(name = COLUMN_EFFECT, nullable = false)
     @Enumerated(EnumType.STRING)
     private List<Effect> effects = new ArrayList<>();
 }

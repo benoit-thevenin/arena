@@ -1,5 +1,13 @@
 package fr.phoenyx.arena.models.item;
 
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_ITEM;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_LEVEL;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_NAME;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_POWER;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_QUANTITY;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_RARITY;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.TABLE_ITEMS;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,24 +30,27 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "ITEM")
+@Table(name = TABLE_ITEMS)
 public class Item extends GenericEntity {
 
-    @Column(name = "NAME")
+    @Column(name = COLUMN_NAME, nullable = false)
     private String name;
 
-    @Column(name = "LEVEL")
+    @Column(name = COLUMN_LEVEL, nullable = false)
     private int level;
 
-    @Column(name = "QUANTITY")
+    @Column(name = COLUMN_QUANTITY, nullable = false)
     private int quantity;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = COLUMN_RARITY, nullable = false)
     private Rarity rarity;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_ITEM")
+    @JoinColumn(name = COLUMN_ID_ITEM)
     private List<Bonus> bonuses = new ArrayList<>();
 
+    @Enumerated
+    @Column(name = COLUMN_POWER)
     private Power power;
 }

@@ -1,5 +1,10 @@
 package fr.phoenyx.arena.models;
 
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_DATE_CREATION;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_DATE_MODIFICATION;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_MODIFIER;
+
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -19,18 +24,23 @@ public abstract class GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = COLUMN_ID)
     protected Long id;
 
-    @Column(name = "DATE_CREATION")
+    @Column(name = COLUMN_DATE_CREATION, nullable = false)
     protected LocalDateTime dateCreation;
 
-    @Column(name = "DATE_MODIFICATION")
+    @Column(name = COLUMN_DATE_MODIFICATION)
     protected LocalDateTime dateModification;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_MODIFIER", nullable = false)
+    @JoinColumn(name = COLUMN_ID_MODIFIER)
     protected Player modifier;
 
+    /**
+     * This method should be called whenever a daughter class is calling an update method
+     * @param modifier the player in cause of the update
+     */
     public void update(Player modifier) {
         this.modifier = modifier;
         dateModification = LocalDateTime.now();

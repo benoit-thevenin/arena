@@ -1,5 +1,10 @@
 package fr.phoenyx.arena.models.battle;
 
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_BUILD;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_SHEET;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_LEVEL;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.TABLE_HEROES;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,17 +22,17 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "HERO")
+@Table(name = TABLE_HEROES)
 public class Hero extends GenericEntity {
 
-    @Column(name = "LEVEL")
+    @Column(name = COLUMN_LEVEL, nullable = false)
     private int level;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_BUILD")
+    @JoinColumn(name = COLUMN_ID_BUILD)
     private Build build;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_SHEET")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
+    @JoinColumn(name = COLUMN_ID_SHEET)
     private Sheet sheet;
 }

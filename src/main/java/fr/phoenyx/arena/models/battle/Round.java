@@ -1,5 +1,10 @@
 package fr.phoenyx.arena.models.battle;
 
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_BATTLE;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_ROUND;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ROUND_NUMBER;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.TABLE_ROUNDS;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,18 +23,18 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "ROUND")
+@Table(name = TABLE_ROUNDS)
 public class Round extends GenericEntity implements Comparable<Round> {
 
-    @Column(name = "ROUND_NUMBER")
+    @Column(name = COLUMN_ROUND_NUMBER, nullable = false)
     private int roundNumber;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_ROUND")
+    @JoinColumn(name = COLUMN_ID_ROUND)
     private Set<Action> actionsPerformed = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_BATTLE")
+    @JoinColumn(name = COLUMN_ID_BATTLE)
     private Set<Hero> heroes = new HashSet<>();
 
     @Override

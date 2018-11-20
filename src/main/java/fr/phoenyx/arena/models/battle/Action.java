@@ -1,5 +1,14 @@
 package fr.phoenyx.arena.models.battle;
 
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ACTION_ORDER;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_ACTION;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_CASTER;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_HERO;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_SKILL;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.TABLE_ACTIONS;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.TABLE_ACTIONS_HEROES;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,28 +30,28 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "ACTIONS")
+@Table(name = TABLE_ACTIONS)
 public class Action extends GenericEntity implements Comparable<Action> {
 
-    @Column(name = "ACTION_ORDER")
+    @Column(name = COLUMN_ACTION_ORDER, nullable = false)
     private int actionOrder;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_CASTER")
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = COLUMN_ID_CASTER)
     private Hero caster;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_SKILL")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = COLUMN_ID_SKILL)
     private ActiveSkill skill;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "ACTION_HERO",
-        joinColumns = @JoinColumn(name = "ID_ACTION", referencedColumnName = "ID"),
-        inverseJoinColumns = @JoinColumn(name = "ID_HERO", referencedColumnName = "ID")
+    @JoinTable(name = TABLE_ACTIONS_HEROES,
+        joinColumns = @JoinColumn(name = COLUMN_ID_ACTION, referencedColumnName = COLUMN_ID),
+        inverseJoinColumns = @JoinColumn(name = COLUMN_ID_HERO, referencedColumnName = COLUMN_ID)
     )
     private Set<Hero> targets = new HashSet<>();
 
-    @Column(name = "RAND")
+    @Column(name = "RAND", nullable = false)
     private double rand;
 
     @Override
