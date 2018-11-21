@@ -5,8 +5,8 @@ public class DatabaseSchemaConstants {
     public static final String TABLE_ACTIONS = "ACTIONS";
     public static final String TABLE_ACTIONS_HEROES = "ACTIONS_HEROES";
     public static final String TABLE_ACTIVE_SKILLS = "ACTIVE_SKILLS";
+    public static final String TABLE_APPLICANTS = "APPLICANTS";
     public static final String TABLE_BATTLES = "BATTLES";
-    public static final String TABLE_BATTLES_PLAYERS = "BATTLES_PLAYERS";
     public static final String TABLE_BONUSES = "BONUSES";
     public static final String TABLE_BUILDS = "BUILDS";
     public static final String TABLE_BUILDS_ITEMS = "BUILDS_ITEMS";
@@ -14,6 +14,8 @@ public class DatabaseSchemaConstants {
     public static final String TABLE_GUILDS = "GUILDS";
     public static final String TABLE_GUILD_MEMBERS = "GUILD_MEMBERS";
     public static final String TABLE_HEROES = "HEROES";
+    public static final String TABLE_HERO_BUILDS = "HERO_BUILDS";
+    public static final String TABLE_HERO_BUILDS_ITEMS = "HERO_BUILDS_ITEMS";
     public static final String TABLE_ITEMS = "ITEMS";
     public static final String TABLE_PASSIVE_SKILLS = "PASSIVE_SKILLS";
     public static final String TABLE_PLAYERS = "PLAYERS";
@@ -22,6 +24,7 @@ public class DatabaseSchemaConstants {
     public static final String TABLE_SHEETS = "SHEETS";
     public static final String TABLE_SHEETS_EFFECTS = "SHEETS_EFFECTS";
     public static final String TABLE_STRATEGIES = "STRATEGIES";
+    public static final String TABLE_TEAMS = "TEAMS";
 
     public static final String COLUMN_ACTION_ORDER = "ACTION_ORDER";
     public static final String COLUMN_ACTIVE_SKILL = "ACTIVE_SKILL";
@@ -32,6 +35,7 @@ public class DatabaseSchemaConstants {
     public static final String COLUMN_DATE_CREATION = "DATE_CREATION";
     public static final String COLUMN_DATE_MODIFICATION = "DATE_MODIFICATION";
     public static final String COLUMN_DESCRIPTION = "DESCRIPTION";
+    public static final String COLUMN_DIMENSION = "DIMENSION";
     public static final String COLUMN_EFFECT = "EFFECT";
     public static final String COLUMN_EMAIL = "EMAIL";
     public static final String COLUMN_EXPERIENCE = "EXPERIENCE";
@@ -46,7 +50,9 @@ public class DatabaseSchemaConstants {
     public static final String COLUMN_ID_GUILD = "ID_GUILD";
     public static final String COLUMN_ID_GUILD_MEMBER = "ID_GUILD_MEMBER";
     public static final String COLUMN_ID_HERO = "ID_HERO";
+    public static final String COLUMN_ID_HERO_BUILD = "ID_HERO_BUILD";
     public static final String COLUMN_ID_ITEM = "ID_ITEM";
+    public static final String COLUMN_ID_LEADER = "ID_LEADER";
     public static final String COLUMN_ID_MODIFIER = "ID_MODIFIER";
     public static final String COLUMN_ID_OWNER = "ID_OWNER";
     public static final String COLUMN_ID_PLAYER = "ID_PLAYER";
@@ -56,6 +62,9 @@ public class DatabaseSchemaConstants {
     public static final String COLUMN_ID_SHEET = "ID_SHEET";
     public static final String COLUMN_ID_SKILL = "ID_SKILL";
     public static final String COLUMN_ID_STRATEGY = "ID_STRATEGY";
+    public static final String COLUMN_ID_TEAM = "ID_TEAM";
+    public static final String COLUMN_ID_TEAM1 = "ID_TEAM1";
+    public static final String COLUMN_ID_TEAM2 = "ID_TEAM2";
     public static final String COLUMN_INIT_HEALTH = "INIT_HEALTH";
     public static final String COLUMN_INIT_MANA = "INIT_MANA";
     public static final String COLUMN_INTELLIGENCE = "INTELLIGENCE";

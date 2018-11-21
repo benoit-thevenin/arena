@@ -1,6 +1,6 @@
 package fr.phoenyx.arena.models.battle;
 
-import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_BUILD;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_HERO_BUILD;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_SHEET;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_LEVEL;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.TABLE_HEROES;
@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import fr.phoenyx.arena.models.Build;
 import fr.phoenyx.arena.models.GenericEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,9 +27,9 @@ public class Hero extends GenericEntity {
     @Column(name = COLUMN_LEVEL, nullable = false)
     private int level;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = COLUMN_ID_BUILD)
-    private Build build;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = COLUMN_ID_HERO_BUILD)
+    private HeroBuild heroBuild;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
     @JoinColumn(name = COLUMN_ID_SHEET)
