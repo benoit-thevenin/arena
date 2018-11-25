@@ -1,6 +1,7 @@
 package fr.phoenyx.arena.models.item;
 
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_ITEM;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ITEM_TYPE;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_LEVEL;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_NAME;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_POWER;
@@ -21,6 +22,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import fr.phoenyx.arena.enums.item.ItemType;
 import fr.phoenyx.arena.enums.item.Power;
 import fr.phoenyx.arena.enums.item.Rarity;
 import fr.phoenyx.arena.models.GenericEntity;
@@ -41,6 +43,10 @@ public class Item extends GenericEntity {
 
     @Column(name = COLUMN_QUANTITY, nullable = false)
     private int quantity;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = COLUMN_ITEM_TYPE, nullable = false)
+    private ItemType itemType;
 
     @Enumerated(EnumType.STRING)
     @Column(name = COLUMN_RARITY, nullable = false)

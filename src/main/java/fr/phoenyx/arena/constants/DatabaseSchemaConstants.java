@@ -68,6 +68,7 @@ public class DatabaseSchemaConstants {
     public static final String COLUMN_INIT_HEALTH = "INIT_HEALTH";
     public static final String COLUMN_INIT_MANA = "INIT_MANA";
     public static final String COLUMN_INTELLIGENCE = "INTELLIGENCE";
+    public static final String COLUMN_ITEM_TYPE = "ITEM_TYPE";
     public static final String COLUMN_IS_BUFF = "IS_BUFF";
     public static final String COLUMN_LAST_CONNECTION = "LAST_CONNECTION";
     public static final String COLUMN_LEVEL = "LEVEL";

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.phoenyx.arena.models.item.Bonus;
+import fr.phoenyx.arena.dtos.item.BonusDTO;
 import fr.phoenyx.arena.services.item.BonusService;
 
 @RestController
@@ -16,7 +16,7 @@ public class BonusController {
     private BonusService bonusService;
 
     @GetMapping("/bonuses")
-    public List<Bonus> getAllBonuses() {
+    public List<BonusDTO> getAllBonuses() {
         return bonusService.getAllBonuses();
     }
 }
