@@ -17,7 +17,7 @@ public class BonusService {
 
     public List<BonusDTO> getAllBonuses() {
         return bonusRepository.findAll().stream()
-                .map(bonus -> new BonusDTO(bonus))
+                .map(BonusDTO::new)
                 .collect(Collectors.toList());
     }
 }

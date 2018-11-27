@@ -17,7 +17,7 @@ public class SheetService {
 
     public List<SheetDTO> getAllSheets() {
         return sheetRepository.findAll().stream()
-                .map(sheet -> new SheetDTO(sheet))
+                .map(SheetDTO::new)
                 .collect(Collectors.toList());
     }
 }

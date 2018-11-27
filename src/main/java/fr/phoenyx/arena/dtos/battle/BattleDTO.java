@@ -26,7 +26,7 @@ public class BattleDTO extends GenericEntityDTO {
         team1 = new TeamDTO(battle.getTeam1());
         team2 = new TeamDTO(battle.getTeam2());
         rounds = battle.getRounds().stream()
-                .map(round -> new RoundDTO(round))
+                .map(RoundDTO::new)
                 .collect(Collectors.toSet());
     }
 }

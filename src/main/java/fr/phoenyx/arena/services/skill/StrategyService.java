@@ -17,7 +17,7 @@ public class StrategyService {
 
     public List<StrategyDTO> getAllStrategies() {
         return strategyRepository.findAll().stream()
-                .map(strategy -> new StrategyDTO(strategy))
+                .map(StrategyDTO::new)
                 .collect(Collectors.toList());
     }
 }

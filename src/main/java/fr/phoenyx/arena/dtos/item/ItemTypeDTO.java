@@ -22,7 +22,7 @@ public class ItemTypeDTO {
         description = itemType.getDescription();
         if (itemType.getItemSlots() != null && itemType.getItemSlots().length > 0) {
             itemSlots = Arrays.stream(itemType.getItemSlots())
-                    .map(itemSlot -> new ItemSlotDTO(itemSlot))
+                    .map(ItemSlotDTO::new)
                     .collect(Collectors.toList());
         }
     }

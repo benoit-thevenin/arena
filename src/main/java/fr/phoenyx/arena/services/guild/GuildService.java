@@ -17,7 +17,7 @@ public class GuildService {
 
     public List<GuildDTO> getAllGuilds() {
         return guildRepository.findAll().stream()
-                .map(guild -> new GuildDTO(guild))
+                .map(GuildDTO::new)
                 .collect(Collectors.toList());
     }
 }

@@ -20,13 +20,13 @@ public class ItemService {
 
     public List<ItemDTO> getAllItems() {
         return itemRepository.findAll().stream()
-                .map(item -> new ItemDTO(item))
+                .map(ItemDTO::new)
                 .collect(Collectors.toList());
     }
 
     public List<RecipeDTO> getAllRecipes() {
         return Arrays.stream(ItemRecipe.values())
-                .map(itemRecipe -> new RecipeDTO(itemRecipe))
+                .map(RecipeDTO::new)
                 .collect(Collectors.toList());
     }
 }

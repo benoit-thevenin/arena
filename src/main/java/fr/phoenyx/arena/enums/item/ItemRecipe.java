@@ -76,7 +76,7 @@ public enum ItemRecipe {
     WAND_RARE(ItemType.WAND, Rarity.RARE, 200, 100, 50, 0, 0),
     WAND_EPIC(ItemType.WAND, Rarity.EPIC, 400, 200, 100, 50, 0),
     WAND_LEGENDARY(ItemType.WAND, Rarity.LEGENDARY, 800, 400, 200, 100, 50),
-    FIST_ItemType_COMMON(ItemType.FIST_WEAPON, Rarity.COMMON, 50, 0, 0, 0, 0),
+    FIST_WEAPON_COMMON(ItemType.FIST_WEAPON, Rarity.COMMON, 50, 0, 0, 0, 0),
     FIST_WEAPON_MAGIC(ItemType.FIST_WEAPON, Rarity.MAGIC, 100, 50, 0, 0, 0),
     FIST_WEAPON_RARE(ItemType.FIST_WEAPON, Rarity.RARE, 200, 100, 50, 0, 0),
     FIST_WEAPON_EPIC(ItemType.FIST_WEAPON, Rarity.EPIC, 400, 200, 100, 50, 0),

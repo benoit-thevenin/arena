@@ -22,7 +22,7 @@ public class PassiveSkillDTO extends GenericEntityDTO {
 
     public PassiveSkillDTO(PassiveSkill passiveSkill) {
         super(passiveSkill);
-        PassiveSkillEnum passiveSkillEnum = passiveSkill.getPassiveSkill();
+        PassiveSkillEnum passiveSkillEnum = passiveSkill.getPassiveSkillEnum();
         name = passiveSkillEnum.getName();
         description = passiveSkillEnum.getDescription();
         if (passiveSkillEnum.getCharacteristic() != null) {

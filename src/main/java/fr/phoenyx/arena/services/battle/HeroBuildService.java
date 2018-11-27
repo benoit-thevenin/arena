@@ -17,7 +17,7 @@ public class HeroBuildService {
 
     public List<HeroBuildDTO> getAllHeroBuilds() {
         return heroBuildRepository.findAll().stream()
-                .map(heroBuild -> new HeroBuildDTO(heroBuild))
+                .map(HeroBuildDTO::new)
                 .collect(Collectors.toList());
     }
 }

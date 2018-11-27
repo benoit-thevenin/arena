@@ -17,7 +17,7 @@ public class PlayerService {
 
     public List<PlayerDTO> getAllPlayers() {
         return playerRepository.findAll().stream()
-                .map(player -> new PlayerDTO(player))
+                .map(PlayerDTO::new)
                 .collect(Collectors.toList());
     }
 }

@@ -34,7 +34,7 @@ public class ActiveSkill extends GenericEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = COLUMN_ACTIVE_SKILL, nullable = false)
-    private ActiveSkillEnum activeSkill;
+    private ActiveSkillEnum activeSkillEnum;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = COLUMN_ID_STRATEGY)

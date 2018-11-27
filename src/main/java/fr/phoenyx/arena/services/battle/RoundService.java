@@ -17,7 +17,7 @@ public class RoundService {
 
     public List<RoundDTO> getAllRounds() {
         return roundRepository.findAll().stream()
-                .map(round -> new RoundDTO(round))
+                .map(RoundDTO::new)
                 .collect(Collectors.toList());
     }
 }

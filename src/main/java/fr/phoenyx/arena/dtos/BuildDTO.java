@@ -36,19 +36,19 @@ public class BuildDTO extends GenericEntityDTO {
         intelligence = build.getIntelligence();
         agility = build.getAgility();
         activeSkills = build.getActiveSkills().stream()
-                .map(activeSkill -> new ActiveSkillDTO(activeSkill))
+                .map(ActiveSkillDTO::new)
                 .collect(Collectors.toList());
         passiveSkills = build.getPassiveSkills().stream()
-                .map(passiveSkill -> new PassiveSkillDTO(passiveSkill))
+                .map(PassiveSkillDTO::new)
                 .collect(Collectors.toList());
         stuff = build.getStuff().stream()
-                .map(item -> new ItemDTO(item))
+                .map(ItemDTO::new)
                 .collect(Collectors.toList());
         if (build.getSpecialization() != null) {
             specialization = build.getSpecialization().getDescription();
         }
         types = build.getTypes().stream()
-                .map(type -> new TypeDTO(type))
+                .map(TypeDTO::new)
                 .collect(Collectors.toSet());
     }
 }

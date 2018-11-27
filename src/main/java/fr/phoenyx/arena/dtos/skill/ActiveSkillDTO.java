@@ -28,7 +28,7 @@ public class ActiveSkillDTO extends GenericEntityDTO {
 
     public ActiveSkillDTO(ActiveSkill activeSkill) {
         super(activeSkill);
-        ActiveSkillEnum activeSkillEnum = activeSkill.getActiveSkill();
+        ActiveSkillEnum activeSkillEnum = activeSkill.getActiveSkillEnum();
         name = activeSkillEnum.getName();
         description = activeSkillEnum.getDescription();
         cooldown = activeSkillEnum.getCooldown();

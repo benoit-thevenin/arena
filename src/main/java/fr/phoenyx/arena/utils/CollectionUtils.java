@@ -4,6 +4,8 @@ import java.util.Collection;
 
 public class CollectionUtils {
 
+    private CollectionUtils() {}
+
     public static final boolean isEmpty(Collection<?> c) {
         return c == null || c.isEmpty();
     }

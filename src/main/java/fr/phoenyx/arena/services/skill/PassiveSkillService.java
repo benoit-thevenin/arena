@@ -17,7 +17,7 @@ public class PassiveSkillService {
 
     public List<PassiveSkillDTO> getAllPassiveSkills() {
         return passiveSkillRepository.findAll().stream()
-                .map(passiveSkill -> new PassiveSkillDTO(passiveSkill))
+                .map(PassiveSkillDTO::new)
                 .collect(Collectors.toList());
     }
 }

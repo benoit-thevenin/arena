@@ -31,5 +31,5 @@ public class PassiveSkill extends GenericEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = COLUMN_PASSIVE_SKILL, nullable = false)
-    private PassiveSkillEnum passiveSkill;
+    private PassiveSkillEnum passiveSkillEnum;
 }

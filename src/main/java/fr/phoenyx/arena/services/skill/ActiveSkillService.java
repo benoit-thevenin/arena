@@ -17,7 +17,7 @@ public class ActiveSkillService {
 
     public List<ActiveSkillDTO> gettAllActiveSkills() {
         return activeSkillRepository.findAll().stream()
-                .map(activeSkill -> new ActiveSkillDTO(activeSkill))
+                .map(ActiveSkillDTO::new)
                 .collect(Collectors.toList());
     }
 }

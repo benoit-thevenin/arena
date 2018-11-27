@@ -21,7 +21,7 @@ public class TypeDTO {
         this();
         description = type.getDescription();
         characteristics = Arrays.stream(type.getCharacteristics())
-                .map(characteristic -> new CharacteristicDTO(characteristic))
+                .map(CharacteristicDTO::new)
                 .collect(Collectors.toList());
     }
 }

@@ -36,7 +36,7 @@ public class SheetDTO extends GenericEntityDTO {
         currentHealth = sheet.getCurrentHealth();
         currentMana = sheet.getCurrentMana();
         effects = sheet.getEffects().stream()
-                .map(effect -> new EffectDTO(effect))
+                .map(EffectDTO::new)
                 .collect(Collectors.toList());
     }
 }

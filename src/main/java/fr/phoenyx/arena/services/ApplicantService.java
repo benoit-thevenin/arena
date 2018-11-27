@@ -17,7 +17,7 @@ public class ApplicantService {
 
     public List<ApplicantDTO> getAllApplicants() {
         return applicantRepository.findAll().stream()
-                .map(applicant -> new ApplicantDTO(applicant))
+                .map(ApplicantDTO::new)
                 .collect(Collectors.toList());
     }
 }

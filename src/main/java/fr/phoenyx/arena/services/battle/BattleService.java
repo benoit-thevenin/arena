@@ -17,7 +17,7 @@ public class BattleService {
 
     public List<BattleDTO> getAllBattles() {
         return battleRepository.findAll().stream()
-                .map(battle -> new BattleDTO(battle))
+                .map(BattleDTO::new)
                 .collect(Collectors.toList());
     }
 }

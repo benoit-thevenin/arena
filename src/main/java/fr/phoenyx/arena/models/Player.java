@@ -3,7 +3,7 @@ package fr.phoenyx.arena.models;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_EMAIL;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_EXPERIENCE;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_GOLD;
-import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_HASH_PASSWORD;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_HASH_PASS;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_GUILD_MEMBER;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_OWNER;
@@ -48,7 +48,7 @@ public class Player extends GenericEntity {
     @Column(name = COLUMN_USERNAME, nullable = false, unique = true)
     private String username;
 
-    @Column(name = COLUMN_HASH_PASSWORD, nullable = false)
+    @Column(name = COLUMN_HASH_PASS, nullable = false)
     private String hashPassword;
 
     @Column(name = COLUMN_SALT)

@@ -29,13 +29,13 @@ public class PlayerDTO extends PlayerDTOLight {
         gold = player.getGold();
         experience = player.getExperience();
         inventory = player.getInventory().stream()
-                .map(item -> new ItemDTO(item))
+                .map(ItemDTO::new)
                 .collect(Collectors.toList());
         builds = player.getBuilds().stream()
-                .map(build -> new BuildDTO(build))
+                .map(BuildDTO::new)
                 .collect(Collectors.toList());
         friends = player.getFriends().stream()
-                .map(friend -> new PlayerDTOLight(friend))
+                .map(PlayerDTOLight::new)
                 .collect(Collectors.toList());
     }
 }

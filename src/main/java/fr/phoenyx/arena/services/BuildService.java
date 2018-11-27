@@ -17,7 +17,7 @@ public class BuildService {
 
     public List<BuildDTO> getAllBuilds() {
         return buildRepository.findAll().stream()
-                .map(build -> new BuildDTO(build))
+                .map(BuildDTO::new)
                 .collect(Collectors.toList());
     }
 }

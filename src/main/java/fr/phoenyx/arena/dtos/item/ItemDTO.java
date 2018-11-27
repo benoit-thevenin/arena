@@ -36,7 +36,7 @@ public class ItemDTO extends GenericEntityDTO {
             rarity = new RarityDTO(item.getRarity());
         }
         bonuses = item.getBonuses().stream()
-                .map(bonus -> new BonusDTO(bonus))
+                .map(BonusDTO::new)
                 .collect(Collectors.toList());
         if (item.getPower() != null) {
             power = new PowerDTO(item.getPower());

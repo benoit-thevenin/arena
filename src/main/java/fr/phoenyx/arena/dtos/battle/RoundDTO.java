@@ -24,10 +24,10 @@ public class RoundDTO extends GenericEntityDTO implements Comparable<RoundDTO> {
         super(round);
         roundNumber = round.getRoundNumber();
         actionsPerformed = round.getActionsPerformed().stream()
-                .map(action -> new ActionDTO(action))
+                .map(ActionDTO::new)
                 .collect(Collectors.toList());
         heroes = round.getHeroes().stream()
-                .map(hero -> new HeroDTO(hero))
+                .map(HeroDTO::new)
                 .collect(Collectors.toList());
     }
 

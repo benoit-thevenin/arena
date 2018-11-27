@@ -17,7 +17,7 @@ public class ActionService {
 
     public List<ActionDTO> getAllActions() {
         return actionRepository.findAll().stream()
-                .map(action -> new ActionDTO(action))
+                .map(ActionDTO::new)
                 .collect(Collectors.toList());
     }
 }

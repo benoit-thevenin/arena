@@ -31,20 +31,20 @@ public class HeroBuildDTO extends GenericEntityDTO {
     public HeroBuildDTO(HeroBuild heroBuild) {
         super(heroBuild);
         heroes = heroBuild.getHeroes().stream()
-                .map(hero -> new HeroDTO(hero))
+                .map(HeroDTO::new)
                 .collect(Collectors.toList());
         vitality = heroBuild.getVitality();
         strength = heroBuild.getStrength();
         intelligence = heroBuild.getIntelligence();
         agility = heroBuild.getAgility();
         activeSkills = heroBuild.getActiveSkills().stream()
-                .map(activeSkill -> new ActiveSkillDTO(activeSkill))
+                .map(ActiveSkillDTO::new)
                 .collect(Collectors.toList());
         passiveSkills = heroBuild.getPassiveSkills().stream()
-                .map(passiveSkill -> new PassiveSkillDTO(passiveSkill))
+                .map(PassiveSkillDTO::new)
                 .collect(Collectors.toList());
         stuff = heroBuild.getStuff().stream()
-                .map(item -> new ItemDTO(item))
+                .map(ItemDTO::new)
                 .collect(Collectors.toList());
     }
 }

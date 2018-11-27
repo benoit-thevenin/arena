@@ -2,6 +2,8 @@ package fr.phoenyx.arena.constants;
 
 public class DatabaseSchemaConstants {
 
+    private DatabaseSchemaConstants() {}
+
     public static final String TABLE_ACTIONS = "ACTIONS";
     public static final String TABLE_ACTIONS_HEROES = "ACTIONS_HEROES";
     public static final String TABLE_ACTIVE_SKILLS = "ACTIVE_SKILLS";
@@ -41,7 +43,7 @@ public class DatabaseSchemaConstants {
     public static final String COLUMN_EXPERIENCE = "EXPERIENCE";
     public static final String COLUMN_GOLD = "GOLD";
     public static final String COLUMN_GUILD_ROLE = "GUILD_ROLE";
-    public static final String COLUMN_HASH_PASSWORD = "HASH_PASSWORD";
+    public static final String COLUMN_HASH_PASS = "HASH_PASSWORD";
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_ID_ACTION = "ID_ACTION";
     public static final String COLUMN_ID_BATTLE = "ID_BATTLE";
