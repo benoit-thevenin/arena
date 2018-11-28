@@ -1,14 +1,11 @@
 package fr.phoenyx.arena.repositories.battle;
 
-import java.util.List;
-
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import fr.phoenyx.arena.models.battle.Action;
 
 @Repository
-public interface ActionRepository extends CrudRepository<Action, Long> {
+public interface ActionRepository extends JpaRepository<Action, Long> {
 
-    List<Action> findAll();
 }
