@@ -16,7 +16,12 @@ public class BattleController {
     private BattleService battleService;
 
     @GetMapping("/battles")
-    public List<BattleDTO> getAllBattles() {
-        return battleService.getAllBattles();
+    public List<BattleDTO> findAll() {
+        return battleService.findAll();
+    }
+
+    @GetMapping("/battles/{id}")
+    public BattleDTO findById(Long id) {
+        return battleService.findById(id);
     }
 }

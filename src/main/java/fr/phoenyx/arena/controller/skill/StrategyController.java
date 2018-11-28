@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.phoenyx.arena.dtos.skill.StrategyDTO;
@@ -16,7 +17,12 @@ public class StrategyController {
     private StrategyService strategyService;
 
     @GetMapping("/strategies")
-    public List<StrategyDTO> getAllStrategies() {
-        return strategyService.getAllStrategies();
+    public List<StrategyDTO> findAll() {
+        return strategyService.findAll();
+    }
+
+    @GetMapping("/strategies/{id}")
+    public StrategyDTO findById(@PathVariable Long id) {
+        return strategyService.findById(id);
     }
 }

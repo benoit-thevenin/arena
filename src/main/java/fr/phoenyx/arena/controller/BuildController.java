@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.phoenyx.arena.dtos.BuildDTO;
@@ -16,7 +17,12 @@ public class BuildController {
     private BuildService buildService;
 
     @GetMapping("/builds")
-    public List<BuildDTO> getAllBuilds() {
-        return buildService.getAllBuilds();
+    public List<BuildDTO> findAll() {
+        return buildService.findAll();
+    }
+
+    @GetMapping("/builds/{id}")
+    public BuildDTO findById(@PathVariable Long id) {
+        return buildService.findById(id);
     }
 }

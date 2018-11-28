@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.phoenyx.arena.dtos.guild.GuildDTO;
@@ -16,7 +17,12 @@ public class GuildController {
     private GuildService guildService;
 
     @GetMapping("/guilds")
-    public List<GuildDTO> getAllGuilds() {
-        return guildService.getAllGuilds();
+    public List<GuildDTO> findAll() {
+        return guildService.findAll();
+    }
+
+    @GetMapping("/guilds/{id}")
+    public GuildDTO findById(@PathVariable Long id) {
+        return guildService.findById(id);
     }
 }

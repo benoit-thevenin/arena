@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.phoenyx.arena.dtos.item.ItemDTO;
@@ -17,8 +18,13 @@ public class ItemController {
     private ItemService itemService;
 
     @GetMapping("/items")
-    public List<ItemDTO> getAllItems() {
-        return itemService.getAllItems();
+    public List<ItemDTO> findAll() {
+        return itemService.findAll();
+    }
+
+    @GetMapping("/items/{id}")
+    public ItemDTO findById(@PathVariable Long id) {
+        return itemService.findById(id);
     }
 
     @GetMapping("/recipes")

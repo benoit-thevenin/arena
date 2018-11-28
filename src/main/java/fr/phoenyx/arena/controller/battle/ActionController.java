@@ -16,7 +16,12 @@ public class ActionController {
     private ActionService actionService;
 
     @GetMapping("/actions")
-    public List<ActionDTO> getAllActions() {
-        return actionService.getAllActions();
+    public List<ActionDTO> findAll() {
+        return actionService.findAll();
+    }
+
+    @GetMapping("/actions/{id}")
+    public ActionDTO findById(Long id) {
+        return actionService.findById(id);
     }
 }
