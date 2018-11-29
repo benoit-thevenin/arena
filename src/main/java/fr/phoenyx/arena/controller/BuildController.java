@@ -3,6 +3,8 @@ package fr.phoenyx.arena.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,12 +19,12 @@ public class BuildController {
     private BuildService buildService;
 
     @GetMapping("/builds")
-    public List<BuildDTO> findAll() {
-        return buildService.findAll();
+    public ResponseEntity<List<BuildDTO>> findAll() {
+        return new ResponseEntity<>(buildService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/builds/{id}")
-    public BuildDTO findById(@PathVariable Long id) {
-        return buildService.findById(id);
+    public ResponseEntity<BuildDTO> findById(@PathVariable Long id) {
+        return new ResponseEntity<>(buildService.findById(id), HttpStatus.OK);
     }
 }

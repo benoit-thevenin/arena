@@ -3,6 +3,8 @@ package fr.phoenyx.arena.controller.guild;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,12 +19,12 @@ public class GuildController {
     private GuildService guildService;
 
     @GetMapping("/guilds")
-    public List<GuildDTO> findAll() {
-        return guildService.findAll();
+    public ResponseEntity<List<GuildDTO>> findAll() {
+        return new ResponseEntity<>(guildService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/guilds/{id}")
-    public GuildDTO findById(@PathVariable Long id) {
-        return guildService.findById(id);
+    public ResponseEntity<GuildDTO> findById(@PathVariable Long id) {
+        return new ResponseEntity<>(guildService.findById(id), HttpStatus.OK);
     }
 }

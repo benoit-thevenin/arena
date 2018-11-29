@@ -3,6 +3,8 @@ package fr.phoenyx.arena.controller.item;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,17 +20,17 @@ public class ItemController {
     private ItemService itemService;
 
     @GetMapping("/items")
-    public List<ItemDTO> findAll() {
-        return itemService.findAll();
+    public ResponseEntity<List<ItemDTO>> findAll() {
+        return new ResponseEntity<>(itemService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/items/{id}")
-    public ItemDTO findById(@PathVariable Long id) {
-        return itemService.findById(id);
+    public ResponseEntity<ItemDTO> findById(@PathVariable Long id) {
+        return new ResponseEntity<>(itemService.findById(id), HttpStatus.OK);
     }
 
     @GetMapping("/recipes")
-    public List<RecipeDTO> getAllRecipes() {
-        return itemService.getAllRecipes();
+    public ResponseEntity<List<RecipeDTO>> getAllRecipes() {
+        return new ResponseEntity<>(itemService.getAllRecipes(), HttpStatus.OK);
     }
 }

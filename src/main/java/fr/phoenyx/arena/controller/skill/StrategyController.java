@@ -3,6 +3,8 @@ package fr.phoenyx.arena.controller.skill;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,12 +19,12 @@ public class StrategyController {
     private StrategyService strategyService;
 
     @GetMapping("/strategies")
-    public List<StrategyDTO> findAll() {
-        return strategyService.findAll();
+    public ResponseEntity<List<StrategyDTO>> findAll() {
+        return new ResponseEntity<>(strategyService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/strategies/{id}")
-    public StrategyDTO findById(@PathVariable Long id) {
-        return strategyService.findById(id);
+    public ResponseEntity<StrategyDTO> findById(@PathVariable Long id) {
+        return new ResponseEntity<>(strategyService.findById(id), HttpStatus.OK);
     }
 }

@@ -3,6 +3,8 @@ package fr.phoenyx.arena.controller.skill;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,12 +19,12 @@ public class ActiveSkillController {
     private ActiveSkillService activeSkillService;
 
     @GetMapping("/active-skills")
-    public List<ActiveSkillDTO> findAll() {
-        return activeSkillService.findAll();
+    public ResponseEntity<List<ActiveSkillDTO>> findAll() {
+        return new ResponseEntity<>(activeSkillService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/active-skills/{id}")
-    public ActiveSkillDTO findById(@PathVariable Long id) {
-        return activeSkillService.findById(id);
+    public ResponseEntity<ActiveSkillDTO> findById(@PathVariable Long id) {
+        return new ResponseEntity<>(activeSkillService.findById(id), HttpStatus.OK);
     }
 }

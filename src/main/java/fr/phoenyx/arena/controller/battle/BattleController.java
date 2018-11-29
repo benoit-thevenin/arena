@@ -3,6 +3,8 @@ package fr.phoenyx.arena.controller.battle;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,12 +18,12 @@ public class BattleController {
     private BattleService battleService;
 
     @GetMapping("/battles")
-    public List<BattleDTO> findAll() {
-        return battleService.findAll();
+    public ResponseEntity<List<BattleDTO>> findAll() {
+        return new ResponseEntity<>(battleService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/battles/{id}")
-    public BattleDTO findById(Long id) {
-        return battleService.findById(id);
+    public ResponseEntity<BattleDTO> findById(Long id) {
+        return new ResponseEntity<>(battleService.findById(id), HttpStatus.OK);
     }
 }

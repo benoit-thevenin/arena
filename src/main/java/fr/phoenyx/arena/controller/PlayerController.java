@@ -3,6 +3,8 @@ package fr.phoenyx.arena.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,12 +19,12 @@ public class PlayerController {
     private PlayerService playerService;
 
     @GetMapping("/players")
-    public List<PlayerDTO> findAll() {
-        return playerService.getAllPlayers();
+    public ResponseEntity<List<PlayerDTO>> findAll() {
+        return new ResponseEntity<>(playerService.getAllPlayers(), HttpStatus.OK);
     }
 
     @GetMapping("/players/{id}")
-    public PlayerDTO findById(@PathVariable Long id) {
-        return playerService.findById(id);
+    public ResponseEntity<PlayerDTO> findById(@PathVariable Long id) {
+        return new ResponseEntity<>(playerService.findById(id), HttpStatus.OK);
     }
 }
