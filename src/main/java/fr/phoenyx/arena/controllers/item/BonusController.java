@@ -1,4 +1,4 @@
-package fr.phoenyx.arena.controller.item;
+package fr.phoenyx.arena.controllers.item;
 
 import java.util.List;
 

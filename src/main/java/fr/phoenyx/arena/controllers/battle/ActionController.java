@@ -1,4 +1,4 @@
-package fr.phoenyx.arena.controller.battle;
+package fr.phoenyx.arena.controllers.battle;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.phoenyx.arena.dtos.battle.ActionDTO;
@@ -23,7 +24,7 @@ public class ActionController {
     }
 
     @GetMapping("/actions/{id}")
-    public ResponseEntity<ActionDTO> findById(Long id) {
+    public ResponseEntity<ActionDTO> findById(@PathVariable Long id) {
         return new ResponseEntity<>(actionService.findById(id), HttpStatus.OK);
     }
 }

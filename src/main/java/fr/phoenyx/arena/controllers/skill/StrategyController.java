@@ -1,4 +1,4 @@
-package fr.phoenyx.arena.controller.skill;
+package fr.phoenyx.arena.controllers.skill;
 
 import java.util.List;
 
