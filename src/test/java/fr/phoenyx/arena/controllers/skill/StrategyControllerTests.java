@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.controllers.skill;
 
+import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,8 +33,6 @@ import fr.phoenyx.arena.services.skill.StrategyService;
 @AutoConfigureMockMvc
 public class StrategyControllerTests {
 
-    private static final long ID = 0L;
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -60,25 +59,25 @@ public class StrategyControllerTests {
     public void findById_shouldReturnOK_whenExists() throws Exception {
         //Given
         StrategyDTO strategy = new StrategyDTO();
-        strategy.setId(ID);
-        when(strategyService.findById(ID)).thenReturn(strategy);
+        strategy.setId(GENERIC_ID);
+        when(strategyService.findById(GENERIC_ID)).thenReturn(strategy);
 
         //When Then
-        mockMvc.perform(get("/strategies/" + ID))
+        mockMvc.perform(get("/strategies/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString(Long.toString(ID))));
+                .andExpect(content().string(containsString(Long.toString(GENERIC_ID))));
     }
 
     @Test
     public void findById_shouldReturnNotFound_whenNotExists() throws Exception {
         //Given
-        when(strategyService.findById(ID)).thenThrow(StrategyException.entityNotFound(ID));
+        when(strategyService.findById(GENERIC_ID)).thenThrow(StrategyException.entityNotFound(GENERIC_ID));
 
         //When Then
-        mockMvc.perform(get("/strategies/" + ID))
+        mockMvc.perform(get("/strategies/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isNotFound())
-                .andExpect(content().string(containsString(Strategy.class.getSimpleName() + " not found : " + ID)));
+                .andExpect(content().string(containsString(Strategy.class.getSimpleName() + " not found : " + GENERIC_ID)));
     }
 }

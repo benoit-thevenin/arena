@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.controllers;
 
+import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,8 +33,6 @@ import fr.phoenyx.arena.services.PlayerService;
 @AutoConfigureMockMvc
 public class PlayerControllerTests {
 
-    private static final long ID = 0L;
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -60,25 +59,25 @@ public class PlayerControllerTests {
     public void findById_shouldReturnOK_whenExists() throws Exception {
         //Given
         PlayerDTO player = new PlayerDTO();
-        player.setId(ID);
-        when(playerService.findById(ID)).thenReturn(player);
+        player.setId(GENERIC_ID);
+        when(playerService.findById(GENERIC_ID)).thenReturn(player);
 
         //When Then
-        mockMvc.perform(get("/players/" + ID))
+        mockMvc.perform(get("/players/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString(Long.toString(ID))));
+                .andExpect(content().string(containsString(Long.toString(GENERIC_ID))));
     }
 
     @Test
     public void findById_shouldReturnNotFound_whenNotExists() throws Exception {
         //Given
-        when(playerService.findById(ID)).thenThrow(PlayerException.entityNotFound(ID));
+        when(playerService.findById(GENERIC_ID)).thenThrow(PlayerException.entityNotFound(GENERIC_ID));
 
         //When Then
-        mockMvc.perform(get("/players/" + ID))
+        mockMvc.perform(get("/players/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isNotFound())
-                .andExpect(content().string(containsString(Player.class.getSimpleName() + " not found : " + ID)));
+                .andExpect(content().string(containsString(Player.class.getSimpleName() + " not found : " + GENERIC_ID)));
     }
 }

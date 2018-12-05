@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.controllers.battle;
 
+import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,8 +33,6 @@ import fr.phoenyx.arena.services.battle.SheetService;
 @AutoConfigureMockMvc
 public class SheetControllerTests {
 
-    private static final long ID = 0L;
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -60,25 +59,25 @@ public class SheetControllerTests {
     public void findById_shouldReturnOK_whenExists() throws Exception {
         //Given
         SheetDTO sheet = new SheetDTO();
-        sheet.setId(ID);
-        when(sheetService.findById(ID)).thenReturn(sheet);
+        sheet.setId(GENERIC_ID);
+        when(sheetService.findById(GENERIC_ID)).thenReturn(sheet);
 
         //When Then
-        mockMvc.perform(get("/sheets/" + ID))
+        mockMvc.perform(get("/sheets/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString(Long.toString(ID))));
+                .andExpect(content().string(containsString(Long.toString(GENERIC_ID))));
     }
 
     @Test
     public void findById_shouldReturnNotFound_whenNotExists() throws Exception {
         //Given
-        when(sheetService.findById(ID)).thenThrow(SheetException.entityNotFound(ID));
+        when(sheetService.findById(GENERIC_ID)).thenThrow(SheetException.entityNotFound(GENERIC_ID));
 
         //When Then
-        mockMvc.perform(get("/sheets/" + ID))
+        mockMvc.perform(get("/sheets/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isNotFound())
-                .andExpect(content().string(containsString(Sheet.class.getSimpleName() + " not found : " + ID)));
+                .andExpect(content().string(containsString(Sheet.class.getSimpleName() + " not found : " + GENERIC_ID)));
     }
 }

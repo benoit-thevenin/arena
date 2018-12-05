@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.controllers;
 
+import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,8 +33,6 @@ import fr.phoenyx.arena.services.TeamService;
 @AutoConfigureMockMvc
 public class TeamControllerTests {
 
-    private static final long ID = 0L;
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -60,25 +59,25 @@ public class TeamControllerTests {
     public void findById_shouldReturnOK_whenExists() throws Exception {
         //Given
         TeamDTO team = new TeamDTO();
-        team.setId(ID);
-        when(teamService.findById(ID)).thenReturn(team);
+        team.setId(GENERIC_ID);
+        when(teamService.findById(GENERIC_ID)).thenReturn(team);
 
         //When Then
-        mockMvc.perform(get("/teams/" + ID))
+        mockMvc.perform(get("/teams/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString(Long.toString(ID))));
+                .andExpect(content().string(containsString(Long.toString(GENERIC_ID))));
     }
 
     @Test
     public void findById_shouldReturnNotFound_whenNotExists() throws Exception {
         //Given
-        when(teamService.findById(ID)).thenThrow(TeamException.entityNotFound(ID));
+        when(teamService.findById(GENERIC_ID)).thenThrow(TeamException.entityNotFound(GENERIC_ID));
 
         //When Then
-        mockMvc.perform(get("/teams/" + ID))
+        mockMvc.perform(get("/teams/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isNotFound())
-                .andExpect(content().string(containsString(Team.class.getSimpleName() + " not found : " + ID)));
+                .andExpect(content().string(containsString(Team.class.getSimpleName() + " not found : " + GENERIC_ID)));
     }
 }

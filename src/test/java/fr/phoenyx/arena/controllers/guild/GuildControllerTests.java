@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.controllers.guild;
 
+import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,8 +33,6 @@ import fr.phoenyx.arena.services.guild.GuildService;
 @AutoConfigureMockMvc
 public class GuildControllerTests {
 
-    private static final long ID = 0L;
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -60,25 +59,25 @@ public class GuildControllerTests {
     public void findById_shouldReturnOK_whenExists() throws Exception {
         //Given
         GuildDTO guild = new GuildDTO();
-        guild.setId(ID);
-        when(guildService.findById(ID)).thenReturn(guild);
+        guild.setId(GENERIC_ID);
+        when(guildService.findById(GENERIC_ID)).thenReturn(guild);
 
         //When Then
-        mockMvc.perform(get("/guilds/" + ID))
+        mockMvc.perform(get("/guilds/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString(Long.toString(ID))));
+                .andExpect(content().string(containsString(Long.toString(GENERIC_ID))));
     }
 
     @Test
     public void findById_shouldReturnNotFound_whenNotExists() throws Exception {
         //Given
-        when(guildService.findById(ID)).thenThrow(GuildException.entityNotFound(ID));
+        when(guildService.findById(GENERIC_ID)).thenThrow(GuildException.entityNotFound(GENERIC_ID));
 
         //When Then
-        mockMvc.perform(get("/guilds/" + ID))
+        mockMvc.perform(get("/guilds/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isNotFound())
-                .andExpect(content().string(containsString(Guild.class.getSimpleName() + " not found : " + ID)));
+                .andExpect(content().string(containsString(Guild.class.getSimpleName() + " not found : " + GENERIC_ID)));
     }
 }

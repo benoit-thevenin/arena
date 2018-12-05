@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.controllers;
 
+import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,8 +33,6 @@ import fr.phoenyx.arena.services.ApplicantService;
 @AutoConfigureMockMvc
 public class ApplicantControllerTests {
 
-    private static final long ID = 0L;
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -60,25 +59,25 @@ public class ApplicantControllerTests {
     public void findById_shouldReturnOK_whenExists() throws Exception {
         //Given
         ApplicantDTO applicant = new ApplicantDTO();
-        applicant.setId(ID);
-        when(applicantService.findById(ID)).thenReturn(applicant);
+        applicant.setId(GENERIC_ID);
+        when(applicantService.findById(GENERIC_ID)).thenReturn(applicant);
 
         //When Then
-        mockMvc.perform(get("/applicants/" + ID))
+        mockMvc.perform(get("/applicants/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString(Long.toString(ID))));
+                .andExpect(content().string(containsString(Long.toString(GENERIC_ID))));
     }
 
     @Test
     public void findById_shouldReturnNotFound_whenNotExists() throws Exception {
         //Given
-        when(applicantService.findById(ID)).thenThrow(ApplicantException.entityNotFound(ID));
+        when(applicantService.findById(GENERIC_ID)).thenThrow(ApplicantException.entityNotFound(GENERIC_ID));
 
         //When Then
-        mockMvc.perform(get("/applicants/" + ID))
+        mockMvc.perform(get("/applicants/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isNotFound())
-                .andExpect(content().string(containsString(Applicant.class.getSimpleName() + " not found : " + ID)));
+                .andExpect(content().string(containsString(Applicant.class.getSimpleName() + " not found : " + GENERIC_ID)));
     }
 }

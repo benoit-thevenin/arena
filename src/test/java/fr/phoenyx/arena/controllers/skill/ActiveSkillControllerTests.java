@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.controllers.skill;
 
+import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,8 +33,6 @@ import fr.phoenyx.arena.services.skill.ActiveSkillService;
 @AutoConfigureMockMvc
 public class ActiveSkillControllerTests {
 
-    private static final long ID = 0L;
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -60,25 +59,25 @@ public class ActiveSkillControllerTests {
     public void findById_shouldReturnOK_whenExists() throws Exception {
         //Given
         ActiveSkillDTO activeSkill = new ActiveSkillDTO();
-        activeSkill.setId(ID);
-        when(activeSkillService.findById(ID)).thenReturn(activeSkill);
+        activeSkill.setId(GENERIC_ID);
+        when(activeSkillService.findById(GENERIC_ID)).thenReturn(activeSkill);
 
         //When Then
-        mockMvc.perform(get("/active-skills/" + ID))
+        mockMvc.perform(get("/active-skills/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString(Long.toString(ID))));
+                .andExpect(content().string(containsString(Long.toString(GENERIC_ID))));
     }
 
     @Test
     public void findById_shouldReturnNotFound_whenNotExists() throws Exception {
         //Given
-        when(activeSkillService.findById(ID)).thenThrow(ActiveSkillException.entityNotFound(ID));
+        when(activeSkillService.findById(GENERIC_ID)).thenThrow(ActiveSkillException.entityNotFound(GENERIC_ID));
 
         //When Then
-        mockMvc.perform(get("/active-skills/" + ID))
+        mockMvc.perform(get("/active-skills/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isNotFound())
-                .andExpect(content().string(containsString(ActiveSkill.class.getSimpleName() + " not found : " + ID)));
+                .andExpect(content().string(containsString(ActiveSkill.class.getSimpleName() + " not found : " + GENERIC_ID)));
     }
 }

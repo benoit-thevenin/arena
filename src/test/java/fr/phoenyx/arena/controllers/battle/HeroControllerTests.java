@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.controllers.battle;
 
+import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,8 +33,6 @@ import fr.phoenyx.arena.services.battle.HeroService;
 @AutoConfigureMockMvc
 public class HeroControllerTests {
 
-    private static final long ID = 0L;
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -60,25 +59,25 @@ public class HeroControllerTests {
     public void findById_shouldReturnOK_whenExists() throws Exception {
         //Given
         HeroDTO heroes = new HeroDTO();
-        heroes.setId(ID);
-        when(heroService.findById(ID)).thenReturn(heroes);
+        heroes.setId(GENERIC_ID);
+        when(heroService.findById(GENERIC_ID)).thenReturn(heroes);
 
         //When Then
-        mockMvc.perform(get("/heroes/" + ID))
+        mockMvc.perform(get("/heroes/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString(Long.toString(ID))));
+                .andExpect(content().string(containsString(Long.toString(GENERIC_ID))));
     }
 
     @Test
     public void findById_shouldReturnNotFound_whenNotExists() throws Exception {
         //Given
-        when(heroService.findById(ID)).thenThrow(HeroException.entityNotFound(ID));
+        when(heroService.findById(GENERIC_ID)).thenThrow(HeroException.entityNotFound(GENERIC_ID));
 
         //When Then
-        mockMvc.perform(get("/heroes/" + ID))
+        mockMvc.perform(get("/heroes/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isNotFound())
-                .andExpect(content().string(containsString(Hero.class.getSimpleName() + " not found : " + ID)));
+                .andExpect(content().string(containsString(Hero.class.getSimpleName() + " not found : " + GENERIC_ID)));
     }
 }

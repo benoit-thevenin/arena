@@ -1,5 +1,7 @@
 package fr.phoenyx.arena.exceptions;
 
+import static fr.phoenyx.arena.constants.MessagesConstants.NOT_FOUND;
+
 import fr.phoenyx.arena.models.GenericEntity;
 
 public class GenericEntityException extends RuntimeException {
@@ -11,6 +13,6 @@ public class GenericEntityException extends RuntimeException {
     }
 
     public static final GenericEntityException entityNotFound(Class<? extends GenericEntity> clazz, Object details) {
-        return new GenericEntityException(clazz.getSimpleName() + " not found : " + details);
+        return new GenericEntityException(String.join(" ", clazz.getSimpleName(), NOT_FOUND, details.toString()));
     }
 }

@@ -1,5 +1,10 @@
 package fr.phoenyx.arena.exceptions;
 
+import static fr.phoenyx.arena.constants.MessagesConstants.BUILD_ILLEGAL_ACTIVE_SKILLS;
+import static fr.phoenyx.arena.constants.MessagesConstants.BUILD_ILLEGAL_PASSIVE_SKILLS;
+import static fr.phoenyx.arena.constants.MessagesConstants.BUILD_ILLEGAL_STUFF;
+import static fr.phoenyx.arena.constants.MessagesConstants.BUILD_ZERO_ACTIVE_SKILL;
+
 import fr.phoenyx.arena.models.Build;
 
 public class BuildException extends RuntimeException {
@@ -15,18 +20,18 @@ public class BuildException extends RuntimeException {
     }
 
     public static final BuildException zeroActiveSkill() {
-        return new BuildException("At least one active skill must be selected");
+        return new BuildException(BUILD_ZERO_ACTIVE_SKILL);
     }
 
     public static final BuildException illegalNumberOfActiveSkills() {
-        return new BuildException("No more than 4 active skills can be selected");
+        return new BuildException(BUILD_ILLEGAL_ACTIVE_SKILLS);
     }
 
     public static final BuildException illegalNumberOfPassiveSkills() {
-        return new BuildException("No more than 4 passive skills can be selected");
+        return new BuildException(BUILD_ILLEGAL_PASSIVE_SKILLS);
     }
 
     public static final BuildException illegalStuff() {
-        return new BuildException("An item slot can be used only once per build");
+        return new BuildException(BUILD_ILLEGAL_STUFF);
     }
 }

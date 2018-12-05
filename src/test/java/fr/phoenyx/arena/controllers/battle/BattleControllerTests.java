@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.controllers.battle;
 
+import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,8 +33,6 @@ import fr.phoenyx.arena.services.battle.BattleService;
 @AutoConfigureMockMvc
 public class BattleControllerTests {
 
-    private static final long ID = 0L;
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -60,25 +59,25 @@ public class BattleControllerTests {
     public void findById_shouldReturnOK_whenExists() throws Exception {
         //Given
         BattleDTO battle = new BattleDTO();
-        battle.setId(ID);
-        when(battleService.findById(ID)).thenReturn(battle);
+        battle.setId(GENERIC_ID);
+        when(battleService.findById(GENERIC_ID)).thenReturn(battle);
 
         //When Then
-        mockMvc.perform(get("/battles/" + ID))
+        mockMvc.perform(get("/battles/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString(Long.toString(ID))));
+                .andExpect(content().string(containsString(Long.toString(GENERIC_ID))));
     }
 
     @Test
     public void findById_shouldReturnNotFound_whenNotExists() throws Exception {
         //Given
-        when(battleService.findById(ID)).thenThrow(BattleException.entityNotFound(ID));
+        when(battleService.findById(GENERIC_ID)).thenThrow(BattleException.entityNotFound(GENERIC_ID));
 
         //When Then
-        mockMvc.perform(get("/battles/" + ID))
+        mockMvc.perform(get("/battles/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isNotFound())
-                .andExpect(content().string(containsString(Battle.class.getSimpleName() + " not found : " + ID)));
+                .andExpect(content().string(containsString(Battle.class.getSimpleName() + " not found : " + GENERIC_ID)));
     }
 }

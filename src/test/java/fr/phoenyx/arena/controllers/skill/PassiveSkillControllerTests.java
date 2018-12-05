@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.controllers.skill;
 
+import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,8 +33,6 @@ import fr.phoenyx.arena.services.skill.PassiveSkillService;
 @AutoConfigureMockMvc
 public class PassiveSkillControllerTests {
 
-    private static final long ID = 0L;
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -60,25 +59,25 @@ public class PassiveSkillControllerTests {
     public void findById_shouldReturnOK_whenExists() throws Exception {
         //Given
         PassiveSkillDTO passiveSkill = new PassiveSkillDTO();
-        passiveSkill.setId(ID);
-        when(passiveSkillService.findById(ID)).thenReturn(passiveSkill);
+        passiveSkill.setId(GENERIC_ID);
+        when(passiveSkillService.findById(GENERIC_ID)).thenReturn(passiveSkill);
 
         //When Then
-        mockMvc.perform(get("/passive-skills/" + ID))
+        mockMvc.perform(get("/passive-skills/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString(Long.toString(ID))));
+                .andExpect(content().string(containsString(Long.toString(GENERIC_ID))));
     }
 
     @Test
     public void findById_shouldReturnNotFound_whenNotExists() throws Exception {
         //Given
-        when(passiveSkillService.findById(ID)).thenThrow(PassiveSkillException.entityNotFound(ID));
+        when(passiveSkillService.findById(GENERIC_ID)).thenThrow(PassiveSkillException.entityNotFound(GENERIC_ID));
 
         //When Then
-        mockMvc.perform(get("/passive-skills/" + ID))
+        mockMvc.perform(get("/passive-skills/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isNotFound())
-                .andExpect(content().string(containsString(PassiveSkill.class.getSimpleName() + " not found : " + ID)));
+                .andExpect(content().string(containsString(PassiveSkill.class.getSimpleName() + " not found : " + GENERIC_ID)));
     }
 }

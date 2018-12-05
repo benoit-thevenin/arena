@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.controllers.guild;
 
+import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,8 +33,6 @@ import fr.phoenyx.arena.services.guild.GuildMemberService;
 @AutoConfigureMockMvc
 public class GuildMemberControllerTests {
 
-    private static final long ID = 0L;
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -60,25 +59,25 @@ public class GuildMemberControllerTests {
     public void findById_shouldReturnOK_whenExists() throws Exception {
         //Given
         GuildMemberDTO guildMember = new GuildMemberDTO();
-        guildMember.setId(ID);
-        when(guildMemberService.findById(ID)).thenReturn(guildMember);
+        guildMember.setId(GENERIC_ID);
+        when(guildMemberService.findById(GENERIC_ID)).thenReturn(guildMember);
 
         //When Then
-        mockMvc.perform(get("/guild-members/" + ID))
+        mockMvc.perform(get("/guild-members/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString(Long.toString(ID))));
+                .andExpect(content().string(containsString(Long.toString(GENERIC_ID))));
     }
 
     @Test
     public void findById_shouldReturnNotFound_whenNotExists() throws Exception {
         //Given
-        when(guildMemberService.findById(ID)).thenThrow(GuildMemberException.entityNotFound(ID));
+        when(guildMemberService.findById(GENERIC_ID)).thenThrow(GuildMemberException.entityNotFound(GENERIC_ID));
 
         //When Then
-        mockMvc.perform(get("/guild-members/" + ID))
+        mockMvc.perform(get("/guild-members/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isNotFound())
-                .andExpect(content().string(containsString(GuildMember.class.getSimpleName() + " not found : " + ID)));
+                .andExpect(content().string(containsString(GuildMember.class.getSimpleName() + " not found : " + GENERIC_ID)));
     }
 }

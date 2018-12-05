@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.controllers.battle;
 
+import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,8 +33,6 @@ import fr.phoenyx.arena.services.battle.RoundService;
 @AutoConfigureMockMvc
 public class RoundControllerTests {
 
-    private static final long ID = 0L;
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -60,25 +59,25 @@ public class RoundControllerTests {
     public void findById_shouldReturnOK_whenExists() throws Exception {
         //Given
         RoundDTO round = new RoundDTO();
-        round.setId(ID);
-        when(roundService.findById(ID)).thenReturn(round);
+        round.setId(GENERIC_ID);
+        when(roundService.findById(GENERIC_ID)).thenReturn(round);
 
         //When Then
-        mockMvc.perform(get("/rounds/" + ID))
+        mockMvc.perform(get("/rounds/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString(Long.toString(ID))));
+                .andExpect(content().string(containsString(Long.toString(GENERIC_ID))));
     }
 
     @Test
     public void findById_shouldReturnNotFound_whenNotExists() throws Exception {
         //Given
-        when(roundService.findById(ID)).thenThrow(RoundException.entityNotFound(ID));
+        when(roundService.findById(GENERIC_ID)).thenThrow(RoundException.entityNotFound(GENERIC_ID));
 
         //When Then
-        mockMvc.perform(get("/rounds/" + ID))
+        mockMvc.perform(get("/rounds/" + GENERIC_ID))
                 .andDo(print())
                 .andExpect(status().isNotFound())
-                .andExpect(content().string(containsString(Round.class.getSimpleName() + " not found : " + ID)));
+                .andExpect(content().string(containsString(Round.class.getSimpleName() + " not found : " + GENERIC_ID)));
     }
 }
