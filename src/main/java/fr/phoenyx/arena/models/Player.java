@@ -3,9 +3,10 @@ package fr.phoenyx.arena.models;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_EMAIL;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_EXPERIENCE;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_GOLD;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_GUILD_ROLE;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_HASH_PASS;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID;
-import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_GUILD_MEMBER;
+import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_GUILD;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_OWNER;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_PLAYER1;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_PLAYER2;
@@ -25,16 +26,18 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import fr.phoenyx.arena.builders.PlayerBuilder;
-import fr.phoenyx.arena.models.guild.GuildMember;
+import fr.phoenyx.arena.enums.GuildRole;
+import fr.phoenyx.arena.models.guild.Guild;
 import fr.phoenyx.arena.models.item.Item;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -76,9 +79,13 @@ public class Player extends GenericEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "owner")
     private List<Build> builds = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = COLUMN_ID_GUILD_MEMBER)
-    private GuildMember guildMember;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = COLUMN_ID_GUILD)
+    private Guild guild;
+
+    @Enumerated
+    @Column(name = COLUMN_GUILD_ROLE)
+    private GuildRole guildRole;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = TABLE_PLAYERS_FRIENDS,
@@ -88,13 +95,11 @@ public class Player extends GenericEntity {
     private Set<Player> friends = new HashSet<>();
 
     public static Player buildNewPlayer(String username, String hashPassword, String email) {
-        Player player = new PlayerBuilder()
+        return new PlayerBuilder()
                 .dateCreation(LocalDateTime.now())
                 .username(username)
                 .hashPassword(hashPassword)
                 .email(email)
                 .level(1).build();
-        player.setGuildMember(GuildMember.buildNewGuildMember(player));
-        return player;
     }
 }

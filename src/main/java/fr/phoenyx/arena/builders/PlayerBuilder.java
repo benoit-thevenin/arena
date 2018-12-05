@@ -4,9 +4,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
+import fr.phoenyx.arena.enums.GuildRole;
 import fr.phoenyx.arena.models.Build;
 import fr.phoenyx.arena.models.Player;
-import fr.phoenyx.arena.models.guild.GuildMember;
+import fr.phoenyx.arena.models.guild.Guild;
 import fr.phoenyx.arena.models.item.Item;
 
 public class PlayerBuilder {
@@ -87,8 +88,13 @@ public class PlayerBuilder {
         return this;
     }
 
-    public PlayerBuilder guildMember(GuildMember guildMember) {
-        player.setGuildMember(guildMember);
+    public PlayerBuilder guild(Guild guild) {
+        player.setGuild(guild);
+        return this;
+    }
+
+    public PlayerBuilder guildRole(GuildRole guildRole) {
+        player.setGuildRole(guildRole);
         return this;
     }
 

@@ -1,9 +1,9 @@
 package fr.phoenyx.arena.dtos.guild;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
+import fr.phoenyx.arena.dtos.PlayerDTOLight;
 import fr.phoenyx.arena.models.guild.Guild;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class GuildDTO extends GuildDTOLight {
 
-    private List<GuildMemberDTO> guildMembers;
+    private List<PlayerDTOLight> members;
 
     public GuildDTO() {
         super();
@@ -20,8 +20,8 @@ public class GuildDTO extends GuildDTOLight {
 
     public GuildDTO(Guild guild) {
         super(guild);
-        guildMembers = guild.getGuildMembers().stream()
-                .map(guildMember -> new GuildMemberDTO(guildMember, Optional.empty()))
+        members = guild.getMembers().stream()
+                .map(PlayerDTOLight::new)
                 .collect(Collectors.toList());
     }
 }

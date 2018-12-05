@@ -7,7 +7,6 @@ import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.TABLE_GUILDS;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import fr.phoenyx.arena.models.GenericEntity;
+import fr.phoenyx.arena.models.Player;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -30,8 +30,8 @@ public class Guild extends GenericEntity {
     @Column(name = COLUMN_DESCRIPTION)
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "guild")
-    private List<GuildMember> guildMembers = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "guild")
+    private List<Player> members = new ArrayList<>();
 
     //TODO other fields like raid boss stage ?
 }

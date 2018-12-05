@@ -3,6 +3,7 @@ package fr.phoenyx.arena.dtos;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import fr.phoenyx.arena.dtos.guild.GuildDTO;
 import fr.phoenyx.arena.dtos.item.ItemDTO;
 import fr.phoenyx.arena.models.Player;
 import lombok.Data;
@@ -17,6 +18,7 @@ public class PlayerDTO extends PlayerDTOLight {
     private long experience;
     private List<ItemDTO> inventory;
     private List<BuildDTO> builds;
+    private GuildDTO guild;
     private List<PlayerDTOLight> friends;
 
     public PlayerDTO() {
@@ -34,6 +36,9 @@ public class PlayerDTO extends PlayerDTOLight {
         builds = player.getBuilds().stream()
                 .map(BuildDTO::new)
                 .collect(Collectors.toList());
+        if (player.getGuild() != null) {
+            guild = new GuildDTO(player.getGuild());
+        }
         friends = player.getFriends().stream()
                 .map(PlayerDTOLight::new)
                 .collect(Collectors.toList());
