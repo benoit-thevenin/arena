@@ -17,7 +17,11 @@ public class ApplicantDTO extends GenericEntityDTO {
 
     public ApplicantDTO(Applicant applicant) {
         super(applicant);
-        player = new PlayerDTOLight(applicant.getPlayer());
-        build = new BuildDTO(applicant.getBuild());
+        if (applicant.getPlayer() != null) {
+            player = new PlayerDTOLight(applicant.getPlayer());
+        }
+        if (applicant.getBuild() != null) {
+            build = new BuildDTO(applicant.getBuild());
+        }
     }
 }

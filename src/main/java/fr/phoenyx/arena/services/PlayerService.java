@@ -17,7 +17,7 @@ public class PlayerService {
     @Autowired
     private PlayerRepository playerRepository;
 
-    public List<PlayerDTO> getAllPlayers() {
+    public List<PlayerDTO> findAll() {
         return playerRepository.findAll().stream()
                 .map(PlayerDTO::new)
                 .collect(Collectors.toList());

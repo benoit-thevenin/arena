@@ -23,7 +23,7 @@ public class PlayerDTOLight extends GenericEntityDTO {
     }
 
     public PlayerDTOLight(Player player) {
-        this();
+        super(player);
         username = player.getUsername();
         lastConnection = player.getLastConnection();
         level = player.getLevel();

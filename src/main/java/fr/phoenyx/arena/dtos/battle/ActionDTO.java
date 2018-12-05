@@ -26,8 +26,12 @@ public class ActionDTO extends GenericEntityDTO implements Comparable<ActionDTO>
     public ActionDTO(Action action) {
         super(action);
         actionOrder = action.getActionOrder();
-        caster = new HeroDTO(action.getCaster());
-        skill = new ActiveSkillDTO(action.getSkill());
+        if (action.getCaster() != null) {
+            caster = new HeroDTO(action.getCaster());
+        }
+        if (action.getSkill() != null) {
+            skill = new ActiveSkillDTO(action.getSkill());
+        }
         targets = action.getTargets().stream()
                 .map(HeroDTO::new)
                 .collect(Collectors.toSet());

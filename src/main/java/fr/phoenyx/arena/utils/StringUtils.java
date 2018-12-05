@@ -2,6 +2,8 @@ package fr.phoenyx.arena.utils;
 
 public class StringUtils {
 
+    public static final String EMPTY = "";
+
     private StringUtils() {}
 
     public static final boolean isEmpty(String s) {

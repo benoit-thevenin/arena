@@ -20,7 +20,7 @@ public class PlayerController {
 
     @GetMapping("/players")
     public ResponseEntity<List<PlayerDTO>> findAll() {
-        return new ResponseEntity<>(playerService.getAllPlayers(), HttpStatus.OK);
+        return new ResponseEntity<>(playerService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/players/{id}")

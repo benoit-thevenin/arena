@@ -20,7 +20,11 @@ public class HeroDTO extends GenericEntityDTO {
     public HeroDTO(Hero hero) {
         super(hero);
         level = hero.getLevel();
-        heroBuild = new HeroBuildDTO(hero.getHeroBuild());
-        sheet = new SheetDTO(hero.getSheet());
+        if (hero.getHeroBuild() != null) {
+            heroBuild = new HeroBuildDTO(hero.getHeroBuild());
+        }
+        if (hero.getSheet() != null) {
+            sheet = new SheetDTO(hero.getSheet());
+        }
     }
 }

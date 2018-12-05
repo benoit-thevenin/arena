@@ -23,7 +23,9 @@ public class TeamDTO extends GenericEntityDTO {
     public TeamDTO(Team team) {
         super(team);
         dimension = team.getDimension();
-        leader = new PlayerDTOLight(team.getLeader());
+        if (team.getLeader() != null) {
+            leader = new PlayerDTOLight(team.getLeader());
+        }
         members = team.getMembers().stream()
                 .map(ApplicantDTO::new)
                 .collect(Collectors.toSet());

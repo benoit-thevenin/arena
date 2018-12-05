@@ -20,7 +20,7 @@ public class TeamController {
 
     @GetMapping("/teams")
     public ResponseEntity<List<TeamDTO>> findAll() {
-        return new ResponseEntity<>(teamService.getAllTeams(), HttpStatus.OK);
+        return new ResponseEntity<>(teamService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/teams/{id}")

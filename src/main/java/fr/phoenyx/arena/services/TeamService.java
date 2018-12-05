@@ -17,7 +17,7 @@ public class TeamService {
     @Autowired
     private TeamRepository teamRepository;
 
-    public List<TeamDTO> getAllTeams() {
+    public List<TeamDTO> findAll() {
         return teamRepository.findAll().stream()
                 .map(TeamDTO::new)
                 .collect(Collectors.toList());
