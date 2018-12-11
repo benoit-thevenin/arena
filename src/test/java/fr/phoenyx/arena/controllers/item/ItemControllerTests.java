@@ -1,11 +1,7 @@
 package fr.phoenyx.arena.controllers.item;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
-import static org.hamcrest.Matchers.containsString;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
@@ -20,18 +16,20 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import fr.phoenyx.arena.advices.BadRequestAdvice;
+import fr.phoenyx.arena.advices.EntityNotFoundAdvice;
 import fr.phoenyx.arena.advices.GenericAdvice;
-import fr.phoenyx.arena.advices.GenericEntityAdvice;
-import fr.phoenyx.arena.advices.item.ItemAdvice;
+import fr.phoenyx.arena.builders.item.ItemBuilder;
+import fr.phoenyx.arena.controllers.CrudControllerTests;
 import fr.phoenyx.arena.dtos.item.ItemDTO;
-import fr.phoenyx.arena.exceptions.item.ItemException;
 import fr.phoenyx.arena.models.item.Item;
+import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.item.ItemService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ItemControllerTests {
+public class ItemControllerTests extends CrudControllerTests<Item, Long, ItemDTO> {
 
     @Autowired
     private MockMvc mockMvc;
@@ -42,48 +40,48 @@ public class ItemControllerTests {
     @InjectMocks
     private ItemController itemController;
 
+    @Override
+    protected MockMvc getMockMvc() {
+        return mockMvc;
+    }
+
+    @Override
+    protected CrudService<Item, Long, ItemDTO> getService() {
+        return itemService;
+    }
+
+    @Override
+    protected String getEndpointRoot() {
+        return "/items";
+    }
+
+    @Override
+    protected Class<Item> getConcernedClass() {
+        return Item.class;
+    }
+
+    @Override
+    protected Long getGenericId() {
+        return GENERIC_ID;
+    }
+
+    @Override
+    protected ItemDTO buildDTO() {
+        Item item = new ItemBuilder()
+                .id(GENERIC_ID).build();
+        return new ItemDTO(item);
+    }
+
     @Before
     public void setup() {
         mockMvc = MockMvcBuilders.standaloneSetup(itemController)
-                .setControllerAdvice(new GenericAdvice(), new GenericEntityAdvice(), new ItemAdvice())
+                .setControllerAdvice(new GenericAdvice(), new EntityNotFoundAdvice(), new BadRequestAdvice())
                 .build();
     }
 
     @Test
-    public void findAll_shouldReturnOK() throws Exception {
-        mockMvc.perform(get("/items"))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    public void findById_shouldReturnOK_whenExists() throws Exception {
-        //Given
-        ItemDTO item = new ItemDTO();
-        item.setId(GENERIC_ID);
-        when(itemService.findById(GENERIC_ID)).thenReturn(item);
-
-        //When Then
-        mockMvc.perform(get("/items/" + GENERIC_ID))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString(Long.toString(GENERIC_ID))));
-    }
-
-    @Test
-    public void findById_shouldReturnNotFound_whenNotExists() throws Exception {
-        //Given
-        when(itemService.findById(GENERIC_ID)).thenThrow(ItemException.entityNotFound(GENERIC_ID));
-
-        //When Then
-        mockMvc.perform(get("/items/" + GENERIC_ID))
-                .andDo(print())
-                .andExpect(status().isNotFound())
-                .andExpect(content().string(containsString(Item.class.getSimpleName() + " not found : " + GENERIC_ID)));
-    }
-
-    @Test
     public void getAllRecipes_shouldReturnOK() throws Exception {
-        mockMvc.perform(get("/recipes"))
+        mockMvc.perform(get(getEndpointRoot() + "/recipes"))
                 .andExpect(status().isOk());
     }
 }

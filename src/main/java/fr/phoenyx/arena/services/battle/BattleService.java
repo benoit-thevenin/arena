@@ -1,31 +1,34 @@
 package fr.phoenyx.arena.services.battle;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import fr.phoenyx.arena.dtos.battle.BattleDTO;
-import fr.phoenyx.arena.exceptions.battle.BattleException;
+import fr.phoenyx.arena.mappers.Mapper;
+import fr.phoenyx.arena.mappers.battle.BattleMapper;
 import fr.phoenyx.arena.models.battle.Battle;
 import fr.phoenyx.arena.repositories.battle.BattleRepository;
+import fr.phoenyx.arena.services.CrudService;
 
 @Service
-public class BattleService {
+public class BattleService extends CrudService<Battle, Long, BattleDTO> {
 
     @Autowired
     private BattleRepository battleRepository;
 
-    public List<BattleDTO> findAll() {
-        return battleRepository.findAll().stream()
-                .map(BattleDTO::new)
-                .collect(Collectors.toList());
+    @Override
+    protected JpaRepository<Battle, Long> getRepository() {
+        return battleRepository;
     }
 
-    public BattleDTO findById(Long id) {
-        Battle battle = battleRepository.findById(id)
-                .orElseThrow(() -> BattleException.entityNotFound(id));
-        return new BattleDTO(battle);
+    @Override
+    protected Mapper<Battle, BattleDTO> getMapper() {
+        return new BattleMapper();
+    }
+
+    @Override
+    protected Class<Battle> getConcernedClass() {
+        return Battle.class;
     }
 }

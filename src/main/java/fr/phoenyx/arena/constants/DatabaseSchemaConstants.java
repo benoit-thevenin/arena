@@ -14,7 +14,7 @@ public class DatabaseSchemaConstants {
     public static final String TABLE_BUILDS_ITEMS = "BUILDS_ITEMS";
     public static final String TABLE_BUILDS_TYPES = "BUILDS_TYPES";
     public static final String TABLE_GUILDS = "GUILDS";
-    public static final String TABLE_GUILD_MEMBERS = "GUILD_MEMBERS";
+    public static final String TABLE_GUILDS_APPLICANTS = "GUILDS_APPLICANTS";
     public static final String TABLE_HEROES = "HEROES";
     public static final String TABLE_HERO_BUILDS = "HERO_BUILDS";
     public static final String TABLE_HERO_BUILDS_ITEMS = "HERO_BUILDS_ITEMS";
@@ -46,6 +46,7 @@ public class DatabaseSchemaConstants {
     public static final String COLUMN_HASH_PASS = "HASH_PASSWORD";
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_ID_ACTION = "ID_ACTION";
+    public static final String COLUMN_ID_APPLICANT = "ID_APPLICANT";
     public static final String COLUMN_ID_BATTLE = "ID_BATTLE";
     public static final String COLUMN_ID_BUILD = "ID_BUILD";
     public static final String COLUMN_ID_CASTER = "ID_CASTER";

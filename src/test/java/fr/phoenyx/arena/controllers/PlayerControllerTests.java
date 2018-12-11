@@ -1,15 +1,8 @@
 package fr.phoenyx.arena.controllers;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
-import static org.hamcrest.Matchers.containsString;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -20,18 +13,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import fr.phoenyx.arena.advices.BadRequestAdvice;
+import fr.phoenyx.arena.advices.EntityNotFoundAdvice;
 import fr.phoenyx.arena.advices.GenericAdvice;
-import fr.phoenyx.arena.advices.GenericEntityAdvice;
-import fr.phoenyx.arena.advices.PlayerAdvice;
+import fr.phoenyx.arena.builders.PlayerBuilder;
 import fr.phoenyx.arena.dtos.PlayerDTO;
-import fr.phoenyx.arena.exceptions.PlayerException;
 import fr.phoenyx.arena.models.Player;
+import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.PlayerService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PlayerControllerTests {
+public class PlayerControllerTests extends CrudControllerTests<Player, Long, PlayerDTO> {
 
     @Autowired
     private MockMvc mockMvc;
@@ -42,42 +36,42 @@ public class PlayerControllerTests {
     @InjectMocks
     private PlayerController playerController;
 
+    @Override
+    protected MockMvc getMockMvc() {
+        return mockMvc;
+    }
+
+    @Override
+    protected CrudService<Player, Long, PlayerDTO> getService() {
+        return playerService;
+    }
+
+    @Override
+    protected String getEndpointRoot() {
+        return "/players";
+    }
+
+    @Override
+    protected Class<Player> getConcernedClass() {
+        return Player.class;
+    }
+
+    @Override
+    protected Long getGenericId() {
+        return GENERIC_ID;
+    }
+
+    @Override
+    protected PlayerDTO buildDTO() {
+        Player player = new PlayerBuilder()
+                .id(GENERIC_ID).build();
+        return new PlayerDTO(player);
+    }
+
     @Before
     public void setup() {
         mockMvc = MockMvcBuilders.standaloneSetup(playerController)
-                .setControllerAdvice(new GenericAdvice(), new GenericEntityAdvice(), new PlayerAdvice())
+                .setControllerAdvice(new GenericAdvice(), new EntityNotFoundAdvice(), new BadRequestAdvice())
                 .build();
-    }
-
-    @Test
-    public void findAll_shouldReturnOK() throws Exception {
-        mockMvc.perform(get("/players"))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    public void findById_shouldReturnOK_whenExists() throws Exception {
-        //Given
-        PlayerDTO player = new PlayerDTO();
-        player.setId(GENERIC_ID);
-        when(playerService.findById(GENERIC_ID)).thenReturn(player);
-
-        //When Then
-        mockMvc.perform(get("/players/" + GENERIC_ID))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString(Long.toString(GENERIC_ID))));
-    }
-
-    @Test
-    public void findById_shouldReturnNotFound_whenNotExists() throws Exception {
-        //Given
-        when(playerService.findById(GENERIC_ID)).thenThrow(PlayerException.entityNotFound(GENERIC_ID));
-
-        //When Then
-        mockMvc.perform(get("/players/" + GENERIC_ID))
-                .andDo(print())
-                .andExpect(status().isNotFound())
-                .andExpect(content().string(containsString(Player.class.getSimpleName() + " not found : " + GENERIC_ID)));
     }
 }

@@ -1,31 +1,27 @@
 package fr.phoenyx.arena.services.battle;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
-import static fr.phoenyx.arena.constants.MessagesConstants.NOT_FOUND;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import fr.phoenyx.arena.builders.battle.BattleBuilder;
 import fr.phoenyx.arena.dtos.battle.BattleDTO;
-import fr.phoenyx.arena.exceptions.GenericEntityException;
 import fr.phoenyx.arena.models.battle.Battle;
 import fr.phoenyx.arena.repositories.battle.BattleRepository;
+import fr.phoenyx.arena.services.CrudService;
+import fr.phoenyx.arena.services.CrudServiceTests;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BattleServiceTests {
+public class BattleServiceTests extends CrudServiceTests<Battle, Long, BattleDTO> {
 
     @Mock
     private BattleRepository battleRepository;
@@ -33,48 +29,33 @@ public class BattleServiceTests {
     @InjectMocks
     private BattleService battleService;
 
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
-
-    @Test
-    public void findAll_shouldReturnList() {
-        //Given
-        Battle battle = new Battle();
-        battle.setId(GENERIC_ID);
-        List<Battle> battles = Arrays.asList(battle);
-        when(battleRepository.findAll()).thenReturn(battles);
-
-        //When
-        List<BattleDTO> battleDTOs = battleService.findAll();
-
-        //Then
-        assertThat(battleDTOs).hasSize(battles.size());
+    @Override
+    protected JpaRepository<Battle, Long> getRepository() {
+        return battleRepository;
     }
 
-    @Test
-    public void findById_shouldReturnBattle_whenExists() {
-        //Given
-        Battle battle = new Battle();
-        battle.setId(GENERIC_ID);
-        when(battleRepository.findById(GENERIC_ID)).thenReturn(Optional.of(battle));
-
-        //When
-        BattleDTO battleDTO = battleService.findById(GENERIC_ID);
-
-        //Then
-        assertThat(battleDTO).isNotNull();
-        assertThat(battleDTO.getId()).isEqualTo(GENERIC_ID);
+    @Override
+    protected CrudService<Battle, Long, BattleDTO> getService() {
+        return battleService;
     }
 
-    @Test
-    public void findById_shouldThrowException_whenNotExists() {
-        //Given
-        exceptionRule.expect(GenericEntityException.class);
-        String message = String.join(" ", Battle.class.getSimpleName(), NOT_FOUND, Long.toString(GENERIC_ID));
-        exceptionRule.expectMessage(message);
-        when(battleRepository.findById(GENERIC_ID)).thenReturn(Optional.empty());
+    @Override
+    protected Class<Battle> getConcernedClass() {
+        return Battle.class;
+    }
 
-        //When Then
-        battleService.findById(GENERIC_ID);
+    @Override
+    protected Long getGenericId() {
+        return GENERIC_ID;
+    }
+
+    @Override
+    protected Battle buildEntity() {
+        return new BattleBuilder().id(GENERIC_ID).build();
+    }
+
+    @Override
+    protected List<Battle> buildEntities() {
+        return Arrays.asList(buildEntity());
     }
 }

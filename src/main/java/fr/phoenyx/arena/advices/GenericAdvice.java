@@ -18,7 +18,7 @@ public class GenericAdvice {
     @ResponseBody
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String genericEntityHandler(Exception exception) {
+    public String genericHandler(Exception exception) {
         log.error(ExceptionUtils.exceptionStacktraceToString(exception));
         return "An error has occured !";
     }

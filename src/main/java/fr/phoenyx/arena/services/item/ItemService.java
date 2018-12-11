@@ -5,31 +5,37 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import fr.phoenyx.arena.dtos.item.ItemDTO;
 import fr.phoenyx.arena.dtos.item.RecipeDTO;
 import fr.phoenyx.arena.enums.item.ItemRecipe;
-import fr.phoenyx.arena.exceptions.item.ItemException;
+import fr.phoenyx.arena.mappers.Mapper;
+import fr.phoenyx.arena.mappers.item.ItemMapper;
 import fr.phoenyx.arena.models.item.Item;
 import fr.phoenyx.arena.repositories.item.ItemRepository;
+import fr.phoenyx.arena.services.CrudService;
 
 @Service
-public class ItemService {
+public class ItemService extends CrudService<Item, Long, ItemDTO> {
 
     @Autowired
     private ItemRepository itemRepository;
 
-    public List<ItemDTO> findAll() {
-        return itemRepository.findAll().stream()
-                .map(ItemDTO::new)
-                .collect(Collectors.toList());
+    @Override
+    protected JpaRepository<Item, Long> getRepository() {
+        return itemRepository;
     }
 
-    public ItemDTO findById(Long id) {
-        Item item = itemRepository.findById(id)
-                .orElseThrow(() -> ItemException.entityNotFound(id));
-        return new ItemDTO(item);
+    @Override
+    protected Mapper<Item, ItemDTO> getMapper() {
+        return new ItemMapper();
+    }
+
+    @Override
+    protected Class<Item> getConcernedClass() {
+        return Item.class;
     }
 
     public List<RecipeDTO> getAllRecipes() {

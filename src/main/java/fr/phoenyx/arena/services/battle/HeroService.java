@@ -1,31 +1,34 @@
 package fr.phoenyx.arena.services.battle;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import fr.phoenyx.arena.dtos.battle.HeroDTO;
-import fr.phoenyx.arena.exceptions.battle.HeroException;
+import fr.phoenyx.arena.mappers.Mapper;
+import fr.phoenyx.arena.mappers.battle.HeroMapper;
 import fr.phoenyx.arena.models.battle.Hero;
 import fr.phoenyx.arena.repositories.battle.HeroRepository;
+import fr.phoenyx.arena.services.CrudService;
 
 @Service
-public class HeroService {
+public class HeroService extends CrudService<Hero, Long, HeroDTO> {
 
     @Autowired
     private HeroRepository heroRepository;
 
-    public List<HeroDTO> findAll() {
-        return heroRepository.findAll().stream()
-                .map(HeroDTO::new)
-                .collect(Collectors.toList());
+    @Override
+    protected JpaRepository<Hero, Long> getRepository() {
+        return heroRepository;
     }
 
-    public HeroDTO findById(Long id) {
-        Hero hero = heroRepository.findById(id)
-                .orElseThrow(() -> HeroException.entityNotFound(id));
-        return new HeroDTO(hero);
+    @Override
+    protected Mapper<Hero, HeroDTO> getMapper() {
+        return new HeroMapper();
+    }
+
+    @Override
+    protected Class<Hero> getConcernedClass() {
+        return Hero.class;
     }
 }

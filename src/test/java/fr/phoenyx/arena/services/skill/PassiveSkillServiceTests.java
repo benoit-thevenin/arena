@@ -1,32 +1,28 @@
 package fr.phoenyx.arena.services.skill;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
-import static fr.phoenyx.arena.constants.MessagesConstants.NOT_FOUND;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import fr.phoenyx.arena.builders.skill.PassiveSkillBuilder;
 import fr.phoenyx.arena.dtos.skill.PassiveSkillDTO;
 import fr.phoenyx.arena.enums.skill.PassiveSkillEnum;
-import fr.phoenyx.arena.exceptions.GenericEntityException;
 import fr.phoenyx.arena.models.skill.PassiveSkill;
 import fr.phoenyx.arena.repositories.skill.PassiveSkillRepository;
+import fr.phoenyx.arena.services.CrudService;
+import fr.phoenyx.arena.services.CrudServiceTests;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PassiveSkillServiceTests {
+public class PassiveSkillServiceTests extends CrudServiceTests<PassiveSkill, Long, PassiveSkillDTO> {
 
     @Mock
     private PassiveSkillRepository passiveSkillRepository;
@@ -34,50 +30,35 @@ public class PassiveSkillServiceTests {
     @InjectMocks
     private PassiveSkillService passiveSkillService;
 
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
-
-    @Test
-    public void findAll_shouldReturnList() {
-        //Given
-        PassiveSkill passiveSkill = new PassiveSkill();
-        passiveSkill.setId(GENERIC_ID);
-        passiveSkill.setPassiveSkillEnum(PassiveSkillEnum.BRUTE);
-        List<PassiveSkill> passiveSkills = Arrays.asList(passiveSkill);
-        when(passiveSkillRepository.findAll()).thenReturn(passiveSkills);
-
-        //When
-        List<PassiveSkillDTO> passiveSkillDTOs = passiveSkillService.findAll();
-
-        //Then
-        assertThat(passiveSkillDTOs).hasSize(passiveSkills.size());
+    @Override
+    protected JpaRepository<PassiveSkill, Long> getRepository() {
+        return passiveSkillRepository;
     }
 
-    @Test
-    public void findById_shouldReturnPassiveSkill_whenExists() {
-        //Given
-        PassiveSkill passiveSkill = new PassiveSkill();
-        passiveSkill.setId(GENERIC_ID);
-        passiveSkill.setPassiveSkillEnum(PassiveSkillEnum.BRUTE);
-        when(passiveSkillRepository.findById(GENERIC_ID)).thenReturn(Optional.of(passiveSkill));
-
-        //When
-        PassiveSkillDTO passiveSkillDTO = passiveSkillService.findById(GENERIC_ID);
-
-        //Then
-        assertThat(passiveSkillDTO).isNotNull();
-        assertThat(passiveSkillDTO.getId()).isEqualTo(GENERIC_ID);
+    @Override
+    protected CrudService<PassiveSkill, Long, PassiveSkillDTO> getService() {
+        return passiveSkillService;
     }
 
-    @Test
-    public void findById_shouldThrowException_whenNotExists() {
-        //Given
-        exceptionRule.expect(GenericEntityException.class);
-        String message = String.join(" ", PassiveSkill.class.getSimpleName(), NOT_FOUND, Long.toString(GENERIC_ID));
-        exceptionRule.expectMessage(message);
-        when(passiveSkillRepository.findById(GENERIC_ID)).thenReturn(Optional.empty());
+    @Override
+    protected Class<PassiveSkill> getConcernedClass() {
+        return PassiveSkill.class;
+    }
 
-        //When Then
-        passiveSkillService.findById(GENERIC_ID);
+    @Override
+    protected Long getGenericId() {
+        return GENERIC_ID;
+    }
+
+    @Override
+    protected PassiveSkill buildEntity() {
+        return new PassiveSkillBuilder()
+                .passiveSkillEnum(PassiveSkillEnum.values()[0])
+                .id(GENERIC_ID).build();
+    }
+
+    @Override
+    protected List<PassiveSkill> buildEntities() {
+        return Arrays.asList(buildEntity());
     }
 }

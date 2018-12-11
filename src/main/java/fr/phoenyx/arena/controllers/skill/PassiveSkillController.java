@@ -1,30 +1,24 @@
 package fr.phoenyx.arena.controllers.skill;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.phoenyx.arena.controllers.CrudController;
 import fr.phoenyx.arena.dtos.skill.PassiveSkillDTO;
+import fr.phoenyx.arena.models.skill.PassiveSkill;
+import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.skill.PassiveSkillService;
 
 @RestController
-public class PassiveSkillController {
+@RequestMapping("/passive-skills")
+public class PassiveSkillController extends CrudController<PassiveSkill, Long, PassiveSkillDTO> {
 
     @Autowired
     private PassiveSkillService passiveSkillService;
 
-    @GetMapping("/passive-skills")
-    public ResponseEntity<List<PassiveSkillDTO>> findAll() {
-        return new ResponseEntity<>(passiveSkillService.findAll(), HttpStatus.OK);
-    }
-
-    @GetMapping("/passive-skills/{id}")
-    public ResponseEntity<PassiveSkillDTO> findById(@PathVariable Long id) {
-        return new ResponseEntity<>(passiveSkillService.findById(id), HttpStatus.OK);
+    @Override
+    protected CrudService<PassiveSkill, Long, PassiveSkillDTO> getService() {
+        return passiveSkillService;
     }
 }

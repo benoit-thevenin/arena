@@ -1,33 +1,31 @@
 package fr.phoenyx.arena.services.item;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
-import static fr.phoenyx.arena.constants.MessagesConstants.NOT_FOUND;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import fr.phoenyx.arena.builders.item.ItemBuilder;
 import fr.phoenyx.arena.dtos.item.ItemDTO;
 import fr.phoenyx.arena.dtos.item.RecipeDTO;
 import fr.phoenyx.arena.enums.item.ItemRecipe;
-import fr.phoenyx.arena.exceptions.GenericEntityException;
 import fr.phoenyx.arena.models.item.Item;
 import fr.phoenyx.arena.repositories.item.ItemRepository;
+import fr.phoenyx.arena.services.CrudService;
+import fr.phoenyx.arena.services.CrudServiceTests;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ItemServiceTests {
+public class ItemServiceTests extends CrudServiceTests<Item, Long, ItemDTO> {
 
     @Mock
     private ItemRepository itemRepository;
@@ -35,49 +33,34 @@ public class ItemServiceTests {
     @InjectMocks
     private ItemService itemService;
 
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
-
-    @Test
-    public void findAll_shouldReturnList() {
-        //Given
-        Item item = new Item();
-        item.setId(GENERIC_ID);
-        List<Item> items = Arrays.asList(item);
-        when(itemRepository.findAll()).thenReturn(items);
-
-        //When
-        List<ItemDTO> itemDTOs = itemService.findAll();
-
-        //Then
-        assertThat(itemDTOs).hasSize(items.size());
+    @Override
+    protected JpaRepository<Item, Long> getRepository() {
+        return itemRepository;
     }
 
-    @Test
-    public void findById_shouldReturnItem_whenExists() {
-        //Given
-        Item item = new Item();
-        item.setId(GENERIC_ID);
-        when(itemRepository.findById(GENERIC_ID)).thenReturn(Optional.of(item));
-
-        //When
-        ItemDTO itemDTO = itemService.findById(GENERIC_ID);
-
-        //Then
-        assertThat(itemDTO).isNotNull();
-        assertThat(itemDTO.getId()).isEqualTo(GENERIC_ID);
+    @Override
+    protected CrudService<Item, Long, ItemDTO> getService() {
+        return itemService;
     }
 
-    @Test
-    public void findById_shouldThrowException_whenNotExists() {
-        //Given
-        exceptionRule.expect(GenericEntityException.class);
-        String message = String.join(" ", Item.class.getSimpleName(), NOT_FOUND, Long.toString(GENERIC_ID));
-        exceptionRule.expectMessage(message);
-        when(itemRepository.findById(GENERIC_ID)).thenReturn(Optional.empty());
+    @Override
+    protected Class<Item> getConcernedClass() {
+        return Item.class;
+    }
 
-        //When Then
-        itemService.findById(GENERIC_ID);
+    @Override
+    protected Long getGenericId() {
+        return GENERIC_ID;
+    }
+
+    @Override
+    protected Item buildEntity() {
+        return new ItemBuilder().id(GENERIC_ID).build();
+    }
+
+    @Override
+    protected List<Item> buildEntities() {
+        return Arrays.asList(buildEntity());
     }
 
     @Test

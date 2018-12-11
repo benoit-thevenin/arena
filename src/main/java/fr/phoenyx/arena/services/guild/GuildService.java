@@ -1,31 +1,34 @@
 package fr.phoenyx.arena.services.guild;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import fr.phoenyx.arena.dtos.guild.GuildDTO;
-import fr.phoenyx.arena.exceptions.guild.GuildException;
+import fr.phoenyx.arena.mappers.Mapper;
+import fr.phoenyx.arena.mappers.guild.GuildMapper;
 import fr.phoenyx.arena.models.guild.Guild;
 import fr.phoenyx.arena.repositories.guild.GuildRepository;
+import fr.phoenyx.arena.services.CrudService;
 
 @Service
-public class GuildService {
+public class GuildService extends CrudService<Guild, Long, GuildDTO> {
 
     @Autowired
     private GuildRepository guildRepository;
 
-    public List<GuildDTO> findAll() {
-        return guildRepository.findAll().stream()
-                .map(GuildDTO::new)
-                .collect(Collectors.toList());
+    @Override
+    protected JpaRepository<Guild, Long> getRepository() {
+        return guildRepository;
     }
 
-    public GuildDTO findById(Long id) {
-        Guild guild = guildRepository.findById(id)
-                .orElseThrow(() -> GuildException.entityNotFound(id));
-        return new GuildDTO(guild);
+    @Override
+    protected Mapper<Guild, GuildDTO> getMapper() {
+        return new GuildMapper();
+    }
+
+    @Override
+    protected Class<Guild> getConcernedClass() {
+        return Guild.class;
     }
 }

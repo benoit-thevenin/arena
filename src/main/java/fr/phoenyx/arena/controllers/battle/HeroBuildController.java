@@ -1,30 +1,24 @@
 package fr.phoenyx.arena.controllers.battle;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.phoenyx.arena.controllers.CrudController;
 import fr.phoenyx.arena.dtos.battle.HeroBuildDTO;
+import fr.phoenyx.arena.models.battle.HeroBuild;
+import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.battle.HeroBuildService;
 
 @RestController
-public class HeroBuildController {
+@RequestMapping("/hero-builds")
+public class HeroBuildController extends CrudController<HeroBuild, Long, HeroBuildDTO> {
 
     @Autowired
     private HeroBuildService heroBuildService;
 
-    @GetMapping("/hero-builds")
-    public ResponseEntity<List<HeroBuildDTO>> findAll() {
-        return new ResponseEntity<>(heroBuildService.findAll(), HttpStatus.OK);
-    }
-
-    @GetMapping("/hero-builds/{id}")
-    public ResponseEntity<HeroBuildDTO> findById(@PathVariable Long id) {
-        return new ResponseEntity<>(heroBuildService.findById(id), HttpStatus.OK);
+    @Override
+    protected CrudService<HeroBuild, Long, HeroBuildDTO> getService() {
+        return heroBuildService;
     }
 }

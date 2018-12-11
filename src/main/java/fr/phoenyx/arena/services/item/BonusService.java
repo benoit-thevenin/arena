@@ -1,31 +1,34 @@
 package fr.phoenyx.arena.services.item;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import fr.phoenyx.arena.dtos.item.BonusDTO;
-import fr.phoenyx.arena.exceptions.item.BonusException;
+import fr.phoenyx.arena.mappers.Mapper;
+import fr.phoenyx.arena.mappers.item.BonusMapper;
 import fr.phoenyx.arena.models.item.Bonus;
 import fr.phoenyx.arena.repositories.item.BonusRepository;
+import fr.phoenyx.arena.services.CrudService;
 
 @Service
-public class BonusService {
+public class BonusService extends CrudService<Bonus, Long, BonusDTO> {
 
     @Autowired
     private BonusRepository bonusRepository;
 
-    public List<BonusDTO> findAll() {
-        return bonusRepository.findAll().stream()
-                .map(BonusDTO::new)
-                .collect(Collectors.toList());
+    @Override
+    protected JpaRepository<Bonus, Long> getRepository() {
+        return bonusRepository;
     }
 
-    public BonusDTO findById(Long id) {
-        Bonus bonus = bonusRepository.findById(id)
-                .orElseThrow(() -> BonusException.entityNotFound(id));
-        return new BonusDTO(bonus);
+    @Override
+    protected Mapper<Bonus, BonusDTO> getMapper() {
+        return new BonusMapper();
+    }
+
+    @Override
+    protected Class<Bonus> getConcernedClass() {
+        return Bonus.class;
     }
 }

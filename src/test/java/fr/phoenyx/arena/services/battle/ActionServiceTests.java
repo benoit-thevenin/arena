@@ -1,31 +1,27 @@
 package fr.phoenyx.arena.services.battle;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
-import static fr.phoenyx.arena.constants.MessagesConstants.NOT_FOUND;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import fr.phoenyx.arena.builders.battle.ActionBuilder;
 import fr.phoenyx.arena.dtos.battle.ActionDTO;
-import fr.phoenyx.arena.exceptions.GenericEntityException;
 import fr.phoenyx.arena.models.battle.Action;
 import fr.phoenyx.arena.repositories.battle.ActionRepository;
+import fr.phoenyx.arena.services.CrudService;
+import fr.phoenyx.arena.services.CrudServiceTests;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ActionServiceTests {
+public class ActionServiceTests extends CrudServiceTests<Action, Long, ActionDTO> {
 
     @Mock
     private ActionRepository actionRepository;
@@ -33,48 +29,33 @@ public class ActionServiceTests {
     @InjectMocks
     private ActionService actionService;
 
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
-
-    @Test
-    public void findAll_shouldReturnList() {
-        //Given
-        Action action = new Action();
-        action.setId(GENERIC_ID);
-        List<Action> actions = Arrays.asList(action);
-        when(actionRepository.findAll()).thenReturn(actions);
-
-        //When
-        List<ActionDTO> actionDTOs = actionService.findAll();
-
-        //Then
-        assertThat(actionDTOs).hasSize(actions.size());
+    @Override
+    protected JpaRepository<Action, Long> getRepository() {
+        return actionRepository;
     }
 
-    @Test
-    public void findById_shouldReturnAction_whenExists() {
-        //Given
-        Action action = new Action();
-        action.setId(GENERIC_ID);
-        when(actionRepository.findById(GENERIC_ID)).thenReturn(Optional.of(action));
-
-        //When
-        ActionDTO actionDTO = actionService.findById(GENERIC_ID);
-
-        //Then
-        assertThat(actionDTO).isNotNull();
-        assertThat(actionDTO.getId()).isEqualTo(GENERIC_ID);
+    @Override
+    protected CrudService<Action, Long, ActionDTO> getService() {
+        return actionService;
     }
 
-    @Test
-    public void findById_shouldThrowException_whenNotExists() {
-        //Given
-        exceptionRule.expect(GenericEntityException.class);
-        String message = String.join(" ", Action.class.getSimpleName(), NOT_FOUND, Long.toString(GENERIC_ID));
-        exceptionRule.expectMessage(message);
-        when(actionRepository.findById(GENERIC_ID)).thenReturn(Optional.empty());
+    @Override
+    protected Class<Action> getConcernedClass() {
+        return Action.class;
+    }
 
-        //When Then
-        actionService.findById(GENERIC_ID);
+    @Override
+    protected Long getGenericId() {
+        return GENERIC_ID;
+    }
+
+    @Override
+    protected Action buildEntity() {
+        return new ActionBuilder().id(GENERIC_ID).build();
+    }
+
+    @Override
+    protected List<Action> buildEntities() {
+        return Arrays.asList(buildEntity());
     }
 }

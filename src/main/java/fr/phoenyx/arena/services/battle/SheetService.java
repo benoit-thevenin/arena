@@ -1,31 +1,34 @@
 package fr.phoenyx.arena.services.battle;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import fr.phoenyx.arena.dtos.battle.SheetDTO;
-import fr.phoenyx.arena.exceptions.battle.SheetException;
+import fr.phoenyx.arena.mappers.Mapper;
+import fr.phoenyx.arena.mappers.battle.SheetMapper;
 import fr.phoenyx.arena.models.battle.Sheet;
 import fr.phoenyx.arena.repositories.battle.SheetRepository;
+import fr.phoenyx.arena.services.CrudService;
 
 @Service
-public class SheetService {
+public class SheetService extends CrudService<Sheet, Long, SheetDTO> {
 
     @Autowired
     private SheetRepository sheetRepository;
 
-    public List<SheetDTO> findAll() {
-        return sheetRepository.findAll().stream()
-                .map(SheetDTO::new)
-                .collect(Collectors.toList());
+    @Override
+    protected JpaRepository<Sheet, Long> getRepository() {
+        return sheetRepository;
     }
 
-    public SheetDTO findById(Long id) {
-        Sheet sheet = sheetRepository.findById(id)
-                .orElseThrow(() -> SheetException.entityNotFound(id));
-        return new SheetDTO(sheet);
+    @Override
+    protected Mapper<Sheet, SheetDTO> getMapper() {
+        return new SheetMapper();
+    }
+
+    @Override
+    protected Class<Sheet> getConcernedClass() {
+        return Sheet.class;
     }
 }

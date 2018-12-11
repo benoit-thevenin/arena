@@ -1,31 +1,27 @@
 package fr.phoenyx.arena.services.battle;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
-import static fr.phoenyx.arena.constants.MessagesConstants.NOT_FOUND;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import fr.phoenyx.arena.builders.battle.SheetBuilder;
 import fr.phoenyx.arena.dtos.battle.SheetDTO;
-import fr.phoenyx.arena.exceptions.GenericEntityException;
 import fr.phoenyx.arena.models.battle.Sheet;
 import fr.phoenyx.arena.repositories.battle.SheetRepository;
+import fr.phoenyx.arena.services.CrudService;
+import fr.phoenyx.arena.services.CrudServiceTests;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SheetServiceTests {
+public class SheetServiceTests extends CrudServiceTests<Sheet, Long, SheetDTO> {
 
     @Mock
     private SheetRepository sheetRepository;
@@ -33,48 +29,33 @@ public class SheetServiceTests {
     @InjectMocks
     private SheetService sheetService;
 
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
-
-    @Test
-    public void findAll_shouldReturnList() {
-        //Given
-        Sheet sheet = new Sheet();
-        sheet.setId(GENERIC_ID);
-        List<Sheet> sheets = Arrays.asList(sheet);
-        when(sheetRepository.findAll()).thenReturn(sheets);
-
-        //When
-        List<SheetDTO> sheetDTOs = sheetService.findAll();
-
-        //Then
-        assertThat(sheetDTOs).hasSize(sheets.size());
+    @Override
+    protected JpaRepository<Sheet, Long> getRepository() {
+        return sheetRepository;
     }
 
-    @Test
-    public void findById_shouldReturnSheet_whenExists() {
-        //Given
-        Sheet sheet = new Sheet();
-        sheet.setId(GENERIC_ID);
-        when(sheetRepository.findById(GENERIC_ID)).thenReturn(Optional.of(sheet));
-
-        //When
-        SheetDTO sheetDTO = sheetService.findById(GENERIC_ID);
-
-        //Then
-        assertThat(sheetDTO).isNotNull();
-        assertThat(sheetDTO.getId()).isEqualTo(GENERIC_ID);
+    @Override
+    protected CrudService<Sheet, Long, SheetDTO> getService() {
+        return sheetService;
     }
 
-    @Test
-    public void findById_shouldThrowException_whenNotExists() {
-        //Given
-        exceptionRule.expect(GenericEntityException.class);
-        String message = String.join(" ", Sheet.class.getSimpleName(), NOT_FOUND, Long.toString(GENERIC_ID));
-        exceptionRule.expectMessage(message);
-        when(sheetRepository.findById(GENERIC_ID)).thenReturn(Optional.empty());
+    @Override
+    protected Class<Sheet> getConcernedClass() {
+        return Sheet.class;
+    }
 
-        //When Then
-        sheetService.findById(GENERIC_ID);
+    @Override
+    protected Long getGenericId() {
+        return GENERIC_ID;
+    }
+
+    @Override
+    protected Sheet buildEntity() {
+        return new SheetBuilder().id(GENERIC_ID).build();
+    }
+
+    @Override
+    protected List<Sheet> buildEntities() {
+        return Arrays.asList(buildEntity());
     }
 }

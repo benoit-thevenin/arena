@@ -1,31 +1,34 @@
 package fr.phoenyx.arena.services.skill;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import fr.phoenyx.arena.dtos.skill.ActiveSkillDTO;
-import fr.phoenyx.arena.exceptions.skill.ActiveSkillException;
+import fr.phoenyx.arena.mappers.Mapper;
+import fr.phoenyx.arena.mappers.skill.ActiveSkillMapper;
 import fr.phoenyx.arena.models.skill.ActiveSkill;
 import fr.phoenyx.arena.repositories.skill.ActiveSkillRepository;
+import fr.phoenyx.arena.services.CrudService;
 
 @Service
-public class ActiveSkillService {
+public class ActiveSkillService extends CrudService<ActiveSkill, Long, ActiveSkillDTO> {
 
     @Autowired
     private ActiveSkillRepository activeSkillRepository;
 
-    public List<ActiveSkillDTO> findAll() {
-        return activeSkillRepository.findAll().stream()
-                .map(ActiveSkillDTO::new)
-                .collect(Collectors.toList());
+    @Override
+    protected JpaRepository<ActiveSkill, Long> getRepository() {
+        return activeSkillRepository;
     }
 
-    public ActiveSkillDTO findById(Long id) {
-        ActiveSkill activeSkill = activeSkillRepository.findById(id)
-                .orElseThrow(() -> ActiveSkillException.entityNotFound(id));
-        return new ActiveSkillDTO(activeSkill);
+    @Override
+    protected Mapper<ActiveSkill, ActiveSkillDTO> getMapper() {
+        return new ActiveSkillMapper();
+    }
+
+    @Override
+    protected Class<ActiveSkill> getConcernedClass() {
+        return ActiveSkill.class;
     }
 }

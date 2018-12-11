@@ -1,30 +1,24 @@
 package fr.phoenyx.arena.controllers.skill;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.phoenyx.arena.controllers.CrudController;
 import fr.phoenyx.arena.dtos.skill.StrategyDTO;
+import fr.phoenyx.arena.models.skill.Strategy;
+import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.skill.StrategyService;
 
 @RestController
-public class StrategyController {
+@RequestMapping("/strategies")
+public class StrategyController extends CrudController<Strategy, Long, StrategyDTO> {
 
     @Autowired
     private StrategyService strategyService;
 
-    @GetMapping("/strategies")
-    public ResponseEntity<List<StrategyDTO>> findAll() {
-        return new ResponseEntity<>(strategyService.findAll(), HttpStatus.OK);
-    }
-
-    @GetMapping("/strategies/{id}")
-    public ResponseEntity<StrategyDTO> findById(@PathVariable Long id) {
-        return new ResponseEntity<>(strategyService.findById(id), HttpStatus.OK);
+    @Override
+    protected CrudService<Strategy, Long, StrategyDTO> getService() {
+        return strategyService;
     }
 }

@@ -1,31 +1,33 @@
 package fr.phoenyx.arena.services;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import fr.phoenyx.arena.dtos.TeamDTO;
-import fr.phoenyx.arena.exceptions.TeamException;
+import fr.phoenyx.arena.mappers.Mapper;
+import fr.phoenyx.arena.mappers.TeamMapper;
 import fr.phoenyx.arena.models.Team;
 import fr.phoenyx.arena.repositories.TeamRepository;
 
 @Service
-public class TeamService {
+public class TeamService extends CrudService<Team, Long, TeamDTO> {
 
     @Autowired
     private TeamRepository teamRepository;
 
-    public List<TeamDTO> findAll() {
-        return teamRepository.findAll().stream()
-                .map(TeamDTO::new)
-                .collect(Collectors.toList());
+    @Override
+    protected JpaRepository<Team, Long> getRepository() {
+        return teamRepository;
     }
 
-    public TeamDTO findById(Long id) {
-        Team team = teamRepository.findById(id)
-                .orElseThrow(() -> TeamException.entityNotFound(id));
-        return new TeamDTO(team);
+    @Override
+    protected Mapper<Team, TeamDTO> getMapper() {
+        return new TeamMapper();
+    }
+
+    @Override
+    protected Class<Team> getConcernedClass() {
+        return Team.class;
     }
 }

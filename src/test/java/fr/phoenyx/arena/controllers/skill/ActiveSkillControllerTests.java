@@ -1,15 +1,8 @@
 package fr.phoenyx.arena.controllers.skill;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
-import static org.hamcrest.Matchers.containsString;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -20,18 +13,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import fr.phoenyx.arena.advices.BadRequestAdvice;
+import fr.phoenyx.arena.advices.EntityNotFoundAdvice;
 import fr.phoenyx.arena.advices.GenericAdvice;
-import fr.phoenyx.arena.advices.GenericEntityAdvice;
-import fr.phoenyx.arena.advices.skill.ActiveSkillAdvice;
+import fr.phoenyx.arena.builders.skill.ActiveSkillBuilder;
+import fr.phoenyx.arena.controllers.CrudControllerTests;
 import fr.phoenyx.arena.dtos.skill.ActiveSkillDTO;
-import fr.phoenyx.arena.exceptions.skill.ActiveSkillException;
+import fr.phoenyx.arena.enums.skill.ActiveSkillEnum;
 import fr.phoenyx.arena.models.skill.ActiveSkill;
+import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.skill.ActiveSkillService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ActiveSkillControllerTests {
+public class ActiveSkillControllerTests extends CrudControllerTests<ActiveSkill, Long, ActiveSkillDTO> {
 
     @Autowired
     private MockMvc mockMvc;
@@ -42,42 +38,43 @@ public class ActiveSkillControllerTests {
     @InjectMocks
     private ActiveSkillController activeSkillController;
 
+    @Override
+    protected MockMvc getMockMvc() {
+        return mockMvc;
+    }
+
+    @Override
+    protected CrudService<ActiveSkill, Long, ActiveSkillDTO> getService() {
+        return activeSkillService;
+    }
+
+    @Override
+    protected String getEndpointRoot() {
+        return "/active-skills";
+    }
+
+    @Override
+    protected Class<ActiveSkill> getConcernedClass() {
+        return ActiveSkill.class;
+    }
+
+    @Override
+    protected Long getGenericId() {
+        return GENERIC_ID;
+    }
+
+    @Override
+    protected ActiveSkillDTO buildDTO() {
+        ActiveSkill activeSkill = new ActiveSkillBuilder()
+                .activeSkillEnum(ActiveSkillEnum.values()[0])
+                .id(GENERIC_ID).build();
+        return new ActiveSkillDTO(activeSkill);
+    }
+
     @Before
     public void setup() {
         mockMvc = MockMvcBuilders.standaloneSetup(activeSkillController)
-                .setControllerAdvice(new GenericAdvice(), new GenericEntityAdvice(), new ActiveSkillAdvice())
+                .setControllerAdvice(new GenericAdvice(), new EntityNotFoundAdvice(), new BadRequestAdvice())
                 .build();
-    }
-
-    @Test
-    public void findAll_shouldReturnOK() throws Exception {
-        mockMvc.perform(get("/active-skills"))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    public void findById_shouldReturnOK_whenExists() throws Exception {
-        //Given
-        ActiveSkillDTO activeSkill = new ActiveSkillDTO();
-        activeSkill.setId(GENERIC_ID);
-        when(activeSkillService.findById(GENERIC_ID)).thenReturn(activeSkill);
-
-        //When Then
-        mockMvc.perform(get("/active-skills/" + GENERIC_ID))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString(Long.toString(GENERIC_ID))));
-    }
-
-    @Test
-    public void findById_shouldReturnNotFound_whenNotExists() throws Exception {
-        //Given
-        when(activeSkillService.findById(GENERIC_ID)).thenThrow(ActiveSkillException.entityNotFound(GENERIC_ID));
-
-        //When Then
-        mockMvc.perform(get("/active-skills/" + GENERIC_ID))
-                .andDo(print())
-                .andExpect(status().isNotFound())
-                .andExpect(content().string(containsString(ActiveSkill.class.getSimpleName() + " not found : " + GENERIC_ID)));
     }
 }

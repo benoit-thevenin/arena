@@ -10,7 +10,7 @@ import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.guild.Guild;
 import fr.phoenyx.arena.models.item.Item;
 
-public class PlayerBuilder {
+public class PlayerBuilder extends GenericEntityBuilder<Player> {
 
     private Player player;
 
@@ -18,24 +18,9 @@ public class PlayerBuilder {
         player = new Player();
     }
 
-    public PlayerBuilder id(Long id) {
-        player.setId(id);
-        return this;
-    }
-
-    public PlayerBuilder dateCreation(LocalDateTime dateCreation) {
-        player.setDateCreation(dateCreation);
-        return this;
-    }
-
-    public PlayerBuilder dateModification(LocalDateTime dateModification) {
-        player.setDateModification(dateModification);
-        return this;
-    }
-
-    public PlayerBuilder modifier(Player modifier) {
-        player.setModifier(modifier);
-        return this;
+    @Override
+    protected Player getEntity() {
+        return player;
     }
 
     public PlayerBuilder username(String username) {
@@ -101,9 +86,5 @@ public class PlayerBuilder {
     public PlayerBuilder friends(Set<Player> friends) {
         player.setFriends(friends);
         return this;
-    }
-
-    public Player build() {
-        return player;
     }
 }

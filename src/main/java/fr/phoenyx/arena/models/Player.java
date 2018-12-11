@@ -96,10 +96,10 @@ public class Player extends GenericEntity {
 
     public static Player buildNewPlayer(String username, String hashPassword, String email) {
         return new PlayerBuilder()
-                .dateCreation(LocalDateTime.now())
                 .username(username)
                 .hashPassword(hashPassword)
                 .email(email)
-                .level(1).build();
+                .level(1)
+                .dateCreation(LocalDateTime.now()).build();
     }
 }

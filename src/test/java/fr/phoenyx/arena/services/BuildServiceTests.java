@@ -1,31 +1,25 @@
 package fr.phoenyx.arena.services;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
-import static fr.phoenyx.arena.constants.MessagesConstants.NOT_FOUND;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import fr.phoenyx.arena.builders.BuildBuilder;
 import fr.phoenyx.arena.dtos.BuildDTO;
-import fr.phoenyx.arena.exceptions.GenericEntityException;
 import fr.phoenyx.arena.models.Build;
 import fr.phoenyx.arena.repositories.BuildRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BuildServiceTests {
+public class BuildServiceTests extends CrudServiceTests<Build, Long, BuildDTO> {
 
     @Mock
     private BuildRepository buildRepository;
@@ -33,48 +27,33 @@ public class BuildServiceTests {
     @InjectMocks
     private BuildService buildService;
 
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
-
-    @Test
-    public void findAll_shouldReturnList() {
-        //Given
-        Build build = new Build();
-        build.setId(GENERIC_ID);
-        List<Build> builds = Arrays.asList(build);
-        when(buildRepository.findAll()).thenReturn(builds);
-
-        //When
-        List<BuildDTO> buildDTOs = buildService.findAll();
-
-        //Then
-        assertThat(buildDTOs).hasSize(builds.size());
+    @Override
+    protected JpaRepository<Build, Long> getRepository() {
+        return buildRepository;
     }
 
-    @Test
-    public void findById_shouldReturnBuild_whenExists() {
-        //Given
-        Build build = new Build();
-        build.setId(GENERIC_ID);
-        when(buildRepository.findById(GENERIC_ID)).thenReturn(Optional.of(build));
-
-        //When
-        BuildDTO buildDTO = buildService.findById(GENERIC_ID);
-
-        //Then
-        assertThat(buildDTO).isNotNull();
-        assertThat(buildDTO.getId()).isEqualTo(GENERIC_ID);
+    @Override
+    protected CrudService<Build, Long, BuildDTO> getService() {
+        return buildService;
     }
 
-    @Test
-    public void findById_shouldThrowException_whenNotExists() {
-        //Given
-        exceptionRule.expect(GenericEntityException.class);
-        String message = String.join(" ", Build.class.getSimpleName(), NOT_FOUND, Long.toString(GENERIC_ID));
-        exceptionRule.expectMessage(message);
-        when(buildRepository.findById(GENERIC_ID)).thenReturn(Optional.empty());
+    @Override
+    protected Class<Build> getConcernedClass() {
+        return Build.class;
+    }
 
-        //When Then
-        buildService.findById(GENERIC_ID);
+    @Override
+    protected Long getGenericId() {
+        return GENERIC_ID;
+    }
+
+    @Override
+    protected Build buildEntity() {
+        return new BuildBuilder().id(GENERIC_ID).build();
+    }
+
+    @Override
+    protected List<Build> buildEntities() {
+        return Arrays.asList(buildEntity());
     }
 }
