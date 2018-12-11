@@ -28,16 +28,6 @@ public class PlayerBuilder extends GenericEntityBuilder<Player> {
         return this;
     }
 
-    public PlayerBuilder hashPassword(String hashPassword) {
-        player.setHashPassword(hashPassword);
-        return this;
-    }
-
-    public PlayerBuilder salt(String salt) {
-        player.setSalt(salt);
-        return this;
-    }
-
     public PlayerBuilder email(String email) {
         player.setEmail(email);
         return this;

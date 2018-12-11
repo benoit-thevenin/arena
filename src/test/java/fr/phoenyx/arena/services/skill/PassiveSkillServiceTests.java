@@ -1,7 +1,9 @@
 package fr.phoenyx.arena.services.skill;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static org.mockito.Mockito.mock;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,6 +17,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import fr.phoenyx.arena.builders.skill.PassiveSkillBuilder;
 import fr.phoenyx.arena.dtos.skill.PassiveSkillDTO;
 import fr.phoenyx.arena.enums.skill.PassiveSkillEnum;
+import fr.phoenyx.arena.mappers.Mapper;
+import fr.phoenyx.arena.mappers.skill.PassiveSkillMapper;
+import fr.phoenyx.arena.models.Build;
+import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.skill.PassiveSkill;
 import fr.phoenyx.arena.repositories.skill.PassiveSkillRepository;
 import fr.phoenyx.arena.services.CrudService;
@@ -41,6 +47,11 @@ public class PassiveSkillServiceTests extends CrudServiceTests<PassiveSkill, Lon
     }
 
     @Override
+    protected Mapper<PassiveSkill, PassiveSkillDTO> getMapper() {
+        return new PassiveSkillMapper();
+    }
+
+    @Override
     protected Class<PassiveSkill> getConcernedClass() {
         return PassiveSkill.class;
     }
@@ -53,8 +64,12 @@ public class PassiveSkillServiceTests extends CrudServiceTests<PassiveSkill, Lon
     @Override
     protected PassiveSkill buildEntity() {
         return new PassiveSkillBuilder()
+                .build(mock(Build.class))
                 .passiveSkillEnum(PassiveSkillEnum.values()[0])
-                .id(GENERIC_ID).build();
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
     }
 
     @Override

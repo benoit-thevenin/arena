@@ -1,8 +1,11 @@
 package fr.phoenyx.arena.services.battle;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static org.mockito.Mockito.mock;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -14,7 +17,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import fr.phoenyx.arena.builders.battle.BattleBuilder;
 import fr.phoenyx.arena.dtos.battle.BattleDTO;
+import fr.phoenyx.arena.mappers.Mapper;
+import fr.phoenyx.arena.mappers.battle.BattleMapper;
+import fr.phoenyx.arena.models.Player;
+import fr.phoenyx.arena.models.Team;
 import fr.phoenyx.arena.models.battle.Battle;
+import fr.phoenyx.arena.models.battle.Round;
 import fr.phoenyx.arena.repositories.battle.BattleRepository;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.CrudServiceTests;
@@ -40,6 +48,11 @@ public class BattleServiceTests extends CrudServiceTests<Battle, Long, BattleDTO
     }
 
     @Override
+    protected Mapper<Battle, BattleDTO> getMapper() {
+        return new BattleMapper();
+    }
+
+    @Override
     protected Class<Battle> getConcernedClass() {
         return Battle.class;
     }
@@ -51,7 +64,14 @@ public class BattleServiceTests extends CrudServiceTests<Battle, Long, BattleDTO
 
     @Override
     protected Battle buildEntity() {
-        return new BattleBuilder().id(GENERIC_ID).build();
+        return new BattleBuilder()
+                .team1(mock(Team.class))
+                .team2(mock(Team.class))
+                .rounds(new HashSet<>(Arrays.asList(mock(Round.class))))
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
     }
 
     @Override

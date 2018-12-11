@@ -1,5 +1,7 @@
 package fr.phoenyx.arena.controllers.skill;
 
+import static fr.phoenyx.arena.constants.RestConstants.ROOT_PASSIVE_SKILLS;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +13,7 @@ import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.skill.PassiveSkillService;
 
 @RestController
-@RequestMapping("/passive-skills")
+@RequestMapping(ROOT_PASSIVE_SKILLS)
 public class PassiveSkillController extends CrudController<PassiveSkill, Long, PassiveSkillDTO> {
 
     @Autowired

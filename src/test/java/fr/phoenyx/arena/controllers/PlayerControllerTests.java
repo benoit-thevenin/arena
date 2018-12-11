@@ -1,6 +1,13 @@
 package fr.phoenyx.arena.controllers;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static fr.phoenyx.arena.constants.RestConstants.ROOT_PLAYERS;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.HashSet;
+
+import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -18,7 +25,11 @@ import fr.phoenyx.arena.advices.EntityNotFoundAdvice;
 import fr.phoenyx.arena.advices.GenericAdvice;
 import fr.phoenyx.arena.builders.PlayerBuilder;
 import fr.phoenyx.arena.dtos.PlayerDTO;
+import fr.phoenyx.arena.enums.GuildRole;
+import fr.phoenyx.arena.models.Build;
 import fr.phoenyx.arena.models.Player;
+import fr.phoenyx.arena.models.guild.Guild;
+import fr.phoenyx.arena.models.item.Item;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.PlayerService;
 
@@ -48,7 +59,7 @@ public class PlayerControllerTests extends CrudControllerTests<Player, Long, Pla
 
     @Override
     protected String getEndpointRoot() {
-        return "/players";
+        return ROOT_PLAYERS;
     }
 
     @Override
@@ -64,7 +75,21 @@ public class PlayerControllerTests extends CrudControllerTests<Player, Long, Pla
     @Override
     protected PlayerDTO buildDTO() {
         Player player = new PlayerBuilder()
-                .id(GENERIC_ID).build();
+                .username("username")
+                .email("email")
+                .lastConnection(LocalDateTime.now())
+                .gold(0)
+                .level(0)
+                .experience(0)
+                .inventory(Arrays.asList(mock(Item.class)))
+                .builds(Arrays.asList(mock(Build.class)))
+                .guild(mock(Guild.class))
+                .guildRole(GuildRole.values()[0])
+                .friends(new HashSet<>(Arrays.asList(mock(Player.class))))
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
         return new PlayerDTO(player);
     }
 

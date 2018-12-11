@@ -1,5 +1,7 @@
 package fr.phoenyx.arena.controllers;
 
+import static fr.phoenyx.arena.constants.RestConstants.ID;
+
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -22,12 +24,12 @@ public abstract class CrudController<E extends GenericEntity, I, D extends Gener
         return new ResponseEntity<>(getService().findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(ID)
     public ResponseEntity<D> findById(@PathVariable I id) throws EntityNotFoundException {
         return new ResponseEntity<>(getService().findById(id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(ID)
     public ResponseEntity<Void> deleteById(@PathVariable I id) throws EntityNotFoundException {
         getService().deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

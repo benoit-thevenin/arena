@@ -1,6 +1,11 @@
 package fr.phoenyx.arena.controllers.skill;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static fr.phoenyx.arena.constants.RestConstants.ROOT_PASSIVE_SKILLS;
+
+import java.time.LocalDateTime;
+
+import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -20,6 +25,8 @@ import fr.phoenyx.arena.builders.skill.PassiveSkillBuilder;
 import fr.phoenyx.arena.controllers.CrudControllerTests;
 import fr.phoenyx.arena.dtos.skill.PassiveSkillDTO;
 import fr.phoenyx.arena.enums.skill.PassiveSkillEnum;
+import fr.phoenyx.arena.models.Build;
+import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.skill.PassiveSkill;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.skill.PassiveSkillService;
@@ -50,7 +57,7 @@ public class PassiveSkillControllerTests extends CrudControllerTests<PassiveSkil
 
     @Override
     protected String getEndpointRoot() {
-        return "/passive-skills";
+        return ROOT_PASSIVE_SKILLS;
     }
 
     @Override
@@ -66,8 +73,12 @@ public class PassiveSkillControllerTests extends CrudControllerTests<PassiveSkil
     @Override
     protected PassiveSkillDTO buildDTO() {
         PassiveSkill passiveSkill = new PassiveSkillBuilder()
+                .build(mock(Build.class))
                 .passiveSkillEnum(PassiveSkillEnum.values()[0])
-                .id(GENERIC_ID).build();
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
         return new PassiveSkillDTO(passiveSkill);
     }
 

@@ -1,6 +1,11 @@
 package fr.phoenyx.arena.controllers.battle;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static fr.phoenyx.arena.constants.RestConstants.ROOT_HEROES;
+
+import java.time.LocalDateTime;
+
+import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -19,7 +24,10 @@ import fr.phoenyx.arena.advices.GenericAdvice;
 import fr.phoenyx.arena.builders.battle.HeroBuilder;
 import fr.phoenyx.arena.controllers.CrudControllerTests;
 import fr.phoenyx.arena.dtos.battle.HeroDTO;
+import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.battle.Hero;
+import fr.phoenyx.arena.models.battle.HeroBuild;
+import fr.phoenyx.arena.models.battle.Sheet;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.battle.HeroService;
 
@@ -49,7 +57,7 @@ public class HeroControllerTests extends CrudControllerTests<Hero, Long, HeroDTO
 
     @Override
     protected String getEndpointRoot() {
-        return "/heroes";
+        return ROOT_HEROES;
     }
 
     @Override
@@ -65,7 +73,13 @@ public class HeroControllerTests extends CrudControllerTests<Hero, Long, HeroDTO
     @Override
     protected HeroDTO buildDTO() {
         Hero hero = new HeroBuilder()
-                .id(GENERIC_ID).build();
+                .level(0)
+                .heroBuild(mock(HeroBuild.class))
+                .sheet(mock(Sheet.class))
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
         return new HeroDTO(hero);
     }
 

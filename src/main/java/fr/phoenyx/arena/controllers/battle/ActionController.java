@@ -1,5 +1,7 @@
 package fr.phoenyx.arena.controllers.battle;
 
+import static fr.phoenyx.arena.constants.RestConstants.ROOT_ACTIONS;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +13,7 @@ import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.battle.ActionService;
 
 @RestController
-@RequestMapping("/actions")
+@RequestMapping(ROOT_ACTIONS)
 public class ActionController extends CrudController<Action, Long, ActionDTO> {
 
     @Autowired

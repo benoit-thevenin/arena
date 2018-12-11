@@ -1,8 +1,14 @@
 package fr.phoenyx.arena.controllers.item;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static fr.phoenyx.arena.constants.RestConstants.RECIPES;
+import static fr.phoenyx.arena.constants.RestConstants.ROOT_ITEMS;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.time.LocalDateTime;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +28,12 @@ import fr.phoenyx.arena.advices.GenericAdvice;
 import fr.phoenyx.arena.builders.item.ItemBuilder;
 import fr.phoenyx.arena.controllers.CrudControllerTests;
 import fr.phoenyx.arena.dtos.item.ItemDTO;
+import fr.phoenyx.arena.enums.Characteristic;
+import fr.phoenyx.arena.enums.item.ItemType;
+import fr.phoenyx.arena.enums.item.Power;
+import fr.phoenyx.arena.enums.item.Rarity;
+import fr.phoenyx.arena.models.Player;
+import fr.phoenyx.arena.models.item.Bonus;
 import fr.phoenyx.arena.models.item.Item;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.item.ItemService;
@@ -52,7 +64,7 @@ public class ItemControllerTests extends CrudControllerTests<Item, Long, ItemDTO
 
     @Override
     protected String getEndpointRoot() {
-        return "/items";
+        return ROOT_ITEMS;
     }
 
     @Override
@@ -67,8 +79,19 @@ public class ItemControllerTests extends CrudControllerTests<Item, Long, ItemDTO
 
     @Override
     protected ItemDTO buildDTO() {
+        Bonus bonus = mock(Bonus.class);
+        when(bonus.getCharacteristic()).thenReturn(Characteristic.values()[0]);
         Item item = new ItemBuilder()
-                .id(GENERIC_ID).build();
+                .name("name")
+                .level(0)
+                .quantity(0)
+                .itemType(ItemType.values()[0])
+                .rarity(Rarity.values()[0])
+                .power(Power.values()[0])
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
         return new ItemDTO(item);
     }
 
@@ -81,7 +104,7 @@ public class ItemControllerTests extends CrudControllerTests<Item, Long, ItemDTO
 
     @Test
     public void getAllRecipes_shouldReturnOK() throws Exception {
-        mockMvc.perform(get(getEndpointRoot() + "/recipes"))
+        mockMvc.perform(get(getEndpointRoot() + RECIPES))
                 .andExpect(status().isOk());
     }
 }

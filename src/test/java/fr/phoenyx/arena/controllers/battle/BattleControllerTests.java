@@ -1,6 +1,13 @@
 package fr.phoenyx.arena.controllers.battle;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static fr.phoenyx.arena.constants.RestConstants.ROOT_BATTLES;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.HashSet;
+
+import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -19,7 +26,10 @@ import fr.phoenyx.arena.advices.GenericAdvice;
 import fr.phoenyx.arena.builders.battle.BattleBuilder;
 import fr.phoenyx.arena.controllers.CrudControllerTests;
 import fr.phoenyx.arena.dtos.battle.BattleDTO;
+import fr.phoenyx.arena.models.Player;
+import fr.phoenyx.arena.models.Team;
 import fr.phoenyx.arena.models.battle.Battle;
+import fr.phoenyx.arena.models.battle.Round;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.battle.BattleService;
 
@@ -49,7 +59,7 @@ public class BattleControllerTests extends CrudControllerTests<Battle, Long, Bat
 
     @Override
     protected String getEndpointRoot() {
-        return "/battles";
+        return ROOT_BATTLES;
     }
 
     @Override
@@ -65,7 +75,13 @@ public class BattleControllerTests extends CrudControllerTests<Battle, Long, Bat
     @Override
     protected BattleDTO buildDTO() {
         Battle battle = new BattleBuilder()
-                .id(GENERIC_ID).build();
+                .team1(mock(Team.class))
+                .team2(mock(Team.class))
+                .rounds(new HashSet<>(Arrays.asList(mock(Round.class))))
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
         return new BattleDTO(battle);
     }
 

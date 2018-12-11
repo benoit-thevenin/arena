@@ -2,7 +2,9 @@ package fr.phoenyx.arena.services.item;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,6 +20,12 @@ import fr.phoenyx.arena.builders.item.ItemBuilder;
 import fr.phoenyx.arena.dtos.item.ItemDTO;
 import fr.phoenyx.arena.dtos.item.RecipeDTO;
 import fr.phoenyx.arena.enums.item.ItemRecipe;
+import fr.phoenyx.arena.enums.item.ItemType;
+import fr.phoenyx.arena.enums.item.Power;
+import fr.phoenyx.arena.enums.item.Rarity;
+import fr.phoenyx.arena.mappers.Mapper;
+import fr.phoenyx.arena.mappers.item.ItemMapper;
+import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.item.Item;
 import fr.phoenyx.arena.repositories.item.ItemRepository;
 import fr.phoenyx.arena.services.CrudService;
@@ -44,6 +52,11 @@ public class ItemServiceTests extends CrudServiceTests<Item, Long, ItemDTO> {
     }
 
     @Override
+    protected Mapper<Item, ItemDTO> getMapper() {
+        return new ItemMapper();
+    }
+
+    @Override
     protected Class<Item> getConcernedClass() {
         return Item.class;
     }
@@ -55,7 +68,17 @@ public class ItemServiceTests extends CrudServiceTests<Item, Long, ItemDTO> {
 
     @Override
     protected Item buildEntity() {
-        return new ItemBuilder().id(GENERIC_ID).build();
+        return new ItemBuilder()
+                .name("name")
+                .level(0)
+                .quantity(0)
+                .itemType(ItemType.values()[0])
+                .rarity(Rarity.values()[0])
+                .power(Power.values()[0])
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
     }
 
     @Override

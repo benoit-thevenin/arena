@@ -1,8 +1,11 @@
 package fr.phoenyx.arena.services;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static org.mockito.Mockito.mock;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -14,6 +17,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import fr.phoenyx.arena.builders.TeamBuilder;
 import fr.phoenyx.arena.dtos.TeamDTO;
+import fr.phoenyx.arena.mappers.Mapper;
+import fr.phoenyx.arena.mappers.TeamMapper;
+import fr.phoenyx.arena.models.Applicant;
+import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.Team;
 import fr.phoenyx.arena.repositories.TeamRepository;
 
@@ -38,6 +45,11 @@ public class TeamServiceTests extends CrudServiceTests<Team, Long, TeamDTO> {
     }
 
     @Override
+    protected Mapper<Team, TeamDTO> getMapper() {
+        return new TeamMapper();
+    }
+
+    @Override
     protected Class<Team> getConcernedClass() {
         return Team.class;
     }
@@ -49,7 +61,15 @@ public class TeamServiceTests extends CrudServiceTests<Team, Long, TeamDTO> {
 
     @Override
     protected Team buildEntity() {
-        return new TeamBuilder().id(GENERIC_ID).build();
+        return new TeamBuilder()
+                .dimension(0)
+                .leader(mock(Player.class))
+                .members(new HashSet<>(Arrays.asList(mock(Applicant.class))))
+                .applicants(new HashSet<>(Arrays.asList(mock(Applicant.class))))
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
     }
 
     @Override

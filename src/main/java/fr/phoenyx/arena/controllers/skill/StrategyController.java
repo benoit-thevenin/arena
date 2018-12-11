@@ -1,5 +1,7 @@
 package fr.phoenyx.arena.controllers.skill;
 
+import static fr.phoenyx.arena.constants.RestConstants.ROOT_STRATEGIES;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +13,7 @@ import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.skill.StrategyService;
 
 @RestController
-@RequestMapping("/strategies")
+@RequestMapping(ROOT_STRATEGIES)
 public class StrategyController extends CrudController<Strategy, Long, StrategyDTO> {
 
     @Autowired

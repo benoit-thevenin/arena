@@ -43,7 +43,6 @@ public class DatabaseSchemaConstants {
     public static final String COLUMN_EXPERIENCE = "EXPERIENCE";
     public static final String COLUMN_GOLD = "GOLD";
     public static final String COLUMN_GUILD_ROLE = "GUILD_ROLE";
-    public static final String COLUMN_HASH_PASS = "HASH_PASSWORD";
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_ID_ACTION = "ID_ACTION";
     public static final String COLUMN_ID_APPLICANT = "ID_APPLICANT";
@@ -83,7 +82,6 @@ public class DatabaseSchemaConstants {
     public static final String COLUMN_RAND = "RAND";
     public static final String COLUMN_RARITY = "RARITY";
     public static final String COLUMN_ROUND_NUMBER = "ROUND_NUMBER";
-    public static final String COLUMN_SALT = "SALT";
     public static final String COLUMN_STRENGTH = "STRENGTH";
     public static final String COLUMN_SPECIALIZATION = "SPECIALIZATION";
     public static final String COLUMN_TARGET_PREDICATE = "TARGET_PREDICATE";

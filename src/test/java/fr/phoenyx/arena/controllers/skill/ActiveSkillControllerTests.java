@@ -1,6 +1,11 @@
 package fr.phoenyx.arena.controllers.skill;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static fr.phoenyx.arena.constants.RestConstants.ROOT_ACTIVE_SKILLS;
+
+import java.time.LocalDateTime;
+
+import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -20,7 +25,10 @@ import fr.phoenyx.arena.builders.skill.ActiveSkillBuilder;
 import fr.phoenyx.arena.controllers.CrudControllerTests;
 import fr.phoenyx.arena.dtos.skill.ActiveSkillDTO;
 import fr.phoenyx.arena.enums.skill.ActiveSkillEnum;
+import fr.phoenyx.arena.models.Build;
+import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.skill.ActiveSkill;
+import fr.phoenyx.arena.models.skill.Strategy;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.skill.ActiveSkillService;
 
@@ -50,7 +58,7 @@ public class ActiveSkillControllerTests extends CrudControllerTests<ActiveSkill,
 
     @Override
     protected String getEndpointRoot() {
-        return "/active-skills";
+        return ROOT_ACTIVE_SKILLS;
     }
 
     @Override
@@ -66,8 +74,13 @@ public class ActiveSkillControllerTests extends CrudControllerTests<ActiveSkill,
     @Override
     protected ActiveSkillDTO buildDTO() {
         ActiveSkill activeSkill = new ActiveSkillBuilder()
+                .build(mock(Build.class))
                 .activeSkillEnum(ActiveSkillEnum.values()[0])
-                .id(GENERIC_ID).build();
+                .strategy(mock(Strategy.class))
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
         return new ActiveSkillDTO(activeSkill);
     }
 

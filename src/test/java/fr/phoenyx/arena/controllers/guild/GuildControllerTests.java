@@ -1,6 +1,12 @@
 package fr.phoenyx.arena.controllers.guild;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static fr.phoenyx.arena.constants.RestConstants.ROOT_GUILDS;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
+
+import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -19,6 +25,8 @@ import fr.phoenyx.arena.advices.GenericAdvice;
 import fr.phoenyx.arena.builders.guild.GuildBuilder;
 import fr.phoenyx.arena.controllers.CrudControllerTests;
 import fr.phoenyx.arena.dtos.guild.GuildDTO;
+import fr.phoenyx.arena.models.Applicant;
+import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.guild.Guild;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.guild.GuildService;
@@ -49,7 +57,7 @@ public class GuildControllerTests extends CrudControllerTests<Guild, Long, Guild
 
     @Override
     protected String getEndpointRoot() {
-        return "/guilds";
+        return ROOT_GUILDS;
     }
 
     @Override
@@ -65,7 +73,14 @@ public class GuildControllerTests extends CrudControllerTests<Guild, Long, Guild
     @Override
     protected GuildDTO buildDTO() {
         Guild guild = new GuildBuilder()
-                .id(GENERIC_ID).build();
+                .name("name")
+                .description("description")
+                .members(Arrays.asList(mock(Player.class)))
+                .applicants(Arrays.asList(mock(Applicant.class)))
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
         return new GuildDTO(guild);
     }
 

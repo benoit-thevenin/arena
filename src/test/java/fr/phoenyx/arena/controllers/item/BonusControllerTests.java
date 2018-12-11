@@ -1,6 +1,11 @@
 package fr.phoenyx.arena.controllers.item;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static fr.phoenyx.arena.constants.RestConstants.ROOT_BONUSES;
+
+import java.time.LocalDateTime;
+
+import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -20,6 +25,7 @@ import fr.phoenyx.arena.builders.item.BonusBuilder;
 import fr.phoenyx.arena.controllers.CrudControllerTests;
 import fr.phoenyx.arena.dtos.item.BonusDTO;
 import fr.phoenyx.arena.enums.Characteristic;
+import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.item.Bonus;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.item.BonusService;
@@ -50,7 +56,7 @@ public class BonusControllerTests extends CrudControllerTests<Bonus, Long, Bonus
 
     @Override
     protected String getEndpointRoot() {
-        return "/bonuses";
+        return ROOT_BONUSES;
     }
 
     @Override
@@ -67,7 +73,11 @@ public class BonusControllerTests extends CrudControllerTests<Bonus, Long, Bonus
     protected BonusDTO buildDTO() {
         Bonus bonus = new BonusBuilder()
                 .characteristic(Characteristic.values()[0])
-                .id(GENERIC_ID).build();
+                .rand(1.0)
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
         return new BonusDTO(bonus);
     }
 

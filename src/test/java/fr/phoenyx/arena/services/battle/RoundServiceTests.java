@@ -1,8 +1,11 @@
 package fr.phoenyx.arena.services.battle;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static org.mockito.Mockito.mock;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -14,6 +17,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import fr.phoenyx.arena.builders.battle.RoundBuilder;
 import fr.phoenyx.arena.dtos.battle.RoundDTO;
+import fr.phoenyx.arena.mappers.Mapper;
+import fr.phoenyx.arena.mappers.battle.RoundMapper;
+import fr.phoenyx.arena.models.Player;
+import fr.phoenyx.arena.models.battle.Action;
+import fr.phoenyx.arena.models.battle.Hero;
 import fr.phoenyx.arena.models.battle.Round;
 import fr.phoenyx.arena.repositories.battle.RoundRepository;
 import fr.phoenyx.arena.services.CrudService;
@@ -40,6 +48,11 @@ public class RoundServiceTests extends CrudServiceTests<Round, Long, RoundDTO> {
     }
 
     @Override
+    protected Mapper<Round, RoundDTO> getMapper() {
+        return new RoundMapper();
+    }
+
+    @Override
     protected Class<Round> getConcernedClass() {
         return Round.class;
     }
@@ -51,7 +64,14 @@ public class RoundServiceTests extends CrudServiceTests<Round, Long, RoundDTO> {
 
     @Override
     protected Round buildEntity() {
-        return new RoundBuilder().id(GENERIC_ID).build();
+        return new RoundBuilder()
+                .roundNumber(0)
+                .actionsPerformed(new HashSet<>(Arrays.asList(mock(Action.class))))
+                .heroes(new HashSet<>(Arrays.asList(mock(Hero.class))))
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
     }
 
     @Override

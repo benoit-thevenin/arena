@@ -1,7 +1,9 @@
 package fr.phoenyx.arena.services.skill;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static org.mockito.Mockito.mock;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,6 +16,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import fr.phoenyx.arena.builders.skill.StrategyBuilder;
 import fr.phoenyx.arena.dtos.skill.StrategyDTO;
+import fr.phoenyx.arena.mappers.Mapper;
+import fr.phoenyx.arena.mappers.skill.StrategyMapper;
+import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.skill.Strategy;
 import fr.phoenyx.arena.repositories.skill.StrategyRepository;
 import fr.phoenyx.arena.services.CrudService;
@@ -40,6 +45,11 @@ public class StrategyServiceTests extends CrudServiceTests<Strategy, Long, Strat
     }
 
     @Override
+    protected Mapper<Strategy, StrategyDTO> getMapper() {
+        return new StrategyMapper();
+    }
+
+    @Override
     protected Class<Strategy> getConcernedClass() {
         return Strategy.class;
     }
@@ -51,7 +61,14 @@ public class StrategyServiceTests extends CrudServiceTests<Strategy, Long, Strat
 
     @Override
     protected Strategy buildEntity() {
-        return new StrategyBuilder().id(GENERIC_ID).build();
+        return new StrategyBuilder()
+                .targetPredicate("targetPredicate")
+                .priority(0)
+                .buff(false)
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
     }
 
     @Override

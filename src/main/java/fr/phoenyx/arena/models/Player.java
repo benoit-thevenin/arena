@@ -4,7 +4,6 @@ import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_EMAIL;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_EXPERIENCE;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_GOLD;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_GUILD_ROLE;
-import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_HASH_PASS;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_GUILD;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_OWNER;
@@ -12,7 +11,6 @@ import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_PLAYE
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_ID_PLAYER2;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_LAST_CONNECTION;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_LEVEL;
-import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_SALT;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_USERNAME;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.TABLE_PLAYERS;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.TABLE_PLAYERS_FRIENDS;
@@ -51,12 +49,6 @@ public class Player extends GenericEntity {
     @Column(name = COLUMN_USERNAME, nullable = false, unique = true)
     private String username;
 
-    @Column(name = COLUMN_HASH_PASS, nullable = false)
-    private String hashPassword;
-
-    @Column(name = COLUMN_SALT)
-    private String salt;
-
     @Column(name = COLUMN_EMAIL, nullable = false, unique = true)
     private String email;
 
@@ -94,10 +86,9 @@ public class Player extends GenericEntity {
     )
     private Set<Player> friends = new HashSet<>();
 
-    public static Player buildNewPlayer(String username, String hashPassword, String email) {
+    public static Player buildNewPlayer(String username, String email) {
         return new PlayerBuilder()
                 .username(username)
-                .hashPassword(hashPassword)
                 .email(email)
                 .level(1)
                 .dateCreation(LocalDateTime.now()).build();

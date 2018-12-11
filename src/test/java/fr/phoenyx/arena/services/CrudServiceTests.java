@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,12 +16,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import fr.phoenyx.arena.dtos.GenericEntityDTO;
 import fr.phoenyx.arena.exceptions.EntityNotFoundException;
+import fr.phoenyx.arena.mappers.Mapper;
 import fr.phoenyx.arena.models.GenericEntity;
 
 public abstract class CrudServiceTests<E extends GenericEntity, I, D extends GenericEntityDTO> {
 
     protected abstract JpaRepository<E, I> getRepository();
     protected abstract CrudService<E, I, D> getService();
+    protected abstract Mapper<E, D> getMapper();
     protected abstract Class<E> getConcernedClass();
     protected abstract I getGenericId();
     protected abstract E buildEntity();
@@ -34,12 +37,16 @@ public abstract class CrudServiceTests<E extends GenericEntity, I, D extends Gen
         //Given
         List<E> entities = buildEntities();
         when(getRepository().findAll()).thenReturn(entities);
+        List<D> expectedDtos = entities.stream()
+                .map(entity -> getMapper().entityToDto(entity))
+                .collect(Collectors.toList());
 
         //When
         List<D> dtos = getService().findAll();
 
         //Then
-        assertThat(dtos).hasSize(entities.size());
+        assertThat(dtos).hasSize(expectedDtos.size());
+        assertThat(dtos).containsExactlyElementsOf(expectedDtos);
     }
 
     @Test
@@ -47,13 +54,14 @@ public abstract class CrudServiceTests<E extends GenericEntity, I, D extends Gen
         //Given
         E entity = buildEntity();
         when(getRepository().findById(getGenericId())).thenReturn(Optional.of(entity));
+        D expectedDto = getMapper().entityToDto(entity);
 
         //When
         D dto = getService().findById(getGenericId());
 
         //Then
         assertThat(dto).isNotNull();
-        assertThat(dto.getId()).isEqualTo(getGenericId());
+        assertThat(dto).isEqualTo(expectedDto);
     }
 
     @Test
@@ -90,6 +98,6 @@ public abstract class CrudServiceTests<E extends GenericEntity, I, D extends Gen
         when(getRepository().existsById(getGenericId())).thenReturn(false);
 
         //When Then
-        getService().findById(getGenericId());
+        getService().deleteById(getGenericId());
     }
 }

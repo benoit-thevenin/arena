@@ -1,6 +1,10 @@
 package fr.phoenyx.arena.controllers;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static fr.phoenyx.arena.constants.RestConstants.ROOT_APPLICANTS;
+import static org.mockito.Mockito.mock;
+
+import java.time.LocalDateTime;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -19,6 +23,8 @@ import fr.phoenyx.arena.advices.GenericAdvice;
 import fr.phoenyx.arena.builders.ApplicantBuilder;
 import fr.phoenyx.arena.dtos.ApplicantDTO;
 import fr.phoenyx.arena.models.Applicant;
+import fr.phoenyx.arena.models.Build;
+import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.services.ApplicantService;
 import fr.phoenyx.arena.services.CrudService;
 
@@ -48,7 +54,7 @@ public class ApplicantControllerTests extends CrudControllerTests<Applicant, Lon
 
     @Override
     protected String getEndpointRoot() {
-        return "/applicants";
+        return ROOT_APPLICANTS;
     }
 
     @Override
@@ -64,7 +70,12 @@ public class ApplicantControllerTests extends CrudControllerTests<Applicant, Lon
     @Override
     protected ApplicantDTO buildDTO() {
         Applicant applicant = new ApplicantBuilder()
-                .id(GENERIC_ID).build();
+                .build(mock(Build.class))
+                .player(mock(Player.class))
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
         return new ApplicantDTO(applicant);
     }
 

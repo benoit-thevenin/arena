@@ -1,6 +1,13 @@
 package fr.phoenyx.arena.controllers;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static fr.phoenyx.arena.constants.RestConstants.ROOT_BUILDS;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.HashSet;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -18,7 +25,15 @@ import fr.phoenyx.arena.advices.EntityNotFoundAdvice;
 import fr.phoenyx.arena.advices.GenericAdvice;
 import fr.phoenyx.arena.builders.BuildBuilder;
 import fr.phoenyx.arena.dtos.BuildDTO;
+import fr.phoenyx.arena.enums.Specialization;
+import fr.phoenyx.arena.enums.Type;
+import fr.phoenyx.arena.enums.skill.ActiveSkillEnum;
+import fr.phoenyx.arena.enums.skill.PassiveSkillEnum;
 import fr.phoenyx.arena.models.Build;
+import fr.phoenyx.arena.models.Player;
+import fr.phoenyx.arena.models.item.Item;
+import fr.phoenyx.arena.models.skill.ActiveSkill;
+import fr.phoenyx.arena.models.skill.PassiveSkill;
 import fr.phoenyx.arena.services.BuildService;
 import fr.phoenyx.arena.services.CrudService;
 
@@ -48,7 +63,7 @@ public class BuildControllerTests extends CrudControllerTests<Build, Long, Build
 
     @Override
     protected String getEndpointRoot() {
-        return "/builds";
+        return ROOT_BUILDS;
     }
 
     @Override
@@ -63,8 +78,25 @@ public class BuildControllerTests extends CrudControllerTests<Build, Long, Build
 
     @Override
     protected BuildDTO buildDTO() {
+        ActiveSkill activeSkill = mock(ActiveSkill.class);
+        PassiveSkill passiveSkill = mock(PassiveSkill.class);
+        when(activeSkill.getActiveSkillEnum()).thenReturn(ActiveSkillEnum.values()[0]);
+        when(passiveSkill.getPassiveSkillEnum()).thenReturn(PassiveSkillEnum.values()[0]);
         Build build = new BuildBuilder()
-                .id(GENERIC_ID).build();
+                .owner(mock(Player.class))
+                .vitality(0)
+                .strength(0)
+                .intelligence(0)
+                .agility(0)
+                .activeSkills(Arrays.asList(activeSkill))
+                .passiveSkills(Arrays.asList(passiveSkill))
+                .stuff(Arrays.asList(mock(Item.class)))
+                .specialization(Specialization.values()[0])
+                .types(new HashSet<>(Arrays.asList(Type.values()[0])))
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
         return new BuildDTO(build);
     }
 

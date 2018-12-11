@@ -1,6 +1,14 @@
 package fr.phoenyx.arena.controllers.battle;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static fr.phoenyx.arena.constants.RestConstants.ROOT_ACTIONS;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.HashSet;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -19,7 +27,11 @@ import fr.phoenyx.arena.advices.GenericAdvice;
 import fr.phoenyx.arena.builders.battle.ActionBuilder;
 import fr.phoenyx.arena.controllers.CrudControllerTests;
 import fr.phoenyx.arena.dtos.battle.ActionDTO;
+import fr.phoenyx.arena.enums.skill.ActiveSkillEnum;
+import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.battle.Action;
+import fr.phoenyx.arena.models.battle.Hero;
+import fr.phoenyx.arena.models.skill.ActiveSkill;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.battle.ActionService;
 
@@ -49,7 +61,7 @@ public class ActionControllerTests extends CrudControllerTests<Action, Long, Act
 
     @Override
     protected String getEndpointRoot() {
-        return "/actions";
+        return ROOT_ACTIONS;
     }
 
     @Override
@@ -64,8 +76,18 @@ public class ActionControllerTests extends CrudControllerTests<Action, Long, Act
 
     @Override
     protected ActionDTO buildDTO() {
+        ActiveSkill activeSkill = mock(ActiveSkill.class);
+        when(activeSkill.getActiveSkillEnum()).thenReturn(ActiveSkillEnum.values()[0]);
         Action action = new ActionBuilder()
-                .id(GENERIC_ID).build();
+                .actionOrder(0)
+                .caster(mock(Hero.class))
+                .skill(activeSkill)
+                .targets(new HashSet<>(Arrays.asList(mock(Hero.class))))
+                .rand(1.0)
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
         return new ActionDTO(action);
     }
 

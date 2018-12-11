@@ -1,8 +1,11 @@
 package fr.phoenyx.arena.services;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static org.mockito.Mockito.mock;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.runner.RunWith;
@@ -14,7 +17,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import fr.phoenyx.arena.builders.PlayerBuilder;
 import fr.phoenyx.arena.dtos.PlayerDTO;
+import fr.phoenyx.arena.enums.GuildRole;
+import fr.phoenyx.arena.mappers.Mapper;
+import fr.phoenyx.arena.mappers.PlayerMapper;
+import fr.phoenyx.arena.models.Build;
 import fr.phoenyx.arena.models.Player;
+import fr.phoenyx.arena.models.guild.Guild;
+import fr.phoenyx.arena.models.item.Item;
 import fr.phoenyx.arena.repositories.PlayerRepository;
 
 @RunWith(SpringRunner.class)
@@ -38,6 +47,11 @@ public class PlayerServiceTests extends CrudServiceTests<Player, Long, PlayerDTO
     }
 
     @Override
+    protected Mapper<Player, PlayerDTO> getMapper() {
+        return new PlayerMapper();
+    }
+
+    @Override
     protected Class<Player> getConcernedClass() {
         return Player.class;
     }
@@ -49,7 +63,22 @@ public class PlayerServiceTests extends CrudServiceTests<Player, Long, PlayerDTO
 
     @Override
     protected Player buildEntity() {
-        return new PlayerBuilder().id(GENERIC_ID).build();
+        return new PlayerBuilder()
+                .username("username")
+                .email("email")
+                .lastConnection(LocalDateTime.now())
+                .gold(0)
+                .level(0)
+                .experience(0)
+                .inventory(Arrays.asList(mock(Item.class)))
+                .builds(Arrays.asList(mock(Build.class)))
+                .guild(mock(Guild.class))
+                .guildRole(GuildRole.values()[0])
+                .friends(new HashSet<>(Arrays.asList(mock(Player.class))))
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
     }
 
     @Override

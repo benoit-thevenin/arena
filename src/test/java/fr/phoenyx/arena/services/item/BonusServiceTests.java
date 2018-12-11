@@ -1,7 +1,9 @@
 package fr.phoenyx.arena.services.item;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static org.mockito.Mockito.mock;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,6 +17,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import fr.phoenyx.arena.builders.item.BonusBuilder;
 import fr.phoenyx.arena.dtos.item.BonusDTO;
 import fr.phoenyx.arena.enums.Characteristic;
+import fr.phoenyx.arena.mappers.Mapper;
+import fr.phoenyx.arena.mappers.item.BonusMapper;
+import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.item.Bonus;
 import fr.phoenyx.arena.repositories.item.BonusRepository;
 import fr.phoenyx.arena.services.CrudService;
@@ -41,6 +46,11 @@ public class BonusServiceTests extends CrudServiceTests<Bonus, Long, BonusDTO> {
     }
 
     @Override
+    protected Mapper<Bonus, BonusDTO> getMapper() {
+        return new BonusMapper();
+    }
+
+    @Override
     protected Class<Bonus> getConcernedClass() {
         return Bonus.class;
     }
@@ -54,7 +64,11 @@ public class BonusServiceTests extends CrudServiceTests<Bonus, Long, BonusDTO> {
     protected Bonus buildEntity() {
         return new BonusBuilder()
                 .characteristic(Characteristic.values()[0])
-                .id(GENERIC_ID).build();
+                .rand(1.0)
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
     }
 
     @Override

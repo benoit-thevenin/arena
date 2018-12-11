@@ -1,6 +1,11 @@
 package fr.phoenyx.arena.controllers.skill;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static fr.phoenyx.arena.constants.RestConstants.ROOT_STRATEGIES;
+
+import java.time.LocalDateTime;
+
+import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -19,6 +24,7 @@ import fr.phoenyx.arena.advices.GenericAdvice;
 import fr.phoenyx.arena.builders.skill.StrategyBuilder;
 import fr.phoenyx.arena.controllers.CrudControllerTests;
 import fr.phoenyx.arena.dtos.skill.StrategyDTO;
+import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.skill.Strategy;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.skill.StrategyService;
@@ -49,7 +55,7 @@ public class StrategyControllerTests extends CrudControllerTests<Strategy, Long,
 
     @Override
     protected String getEndpointRoot() {
-        return "/strategies";
+        return ROOT_STRATEGIES;
     }
 
     @Override
@@ -65,7 +71,13 @@ public class StrategyControllerTests extends CrudControllerTests<Strategy, Long,
     @Override
     protected StrategyDTO buildDTO() {
         Strategy strategy = new StrategyBuilder()
-                .id(GENERIC_ID).build();
+                .targetPredicate("targetPredicate")
+                .priority(0)
+                .buff(false)
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
         return new StrategyDTO(strategy);
     }
 

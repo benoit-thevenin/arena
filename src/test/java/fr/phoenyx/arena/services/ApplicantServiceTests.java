@@ -1,7 +1,9 @@
 package fr.phoenyx.arena.services;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static org.mockito.Mockito.mock;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,7 +16,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import fr.phoenyx.arena.builders.ApplicantBuilder;
 import fr.phoenyx.arena.dtos.ApplicantDTO;
+import fr.phoenyx.arena.mappers.ApplicantMapper;
+import fr.phoenyx.arena.mappers.Mapper;
 import fr.phoenyx.arena.models.Applicant;
+import fr.phoenyx.arena.models.Build;
+import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.repositories.ApplicantRepository;
 
 @RunWith(SpringRunner.class)
@@ -38,6 +44,11 @@ public class ApplicantServiceTests extends CrudServiceTests<Applicant, Long, App
     }
 
     @Override
+    protected Mapper<Applicant, ApplicantDTO> getMapper() {
+        return new ApplicantMapper();
+    }
+
+    @Override
     protected Class<Applicant> getConcernedClass() {
         return Applicant.class;
     }
@@ -49,7 +60,13 @@ public class ApplicantServiceTests extends CrudServiceTests<Applicant, Long, App
 
     @Override
     protected Applicant buildEntity() {
-        return new ApplicantBuilder().id(GENERIC_ID).build();
+        return new ApplicantBuilder()
+                .build(mock(Build.class))
+                .player(mock(Player.class))
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
     }
 
     @Override

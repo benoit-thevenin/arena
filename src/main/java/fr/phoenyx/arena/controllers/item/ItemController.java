@@ -1,5 +1,8 @@
 package fr.phoenyx.arena.controllers.item;
 
+import static fr.phoenyx.arena.constants.RestConstants.RECIPES;
+import static fr.phoenyx.arena.constants.RestConstants.ROOT_ITEMS;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +20,7 @@ import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.item.ItemService;
 
 @RestController
-@RequestMapping("/items")
+@RequestMapping(ROOT_ITEMS)
 public class ItemController extends CrudController<Item, Long, ItemDTO> {
 
     @Autowired
@@ -28,7 +31,7 @@ public class ItemController extends CrudController<Item, Long, ItemDTO> {
         return itemService;
     }
 
-    @GetMapping("/recipes")
+    @GetMapping(RECIPES)
     public ResponseEntity<List<RecipeDTO>> getAllRecipes() {
         return new ResponseEntity<>(itemService.getAllRecipes(), HttpStatus.OK);
     }

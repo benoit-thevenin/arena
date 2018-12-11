@@ -1,6 +1,13 @@
 package fr.phoenyx.arena.controllers;
 
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
+import static fr.phoenyx.arena.constants.RestConstants.ROOT_TEAMS;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.HashSet;
+
+import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -18,6 +25,8 @@ import fr.phoenyx.arena.advices.EntityNotFoundAdvice;
 import fr.phoenyx.arena.advices.GenericAdvice;
 import fr.phoenyx.arena.builders.TeamBuilder;
 import fr.phoenyx.arena.dtos.TeamDTO;
+import fr.phoenyx.arena.models.Applicant;
+import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.Team;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.TeamService;
@@ -48,7 +57,7 @@ public class TeamControllerTests extends CrudControllerTests<Team, Long, TeamDTO
 
     @Override
     protected String getEndpointRoot() {
-        return "/teams";
+        return ROOT_TEAMS;
     }
 
     @Override
@@ -64,7 +73,14 @@ public class TeamControllerTests extends CrudControllerTests<Team, Long, TeamDTO
     @Override
     protected TeamDTO buildDTO() {
         Team team = new TeamBuilder()
-                .id(GENERIC_ID).build();
+                .dimension(0)
+                .leader(mock(Player.class))
+                .members(new HashSet<>(Arrays.asList(mock(Applicant.class))))
+                .applicants(new HashSet<>(Arrays.asList(mock(Applicant.class))))
+                .id(GENERIC_ID)
+                .dateCreation(LocalDateTime.now())
+                .dateModification(LocalDateTime.now())
+                .modifier(mock(Player.class)).build();
         return new TeamDTO(team);
     }
 

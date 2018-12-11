@@ -13,6 +13,6 @@ public class EntityNotFoundException extends Exception {
     }
 
     public EntityNotFoundException(Class<? extends GenericEntity> clazz, Object details) {
-        super(String.join(" ", clazz.getSimpleName(), NOT_FOUND, details.toString()));
+        this(String.join(" ", clazz.getSimpleName(), NOT_FOUND, details.toString()));
     }
 }
