@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.commons.lang3.NotImplementedException;
@@ -69,8 +70,8 @@ public class GuildServiceTests extends CrudServiceTests<Guild, GuildDTO> {
         return new GuildBuilder()
                 .name("name")
                 .description("description")
-                .members(Arrays.asList(mock(Player.class)))
-                .applicants(Arrays.asList(mock(Applicant.class)))
+                .members(new HashSet<>(Arrays.asList(mock(Player.class))))
+                .applicants(new HashSet<>(Arrays.asList(mock(Applicant.class))))
                 .id(GENERIC_ID)
                 .dateCreation(LocalDateTime.now())
                 .dateModification(LocalDateTime.now())

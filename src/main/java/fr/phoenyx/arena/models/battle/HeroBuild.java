@@ -11,7 +11,9 @@ import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.TABLE_HERO_BUIL
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.TABLE_HERO_BUILDS_ITEMS;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,7 +39,7 @@ import lombok.EqualsAndHashCode;
 public class HeroBuild extends GenericEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "heroBuild")
-    private List<Hero> heroes = new ArrayList<>();
+    private Set<Hero> heroes = new HashSet<>();
 
     @Column(name = COLUMN_VITALITY, nullable = false)
     private int vitality;
@@ -53,11 +55,11 @@ public class HeroBuild extends GenericEntity {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(name = COLUMN_ID_HERO_BUILD)
-    private List<ActiveSkill> activeSkills = new ArrayList<>();
+    private Set<ActiveSkill> activeSkills = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(name = COLUMN_ID_HERO_BUILD)
-    private List<PassiveSkill> passiveSkills = new ArrayList<>();
+    private Set<PassiveSkill> passiveSkills = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = TABLE_HERO_BUILDS_ITEMS,

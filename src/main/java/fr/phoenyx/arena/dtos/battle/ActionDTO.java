@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.dtos.battle;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,7 +17,7 @@ public class ActionDTO extends GenericEntityDTO implements Comparable<ActionDTO>
     private int actionOrder;
     private HeroDTO caster;
     private ActiveSkillDTO skill;
-    private Set<HeroDTO> targets;
+    private Set<HeroDTO> targets = new HashSet<>();
     private double rand;
 
     public ActionDTO() {

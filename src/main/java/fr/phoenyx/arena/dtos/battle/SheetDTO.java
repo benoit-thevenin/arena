@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.dtos.battle;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,7 @@ public class SheetDTO extends GenericEntityDTO {
     private int intelligence;
     private int currentHealth;
     private int currentMana;
-    private List<EffectDTO> effects;
+    private List<EffectDTO> effects = new ArrayList<>();
 
     public SheetDTO() {
         super();

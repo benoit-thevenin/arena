@@ -89,16 +89,6 @@ public class ItemServiceTests extends CrudServiceTests<Item, ItemDTO> {
         return Arrays.asList(buildEntity());
     }
 
-    @Test
-    public void getAllRecipes_shouldReturnList() {
-        //When
-        List<RecipeDTO> recipes = itemService.getAllRecipes();
-
-        //Then
-        assertThat(recipes).isNotNull();
-        assertThat(recipes).hasSize(ItemRecipe.values().length);
-    }
-
     @Override
     @Test
     public void create_shouldReturnDTO_whenOK() throws BadRequestException, EntityNotFoundException {
@@ -139,5 +129,15 @@ public class ItemServiceTests extends CrudServiceTests<Item, ItemDTO> {
     public void update_shouldThrowBadRequestException_whenKO() throws BadRequestException, EntityNotFoundException {
         // TODO Auto-generated method stub
         throw new NotImplementedException("Not Yet Implemented");
+    }
+
+    @Test
+    public void getAllRecipes_shouldReturnList() {
+        //When
+        List<RecipeDTO> recipes = itemService.getAllRecipes();
+
+        //Then
+        assertThat(recipes).isNotNull();
+        assertThat(recipes).hasSize(ItemRecipe.values().length);
     }
 }

@@ -82,7 +82,7 @@ public class PlayerControllerTests extends CrudControllerTests<Player, PlayerDTO
                 .level(0)
                 .experience(0)
                 .inventory(Arrays.asList(mock(Item.class)))
-                .builds(Arrays.asList(mock(Build.class)))
+                .builds(new HashSet<>(Arrays.asList(mock(Build.class))))
                 .guild(mock(Guild.class))
                 .guildRole(GuildRole.values()[0])
                 .friends(new HashSet<>(Arrays.asList(mock(Player.class))))

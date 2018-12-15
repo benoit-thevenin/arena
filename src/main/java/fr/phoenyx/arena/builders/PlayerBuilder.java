@@ -58,7 +58,7 @@ public class PlayerBuilder extends GenericEntityBuilder<Player> {
         return this;
     }
 
-    public PlayerBuilder builds(List<Build> builds) {
+    public PlayerBuilder builds(Set<Build> builds) {
         player.setBuilds(builds);
         return this;
     }

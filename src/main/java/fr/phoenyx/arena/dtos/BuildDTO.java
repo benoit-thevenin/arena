@@ -1,5 +1,7 @@
 package fr.phoenyx.arena.dtos;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,11 +21,11 @@ public class BuildDTO extends GenericEntityDTO {
     private int strength;
     private int intelligence;
     private int agility;
-    private List<ActiveSkillDTO> activeSkills;
-    private List<PassiveSkillDTO> passiveSkills;
-    private List<ItemDTO> stuff;
+    private Set<ActiveSkillDTO> activeSkills = new HashSet<>();
+    private Set<PassiveSkillDTO> passiveSkills = new HashSet<>();
+    private List<ItemDTO> stuff = new ArrayList<>();
     private String specialization;
-    private Set<TypeDTO> types;
+    private Set<TypeDTO> types = new HashSet<>();
 
     public BuildDTO() {
         super();
@@ -37,10 +39,10 @@ public class BuildDTO extends GenericEntityDTO {
         agility = build.getAgility();
         activeSkills = build.getActiveSkills().stream()
                 .map(ActiveSkillDTO::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         passiveSkills = build.getPassiveSkills().stream()
                 .map(PassiveSkillDTO::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         stuff = build.getStuff().stream()
                 .map(ItemDTO::new)
                 .collect(Collectors.toList());

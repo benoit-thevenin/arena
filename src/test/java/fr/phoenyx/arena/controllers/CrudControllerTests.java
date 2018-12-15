@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.controllers;
 
+import static fr.phoenyx.arena.constants.GlobalConstants.CHARACTER_ENCODING;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
@@ -37,7 +38,9 @@ public abstract class CrudControllerTests<E extends GenericEntity, D extends Gen
 
     @Test
     public void findAll_shouldReturnOK() throws Exception {
-        getMockMvc().perform(get(getEndpointRoot()))
+        getMockMvc().perform(get(getEndpointRoot())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .characterEncoding(CHARACTER_ENCODING))
                 .andExpect(status().isOk());
     }
 
@@ -48,7 +51,9 @@ public abstract class CrudControllerTests<E extends GenericEntity, D extends Gen
         when(getService().findById(getGenericId())).thenReturn(dto);
 
         //When Then
-        getMockMvc().perform(get(getEndpointRoot() + "/" + getGenericId()))
+        getMockMvc().perform(get(getEndpointRoot() + "/" + getGenericId())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .characterEncoding(CHARACTER_ENCODING))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString(getGenericId().toString())));
@@ -61,7 +66,9 @@ public abstract class CrudControllerTests<E extends GenericEntity, D extends Gen
         when(getService().findById(getGenericId())).thenThrow(exception);
 
         //When Then
-        getMockMvc().perform(get(getEndpointRoot() + "/" + getGenericId()))
+        getMockMvc().perform(get(getEndpointRoot() + "/" + getGenericId())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .characterEncoding(CHARACTER_ENCODING))
                 .andDo(print())
                 .andExpect(status().isNotFound())
                 .andExpect(content().string(containsString(exception.getMessage())));
@@ -69,7 +76,9 @@ public abstract class CrudControllerTests<E extends GenericEntity, D extends Gen
 
     @Test
     public void deleteById_shouldReturnNoContent_whenExists() throws Exception {
-        getMockMvc().perform(delete(getEndpointRoot() + "/" + getGenericId()))
+        getMockMvc().perform(delete(getEndpointRoot() + "/" + getGenericId())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .characterEncoding(CHARACTER_ENCODING))
                 .andExpect(status().isNoContent());
     }
 
@@ -80,7 +89,9 @@ public abstract class CrudControllerTests<E extends GenericEntity, D extends Gen
         doThrow(exception).when(getService()).deleteById(getGenericId());
 
         //When Then
-        getMockMvc().perform(delete(getEndpointRoot() + "/" + getGenericId()))
+        getMockMvc().perform(delete(getEndpointRoot() + "/" + getGenericId())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .characterEncoding(CHARACTER_ENCODING))
                 .andDo(print())
                 .andExpect(status().isNotFound())
                 .andExpect(content().string(containsString(exception.getMessage())));
@@ -98,7 +109,7 @@ public abstract class CrudControllerTests<E extends GenericEntity, D extends Gen
         //When Then
         getMockMvc().perform(post(getEndpointRoot()).content(dtoJson)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .characterEncoding("UTF-8"))
+                .characterEncoding(CHARACTER_ENCODING))
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(content().string(containsString(getGenericId().toString())));
@@ -117,7 +128,7 @@ public abstract class CrudControllerTests<E extends GenericEntity, D extends Gen
         //When Then
         getMockMvc().perform(post(getEndpointRoot()).content(dtoJson)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .characterEncoding("UTF-8"))
+                .characterEncoding(CHARACTER_ENCODING))
                 .andDo(print())
                 .andExpect(status().isNotFound())
                 .andExpect(content().string(containsString(exception.getMessage())));
@@ -136,7 +147,7 @@ public abstract class CrudControllerTests<E extends GenericEntity, D extends Gen
         //When Then
         getMockMvc().perform(post(getEndpointRoot()).content(dtoJson)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .characterEncoding("UTF-8"))
+                .characterEncoding(CHARACTER_ENCODING))
                 .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string(containsString(exception.getMessage())));
@@ -154,7 +165,7 @@ public abstract class CrudControllerTests<E extends GenericEntity, D extends Gen
         //When Then
         getMockMvc().perform(put(getEndpointRoot()).content(dtoJson)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .characterEncoding("UTF-8"))
+                .characterEncoding(CHARACTER_ENCODING))
                 .andDo(print())
                 .andExpect(status().isAccepted())
                 .andExpect(content().string(containsString(getGenericId().toString())));
@@ -173,7 +184,7 @@ public abstract class CrudControllerTests<E extends GenericEntity, D extends Gen
         //When Then
         getMockMvc().perform(put(getEndpointRoot()).content(dtoJson)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .characterEncoding("UTF-8"))
+                .characterEncoding(CHARACTER_ENCODING))
                 .andDo(print())
                 .andExpect(status().isNotFound())
                 .andExpect(content().string(containsString(exception.getMessage())));
@@ -192,7 +203,7 @@ public abstract class CrudControllerTests<E extends GenericEntity, D extends Gen
         //When Then
         getMockMvc().perform(put(getEndpointRoot()).content(dtoJson)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .characterEncoding("UTF-8"))
+                .characterEncoding(CHARACTER_ENCODING))
                 .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string(containsString(exception.getMessage())));

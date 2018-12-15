@@ -1,6 +1,6 @@
 package fr.phoenyx.arena.builders.guild;
 
-import java.util.List;
+import java.util.Set;
 
 import fr.phoenyx.arena.builders.GenericEntityBuilder;
 import fr.phoenyx.arena.models.Applicant;
@@ -30,12 +30,12 @@ public class GuildBuilder extends GenericEntityBuilder<Guild> {
         return this;
     }
 
-    public GuildBuilder members(List<Player> members) {
+    public GuildBuilder members(Set<Player> members) {
         guild.setMembers(members);
         return this;
     }
 
-    public GuildBuilder applicants(List<Applicant> applicants) {
+    public GuildBuilder applicants(Set<Applicant> applicants) {
         guild.setApplicants(applicants);
         return this;
     }

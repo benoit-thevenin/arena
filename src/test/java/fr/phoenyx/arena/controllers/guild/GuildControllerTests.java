@@ -5,6 +5,7 @@ import static fr.phoenyx.arena.constants.RestConstants.ROOT_GUILDS;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashSet;
 
 import static org.mockito.Mockito.mock;
 
@@ -75,8 +76,8 @@ public class GuildControllerTests extends CrudControllerTests<Guild, GuildDTO> {
         Guild guild = new GuildBuilder()
                 .name("name")
                 .description("description")
-                .members(Arrays.asList(mock(Player.class)))
-                .applicants(Arrays.asList(mock(Applicant.class)))
+                .members(new HashSet<>(Arrays.asList(mock(Player.class))))
+                .applicants(new HashSet<>(Arrays.asList(mock(Applicant.class))))
                 .id(GENERIC_ID)
                 .dateCreation(LocalDateTime.now())
                 .dateModification(LocalDateTime.now())

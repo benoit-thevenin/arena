@@ -49,12 +49,12 @@ public class BuildBuilder extends GenericEntityBuilder<Build> {
         return this;
     }
 
-    public BuildBuilder activeSkills(List<ActiveSkill> activeSkills) {
+    public BuildBuilder activeSkills(Set<ActiveSkill> activeSkills) {
         build.setActiveSkills(activeSkills);
         return this;
     }
 
-    public BuildBuilder passiveSkills(List<PassiveSkill> passiveSkills) {
+    public BuildBuilder passiveSkills(Set<PassiveSkill> passiveSkills) {
         build.setPassiveSkills(passiveSkills);
         return this;
     }

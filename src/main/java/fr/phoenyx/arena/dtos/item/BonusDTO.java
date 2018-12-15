@@ -19,7 +19,9 @@ public class BonusDTO extends GenericEntityDTO {
 
     public BonusDTO(Bonus bonus) {
         super(bonus);
-        characteristic = new CharacteristicDTO(bonus.getCharacteristic());
+        if (bonus.getCharacteristic() != null) {
+            characteristic = new CharacteristicDTO(bonus.getCharacteristic());
+        }
         rand = bonus.getRand();
     }
 }

@@ -1,6 +1,7 @@
 package fr.phoenyx.arena.dtos.guild;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import fr.phoenyx.arena.dtos.ApplicantDTO;
@@ -13,8 +14,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class GuildDTO extends GuildDTOLight {
 
-    private List<PlayerDTOLight> members;
-    private List<ApplicantDTO> applicants;
+    private Set<PlayerDTOLight> members = new HashSet<>();
+    private Set<ApplicantDTO> applicants = new HashSet<>();
 
     public GuildDTO() {
         super();
@@ -24,9 +25,9 @@ public class GuildDTO extends GuildDTOLight {
         super(guild);
         members = guild.getMembers().stream()
                 .map(PlayerDTOLight::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         applicants = guild.getApplicants().stream()
                 .map(ApplicantDTO::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 }

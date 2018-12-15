@@ -1,6 +1,9 @@
 package fr.phoenyx.arena.dtos;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import fr.phoenyx.arena.dtos.guild.GuildDTO;
@@ -16,10 +19,10 @@ public class PlayerDTO extends PlayerDTOLight {
     private String email;
     private int gold;
     private long experience;
-    private List<ItemDTO> inventory;
-    private List<BuildDTO> builds;
+    private List<ItemDTO> inventory = new ArrayList<>();
+    private Set<BuildDTO> builds = new HashSet<>();
     private GuildDTO guild;
-    private List<PlayerDTOLight> friends;
+    private Set<PlayerDTOLight> friends = new HashSet<>();
 
     public PlayerDTO() {
         super();
@@ -35,12 +38,12 @@ public class PlayerDTO extends PlayerDTOLight {
                 .collect(Collectors.toList());
         builds = player.getBuilds().stream()
                 .map(BuildDTO::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         if (player.getGuild() != null) {
             guild = new GuildDTO(player.getGuild());
         }
         friends = player.getFriends().stream()
                 .map(PlayerDTOLight::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 }

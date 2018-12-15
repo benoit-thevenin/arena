@@ -69,7 +69,7 @@ public class Player extends GenericEntity {
     private List<Item> inventory = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "owner")
-    private List<Build> builds = new ArrayList<>();
+    private Set<Build> builds = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = COLUMN_ID_GUILD)

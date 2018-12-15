@@ -64,10 +64,10 @@ public class Build extends GenericEntity {
     private int agility;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "build")
-    private List<ActiveSkill> activeSkills = new ArrayList<>();
+    private Set<ActiveSkill> activeSkills = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "build")
-    private List<PassiveSkill> passiveSkills = new ArrayList<>();
+    private Set<PassiveSkill> passiveSkills = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = TABLE_BUILDS_ITEMS,

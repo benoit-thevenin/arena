@@ -1,6 +1,7 @@
 package fr.phoenyx.arena.builders.battle;
 
 import java.util.List;
+import java.util.Set;
 
 import fr.phoenyx.arena.builders.GenericEntityBuilder;
 import fr.phoenyx.arena.models.battle.Hero;
@@ -22,7 +23,7 @@ public class HeroBuildBuilder extends GenericEntityBuilder<HeroBuild> {
         return heroBuild;
     }
 
-    public HeroBuildBuilder heroes(List<Hero> heroes) {
+    public HeroBuildBuilder heroes(Set<Hero> heroes) {
         heroBuild.setHeroes(heroes);
         return this;
     }
@@ -47,12 +48,12 @@ public class HeroBuildBuilder extends GenericEntityBuilder<HeroBuild> {
         return this;
     }
 
-    public HeroBuildBuilder activeSkills(List<ActiveSkill> activeSkills) {
+    public HeroBuildBuilder activeSkills(Set<ActiveSkill> activeSkills) {
         heroBuild.setActiveSkills(activeSkills);
         return this;
     }
 
-    public HeroBuildBuilder passiveSkills(List<PassiveSkill> passiveSkills) {
+    public HeroBuildBuilder passiveSkills(Set<PassiveSkill> passiveSkills) {
         heroBuild.setPassiveSkills(passiveSkills);
         return this;
     }

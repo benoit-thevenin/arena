@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.dtos.battle;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -15,7 +16,7 @@ public class BattleDTO extends GenericEntityDTO {
 
     private TeamDTO team1;
     private TeamDTO team2;
-    private Set<RoundDTO> rounds;
+    private Set<RoundDTO> rounds = new HashSet<>();
 
     public BattleDTO() {
         super();

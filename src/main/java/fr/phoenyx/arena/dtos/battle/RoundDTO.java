@@ -1,6 +1,7 @@
 package fr.phoenyx.arena.dtos.battle;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import fr.phoenyx.arena.dtos.GenericEntityDTO;
@@ -13,8 +14,8 @@ import lombok.EqualsAndHashCode;
 public class RoundDTO extends GenericEntityDTO implements Comparable<RoundDTO> {
 
     private int roundNumber;
-    private List<ActionDTO> actionsPerformed;
-    private List<HeroDTO> heroes;
+    private Set<ActionDTO> actionsPerformed = new HashSet<>();
+    private Set<HeroDTO> heroes = new HashSet<>();
 
     public RoundDTO() {
         super();
@@ -25,10 +26,10 @@ public class RoundDTO extends GenericEntityDTO implements Comparable<RoundDTO> {
         roundNumber = round.getRoundNumber();
         actionsPerformed = round.getActionsPerformed().stream()
                 .map(ActionDTO::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         heroes = round.getHeroes().stream()
                 .map(HeroDTO::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     @Override

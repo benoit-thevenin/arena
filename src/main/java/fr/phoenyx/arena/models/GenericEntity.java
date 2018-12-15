@@ -16,7 +16,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
-import fr.phoenyx.arena.dtos.GenericEntityDTO;
 import lombok.Data;
 
 @Data
@@ -38,16 +37,12 @@ public abstract class GenericEntity {
     @JoinColumn(name = COLUMN_ID_MODIFIER)
     protected Player modifier;
 
-    public GenericEntity() {
-        super();
-    }
-
-    public GenericEntity(GenericEntityDTO genericEntity) {
-        this();
-        id = genericEntity.getId();
-    }
-
-    public void update(GenericEntityDTO generityEntityDto) {
+    public void update() {
         dateModification = LocalDateTime.now();
+    }
+
+    public void update(Player modifier) {
+        update();
+        this.modifier = modifier;
     }
 }

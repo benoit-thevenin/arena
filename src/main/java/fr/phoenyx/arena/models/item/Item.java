@@ -9,8 +9,8 @@ import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_QUANTITY
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_RARITY;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.TABLE_ITEMS;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -54,7 +54,7 @@ public class Item extends GenericEntity {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = COLUMN_ID_ITEM)
-    private List<Bonus> bonuses = new ArrayList<>();
+    private Set<Bonus> bonuses = new HashSet<>();
 
     @Enumerated
     @Column(name = COLUMN_POWER)

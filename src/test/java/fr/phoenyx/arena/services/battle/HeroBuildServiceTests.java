@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.commons.lang3.NotImplementedException;
@@ -77,13 +78,13 @@ public class HeroBuildServiceTests extends CrudServiceTests<HeroBuild, HeroBuild
         when(activeSkill.getActiveSkillEnum()).thenReturn(ActiveSkillEnum.values()[0]);
         when(passiveSkill.getPassiveSkillEnum()).thenReturn(PassiveSkillEnum.values()[0]);
         return new HeroBuildBuilder()
-                .heroes(Arrays.asList(mock(Hero.class)))
+                .heroes(new HashSet<>(Arrays.asList(mock(Hero.class))))
                 .vitality(0)
                 .strength(0)
                 .intelligence(0)
                 .agility(0)
-                .activeSkills(Arrays.asList(activeSkill))
-                .passiveSkills(Arrays.asList(passiveSkill))
+                .activeSkills(new HashSet<>(Arrays.asList(activeSkill)))
+                .passiveSkills(new HashSet<>(Arrays.asList(passiveSkill)))
                 .stuff(Arrays.asList(mock(Item.class)))
                 .id(GENERIC_ID)
                 .dateCreation(LocalDateTime.now())

@@ -1,6 +1,6 @@
 package fr.phoenyx.arena.builders.item;
 
-import java.util.List;
+import java.util.Set;
 
 import fr.phoenyx.arena.builders.GenericEntityBuilder;
 import fr.phoenyx.arena.enums.item.ItemType;
@@ -47,7 +47,7 @@ public class ItemBuilder extends GenericEntityBuilder<Item> {
         return this;
     }
 
-    public ItemBuilder bonuses(List<Bonus> bonuses) {
+    public ItemBuilder bonuses(Set<Bonus> bonuses) {
         item.setBonuses(bonuses);
         return this;
     }

@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.controllers.item;
 
+import static fr.phoenyx.arena.constants.GlobalConstants.CHARACTER_ENCODING;
 import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
 import static fr.phoenyx.arena.constants.RestConstants.RECIPES;
 import static fr.phoenyx.arena.constants.RestConstants.ROOT_ITEMS;
@@ -18,6 +19,7 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -104,7 +106,9 @@ public class ItemControllerTests extends CrudControllerTests<Item, ItemDTO> {
 
     @Test
     public void getAllRecipes_shouldReturnOK() throws Exception {
-        mockMvc.perform(get(getEndpointRoot() + RECIPES))
+        mockMvc.perform(get(getEndpointRoot() + RECIPES)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .characterEncoding(CHARACTER_ENCODING))
                 .andExpect(status().isOk());
     }
 }

@@ -8,8 +8,8 @@ import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.COLUMN_NAME;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.TABLE_GUILDS;
 import static fr.phoenyx.arena.constants.DatabaseSchemaConstants.TABLE_GUILDS_APPLICANTS;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,14 +39,14 @@ public class Guild extends GenericEntity {
     private String description;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "guild")
-    private List<Player> members = new ArrayList<>();
+    private Set<Player> members = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = TABLE_GUILDS_APPLICANTS,
         joinColumns = @JoinColumn(name = COLUMN_ID_GUILD, referencedColumnName = COLUMN_ID),
         inverseJoinColumns = @JoinColumn(name = COLUMN_ID_APPLICANT, referencedColumnName = COLUMN_ID)
     )
-    private List<Applicant> applicants = new ArrayList<>();
+    private Set<Applicant> applicants = new HashSet<>();
 
     //TODO other fields like raid boss stage ?
 }

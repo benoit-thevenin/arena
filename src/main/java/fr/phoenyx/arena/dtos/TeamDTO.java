@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.dtos;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,8 +14,8 @@ public class TeamDTO extends GenericEntityDTO {
 
     private int dimension;
     private PlayerDTOLight leader;
-    private Set<ApplicantDTO> members;
-    private Set<ApplicantDTO> applicants;
+    private Set<ApplicantDTO> members = new HashSet<>();
+    private Set<ApplicantDTO> applicants = new HashSet<>();
 
     public TeamDTO() {
         super();

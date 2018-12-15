@@ -1,6 +1,7 @@
 package fr.phoenyx.arena.dtos.item;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import fr.phoenyx.arena.dtos.GenericEntityDTO;
@@ -17,7 +18,7 @@ public class ItemDTO extends GenericEntityDTO {
     private int quantity;
     private ItemTypeDTO itemType;
     private RarityDTO rarity;
-    private List<BonusDTO> bonuses;
+    private Set<BonusDTO> bonuses = new HashSet<>();
     private PowerDTO power;
 
     public ItemDTO() {
@@ -37,7 +38,7 @@ public class ItemDTO extends GenericEntityDTO {
         }
         bonuses = item.getBonuses().stream()
                 .map(BonusDTO::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         if (item.getPower() != null) {
             power = new PowerDTO(item.getPower());
         }

@@ -3,7 +3,6 @@ package fr.phoenyx.arena.dtos;
 import java.time.LocalDateTime;
 
 import fr.phoenyx.arena.dtos.guild.GuildDTOLight;
-import fr.phoenyx.arena.enums.GuildRole;
 import fr.phoenyx.arena.models.Player;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,7 +15,7 @@ public class PlayerDTOLight extends GenericEntityDTO {
     protected LocalDateTime lastConnection;
     protected int level;
     protected GuildDTOLight guildLight;
-    protected GuildRole guildRole;
+    protected String guildRole;
 
     public PlayerDTOLight() {
         super();
@@ -30,6 +29,8 @@ public class PlayerDTOLight extends GenericEntityDTO {
         if (player.getGuild() != null) {
             guildLight = new GuildDTOLight(player.getGuild());
         }
-        guildRole = player.getGuildRole();
+        if (player.getGuildRole() != null) {
+            guildRole = player.getGuildRole().getDescription();
+        }
     }
 }

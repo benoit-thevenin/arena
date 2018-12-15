@@ -1,6 +1,8 @@
 package fr.phoenyx.arena.dtos.battle;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import fr.phoenyx.arena.dtos.GenericEntityDTO;
@@ -15,13 +17,13 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class HeroBuildDTO extends GenericEntityDTO {
 
-    private List<HeroDTO> heroes;
+    private Set<HeroDTO> heroes = new HashSet<>();
     private int vitality;
     private int strength;
     private int intelligence;
     private int agility;
-    private List<ActiveSkillDTO> activeSkills;
-    private List<PassiveSkillDTO> passiveSkills;
+    private Set<ActiveSkillDTO> activeSkills = new HashSet<>();
+    private Set<PassiveSkillDTO> passiveSkills = new HashSet<>();
     private List<ItemDTO> stuff;
 
     public HeroBuildDTO() {
@@ -32,17 +34,17 @@ public class HeroBuildDTO extends GenericEntityDTO {
         super(heroBuild);
         heroes = heroBuild.getHeroes().stream()
                 .map(HeroDTO::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         vitality = heroBuild.getVitality();
         strength = heroBuild.getStrength();
         intelligence = heroBuild.getIntelligence();
         agility = heroBuild.getAgility();
         activeSkills = heroBuild.getActiveSkills().stream()
                 .map(ActiveSkillDTO::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         passiveSkills = heroBuild.getPassiveSkills().stream()
                 .map(PassiveSkillDTO::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         stuff = heroBuild.getStuff().stream()
                 .map(ItemDTO::new)
                 .collect(Collectors.toList());
