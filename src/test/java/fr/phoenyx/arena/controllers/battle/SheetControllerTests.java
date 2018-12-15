@@ -35,7 +35,7 @@ import fr.phoenyx.arena.services.battle.SheetService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class SheetControllerTests extends CrudControllerTests<Sheet, Long, SheetDTO> {
+public class SheetControllerTests extends CrudControllerTests<Sheet, SheetDTO> {
 
     @Autowired
     private MockMvc mockMvc;
@@ -52,7 +52,7 @@ public class SheetControllerTests extends CrudControllerTests<Sheet, Long, Sheet
     }
 
     @Override
-    protected CrudService<Sheet, Long, SheetDTO> getService() {
+    protected CrudService<Sheet, SheetDTO> getService() {
         return sheetService;
     }
 

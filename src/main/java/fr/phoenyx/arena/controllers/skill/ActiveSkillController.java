@@ -14,13 +14,13 @@ import fr.phoenyx.arena.services.skill.ActiveSkillService;
 
 @RestController
 @RequestMapping(ROOT_ACTIVE_SKILLS)
-public class ActiveSkillController extends CrudController<ActiveSkill, Long, ActiveSkillDTO> {
+public class ActiveSkillController extends CrudController<ActiveSkill, ActiveSkillDTO> {
 
     @Autowired
     private ActiveSkillService activeSkillService;
 
     @Override
-    protected CrudService<ActiveSkill, Long, ActiveSkillDTO> getService() {
+    protected CrudService<ActiveSkill, ActiveSkillDTO> getService() {
         return activeSkillService;
     }
 }

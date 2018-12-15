@@ -10,10 +10,4 @@ public class RoundMapper implements Mapper<Round, RoundDTO> {
     public RoundDTO entityToDto(Round entity) {
         return new RoundDTO(entity);
     }
-
-    @Override
-    public Round dtoToEntity(RoundDTO dto) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

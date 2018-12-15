@@ -1,10 +1,13 @@
 package fr.phoenyx.arena.services.guild;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import fr.phoenyx.arena.dtos.guild.GuildDTO;
+import fr.phoenyx.arena.exceptions.BadRequestException;
+import fr.phoenyx.arena.exceptions.EntityNotFoundException;
 import fr.phoenyx.arena.mappers.Mapper;
 import fr.phoenyx.arena.mappers.guild.GuildMapper;
 import fr.phoenyx.arena.models.guild.Guild;
@@ -12,7 +15,7 @@ import fr.phoenyx.arena.repositories.guild.GuildRepository;
 import fr.phoenyx.arena.services.CrudService;
 
 @Service
-public class GuildService extends CrudService<Guild, Long, GuildDTO> {
+public class GuildService extends CrudService<Guild, GuildDTO> {
 
     @Autowired
     private GuildRepository guildRepository;
@@ -30,5 +33,17 @@ public class GuildService extends CrudService<Guild, Long, GuildDTO> {
     @Override
     protected Class<Guild> getConcernedClass() {
         return Guild.class;
+    }
+
+    @Override
+    public GuildDTO create(GuildDTO dto) throws BadRequestException, EntityNotFoundException {
+        // TODO Auto-generated method stub
+        throw new NotImplementedException("Not Yet Implemented");
+    }
+
+    @Override
+    public GuildDTO update(GuildDTO dto) throws BadRequestException, EntityNotFoundException {
+        // TODO Auto-generated method stub
+        throw new NotImplementedException("Not Yet Implemented");
     }
 }

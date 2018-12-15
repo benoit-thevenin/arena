@@ -10,10 +10,4 @@ public class ActiveSkillMapper implements Mapper<ActiveSkill, ActiveSkillDTO> {
     public ActiveSkillDTO entityToDto(ActiveSkill entity) {
         return new ActiveSkillDTO(entity);
     }
-
-    @Override
-    public ActiveSkill dtoToEntity(ActiveSkillDTO dto) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

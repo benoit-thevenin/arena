@@ -34,7 +34,7 @@ import fr.phoenyx.arena.services.guild.GuildService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class GuildControllerTests extends CrudControllerTests<Guild, Long, GuildDTO> {
+public class GuildControllerTests extends CrudControllerTests<Guild, GuildDTO> {
 
     @Autowired
     private MockMvc mockMvc;
@@ -51,7 +51,7 @@ public class GuildControllerTests extends CrudControllerTests<Guild, Long, Guild
     }
 
     @Override
-    protected CrudService<Guild, Long, GuildDTO> getService() {
+    protected CrudService<Guild, GuildDTO> getService() {
         return guildService;
     }
 

@@ -14,13 +14,13 @@ import fr.phoenyx.arena.services.skill.PassiveSkillService;
 
 @RestController
 @RequestMapping(ROOT_PASSIVE_SKILLS)
-public class PassiveSkillController extends CrudController<PassiveSkill, Long, PassiveSkillDTO> {
+public class PassiveSkillController extends CrudController<PassiveSkill, PassiveSkillDTO> {
 
     @Autowired
     private PassiveSkillService passiveSkillService;
 
     @Override
-    protected CrudService<PassiveSkill, Long, PassiveSkillDTO> getService() {
+    protected CrudService<PassiveSkill, PassiveSkillDTO> getService() {
         return passiveSkillService;
     }
 }

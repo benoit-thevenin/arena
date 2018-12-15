@@ -14,13 +14,13 @@ import fr.phoenyx.arena.services.battle.HeroBuildService;
 
 @RestController
 @RequestMapping(ROOT_HERO_BUILDS)
-public class HeroBuildController extends CrudController<HeroBuild, Long, HeroBuildDTO> {
+public class HeroBuildController extends CrudController<HeroBuild, HeroBuildDTO> {
 
     @Autowired
     private HeroBuildService heroBuildService;
 
     @Override
-    protected CrudService<HeroBuild, Long, HeroBuildDTO> getService() {
+    protected CrudService<HeroBuild, HeroBuildDTO> getService() {
         return heroBuildService;
     }
 }

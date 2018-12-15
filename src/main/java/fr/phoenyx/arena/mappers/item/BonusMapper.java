@@ -10,10 +10,4 @@ public class BonusMapper implements Mapper<Bonus, BonusDTO> {
     public BonusDTO entityToDto(Bonus entity) {
         return new BonusDTO(entity);
     }
-
-    @Override
-    public Bonus dtoToEntity(BonusDTO dto) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

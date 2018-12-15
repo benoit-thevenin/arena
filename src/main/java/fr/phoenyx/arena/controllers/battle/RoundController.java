@@ -14,13 +14,13 @@ import fr.phoenyx.arena.services.battle.RoundService;
 
 @RestController
 @RequestMapping(ROOT_ROUNDS)
-public class RoundController extends CrudController<Round, Long, RoundDTO> {
+public class RoundController extends CrudController<Round, RoundDTO> {
 
     @Autowired
     private RoundService roundService;
 
     @Override
-    protected CrudService<Round, Long, RoundDTO> getService() {
+    protected CrudService<Round, RoundDTO> getService() {
         return roundService;
     }
 }

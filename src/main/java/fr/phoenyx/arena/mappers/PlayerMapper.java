@@ -9,10 +9,4 @@ public class PlayerMapper implements Mapper<Player, PlayerDTO> {
     public PlayerDTO entityToDto(Player entity) {
         return new PlayerDTO(entity);
     }
-
-    @Override
-    public Player dtoToEntity(PlayerDTO dto) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

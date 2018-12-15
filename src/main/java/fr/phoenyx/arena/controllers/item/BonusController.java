@@ -14,13 +14,13 @@ import fr.phoenyx.arena.services.item.BonusService;
 
 @RestController
 @RequestMapping(ROOT_BONUSES)
-public class BonusController extends CrudController<Bonus, Long, BonusDTO> {
+public class BonusController extends CrudController<Bonus, BonusDTO> {
 
     @Autowired
     private BonusService bonusService;
 
     @Override
-    protected CrudService<Bonus, Long, BonusDTO> getService() {
+    protected CrudService<Bonus, BonusDTO> getService() {
         return bonusService;
     }
 }

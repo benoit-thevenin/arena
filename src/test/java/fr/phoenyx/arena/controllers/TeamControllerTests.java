@@ -34,7 +34,7 @@ import fr.phoenyx.arena.services.TeamService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class TeamControllerTests extends CrudControllerTests<Team, Long, TeamDTO> {
+public class TeamControllerTests extends CrudControllerTests<Team, TeamDTO> {
 
     @Autowired
     private MockMvc mockMvc;
@@ -51,7 +51,7 @@ public class TeamControllerTests extends CrudControllerTests<Team, Long, TeamDTO
     }
 
     @Override
-    protected CrudService<Team, Long, TeamDTO> getService() {
+    protected CrudService<Team, TeamDTO> getService() {
         return teamService;
     }
 

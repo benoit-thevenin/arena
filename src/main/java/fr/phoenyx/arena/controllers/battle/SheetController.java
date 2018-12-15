@@ -14,13 +14,13 @@ import fr.phoenyx.arena.services.battle.SheetService;
 
 @RestController
 @RequestMapping(ROOT_SHEETS)
-public class SheetController extends CrudController<Sheet, Long, SheetDTO> {
+public class SheetController extends CrudController<Sheet, SheetDTO> {
 
     @Autowired
     private SheetService sheetService;
 
     @Override
-    protected CrudService<Sheet, Long, SheetDTO> getService() {
+    protected CrudService<Sheet, SheetDTO> getService() {
         return sheetService;
     }
 }

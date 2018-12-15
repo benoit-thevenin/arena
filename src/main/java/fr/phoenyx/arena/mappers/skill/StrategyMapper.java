@@ -10,10 +10,4 @@ public class StrategyMapper implements Mapper<Strategy, StrategyDTO> {
     public StrategyDTO entityToDto(Strategy entity) {
         return new StrategyDTO(entity);
     }
-
-    @Override
-    public Strategy dtoToEntity(StrategyDTO dto) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

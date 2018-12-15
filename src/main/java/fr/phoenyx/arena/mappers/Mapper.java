@@ -6,5 +6,4 @@ import fr.phoenyx.arena.models.GenericEntity;
 public interface Mapper<E extends GenericEntity, D extends GenericEntityDTO> {
 
     public D entityToDto(E entity);
-    public E dtoToEntity(D dto);
 }

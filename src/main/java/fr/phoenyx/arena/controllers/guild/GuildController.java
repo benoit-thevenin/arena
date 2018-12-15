@@ -14,13 +14,13 @@ import fr.phoenyx.arena.services.guild.GuildService;
 
 @RestController
 @RequestMapping(ROOT_GUILDS)
-public class GuildController extends CrudController<Guild, Long, GuildDTO> {
+public class GuildController extends CrudController<Guild, GuildDTO> {
 
     @Autowired
     private GuildService guildService;
 
     @Override
-    protected CrudService<Guild, Long, GuildDTO> getService() {
+    protected CrudService<Guild, GuildDTO> getService() {
         return guildService;
     }
 }

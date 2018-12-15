@@ -10,10 +10,4 @@ public class GuildMapper implements Mapper<Guild, GuildDTO> {
     public GuildDTO entityToDto(Guild entity) {
         return new GuildDTO(entity);
     }
-
-    @Override
-    public Guild dtoToEntity(GuildDTO dto) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

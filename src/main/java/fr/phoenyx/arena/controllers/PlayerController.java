@@ -13,13 +13,13 @@ import fr.phoenyx.arena.services.PlayerService;
 
 @RestController
 @RequestMapping(ROOT_PLAYERS)
-public class PlayerController extends CrudController<Player, Long, PlayerDTO> {
+public class PlayerController extends CrudController<Player, PlayerDTO> {
 
     @Autowired
     private PlayerService playerService;
 
     @Override
-    protected CrudService<Player, Long, PlayerDTO> getService() {
+    protected CrudService<Player, PlayerDTO> getService() {
         return playerService;
     }
 }

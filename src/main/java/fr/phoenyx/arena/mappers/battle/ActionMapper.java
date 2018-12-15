@@ -10,10 +10,4 @@ public class ActionMapper implements Mapper<Action, ActionDTO> {
     public ActionDTO entityToDto(Action entity) {
         return new ActionDTO(entity);
     }
-
-    @Override
-    public Action dtoToEntity(ActionDTO dto) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

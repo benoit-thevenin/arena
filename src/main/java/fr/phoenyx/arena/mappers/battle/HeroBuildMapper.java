@@ -10,10 +10,4 @@ public class HeroBuildMapper implements Mapper<HeroBuild, HeroBuildDTO> {
     public HeroBuildDTO entityToDto(HeroBuild entity) {
         return new HeroBuildDTO(entity);
     }
-
-    @Override
-    public HeroBuild dtoToEntity(HeroBuildDTO dto) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

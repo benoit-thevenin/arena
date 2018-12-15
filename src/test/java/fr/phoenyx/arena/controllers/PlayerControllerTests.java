@@ -36,7 +36,7 @@ import fr.phoenyx.arena.services.PlayerService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PlayerControllerTests extends CrudControllerTests<Player, Long, PlayerDTO> {
+public class PlayerControllerTests extends CrudControllerTests<Player, PlayerDTO> {
 
     @Autowired
     private MockMvc mockMvc;
@@ -53,7 +53,7 @@ public class PlayerControllerTests extends CrudControllerTests<Player, Long, Pla
     }
 
     @Override
-    protected CrudService<Player, Long, PlayerDTO> getService() {
+    protected CrudService<Player, PlayerDTO> getService() {
         return playerService;
     }
 

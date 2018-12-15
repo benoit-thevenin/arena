@@ -35,7 +35,7 @@ import fr.phoenyx.arena.services.battle.RoundService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class RoundControllerTests extends CrudControllerTests<Round, Long, RoundDTO> {
+public class RoundControllerTests extends CrudControllerTests<Round, RoundDTO> {
 
     @Autowired
     private MockMvc mockMvc;
@@ -52,7 +52,7 @@ public class RoundControllerTests extends CrudControllerTests<Round, Long, Round
     }
 
     @Override
-    protected CrudService<Round, Long, RoundDTO> getService() {
+    protected CrudService<Round, RoundDTO> getService() {
         return roundService;
     }
 

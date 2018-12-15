@@ -14,13 +14,13 @@ import fr.phoenyx.arena.services.skill.StrategyService;
 
 @RestController
 @RequestMapping(ROOT_STRATEGIES)
-public class StrategyController extends CrudController<Strategy, Long, StrategyDTO> {
+public class StrategyController extends CrudController<Strategy, StrategyDTO> {
 
     @Autowired
     private StrategyService strategyService;
 
     @Override
-    protected CrudService<Strategy, Long, StrategyDTO> getService() {
+    protected CrudService<Strategy, StrategyDTO> getService() {
         return strategyService;
     }
 }

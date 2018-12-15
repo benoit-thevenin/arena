@@ -13,13 +13,13 @@ import fr.phoenyx.arena.services.TeamService;
 
 @RestController
 @RequestMapping(ROOT_TEAMS)
-public class TeamController extends CrudController<Team, Long, TeamDTO> {
+public class TeamController extends CrudController<Team, TeamDTO> {
 
     @Autowired
     private TeamService teamService;
 
     @Override
-    protected CrudService<Team, Long, TeamDTO> getService() {
+    protected CrudService<Team, TeamDTO> getService() {
         return teamService;
     }
 }

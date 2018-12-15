@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public abstract class GenericEntityDTO {
 
-    protected long id;
+    protected Long id;
 
     public GenericEntityDTO() {
         super();

@@ -32,7 +32,7 @@ import fr.phoenyx.arena.services.skill.StrategyService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class StrategyControllerTests extends CrudControllerTests<Strategy, Long, StrategyDTO> {
+public class StrategyControllerTests extends CrudControllerTests<Strategy, StrategyDTO> {
 
     @Autowired
     private MockMvc mockMvc;
@@ -49,7 +49,7 @@ public class StrategyControllerTests extends CrudControllerTests<Strategy, Long,
     }
 
     @Override
-    protected CrudService<Strategy, Long, StrategyDTO> getService() {
+    protected CrudService<Strategy, StrategyDTO> getService() {
         return strategyService;
     }
 

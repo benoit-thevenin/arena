@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -23,6 +24,8 @@ import fr.phoenyx.arena.enums.item.ItemRecipe;
 import fr.phoenyx.arena.enums.item.ItemType;
 import fr.phoenyx.arena.enums.item.Power;
 import fr.phoenyx.arena.enums.item.Rarity;
+import fr.phoenyx.arena.exceptions.BadRequestException;
+import fr.phoenyx.arena.exceptions.EntityNotFoundException;
 import fr.phoenyx.arena.mappers.Mapper;
 import fr.phoenyx.arena.mappers.item.ItemMapper;
 import fr.phoenyx.arena.models.Player;
@@ -33,7 +36,7 @@ import fr.phoenyx.arena.services.CrudServiceTests;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ItemServiceTests extends CrudServiceTests<Item, Long, ItemDTO> {
+public class ItemServiceTests extends CrudServiceTests<Item, ItemDTO> {
 
     @Mock
     private ItemRepository itemRepository;
@@ -47,7 +50,7 @@ public class ItemServiceTests extends CrudServiceTests<Item, Long, ItemDTO> {
     }
 
     @Override
-    protected CrudService<Item, Long, ItemDTO> getService() {
+    protected CrudService<Item, ItemDTO> getService() {
         return itemService;
     }
 
@@ -94,5 +97,47 @@ public class ItemServiceTests extends CrudServiceTests<Item, Long, ItemDTO> {
         //Then
         assertThat(recipes).isNotNull();
         assertThat(recipes).hasSize(ItemRecipe.values().length);
+    }
+
+    @Override
+    @Test
+    public void create_shouldReturnDTO_whenOK() throws BadRequestException, EntityNotFoundException {
+        // TODO Auto-generated method stub
+        throw new NotImplementedException("Not Yet Implemented");
+    }
+
+    @Override
+    @Test
+    public void create_shouldThrowNotFoundException_whenNotExists() throws BadRequestException, EntityNotFoundException {
+        // TODO Auto-generated method stub
+        throw new NotImplementedException("Not Yet Implemented");
+    }
+
+    @Override
+    @Test
+    public void create_shouldThrowBadRequestException_whenKO() throws BadRequestException, EntityNotFoundException {
+        // TODO Auto-generated method stub
+        throw new NotImplementedException("Not Yet Implemented");
+    }
+
+    @Override
+    @Test
+    public void update_shouldReturnDTO_whenOK() throws BadRequestException, EntityNotFoundException {
+        // TODO Auto-generated method stub
+        throw new NotImplementedException("Not Yet Implemented");
+    }
+
+    @Override
+    @Test
+    public void update_shouldThrowNotFoundException_whenNotExists() throws BadRequestException, EntityNotFoundException {
+        // TODO Auto-generated method stub
+        throw new NotImplementedException("Not Yet Implemented");
+    }
+
+    @Override
+    @Test
+    public void update_shouldThrowBadRequestException_whenKO() throws BadRequestException, EntityNotFoundException {
+        // TODO Auto-generated method stub
+        throw new NotImplementedException("Not Yet Implemented");
     }
 }

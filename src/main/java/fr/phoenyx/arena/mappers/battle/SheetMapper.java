@@ -10,10 +10,4 @@ public class SheetMapper implements Mapper<Sheet, SheetDTO> {
     public SheetDTO entityToDto(Sheet entity) {
         return new SheetDTO(entity);
     }
-
-    @Override
-    public Sheet dtoToEntity(SheetDTO dto) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

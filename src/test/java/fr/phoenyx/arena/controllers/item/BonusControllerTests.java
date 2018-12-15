@@ -33,7 +33,7 @@ import fr.phoenyx.arena.services.item.BonusService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class BonusControllerTests extends CrudControllerTests<Bonus, Long, BonusDTO> {
+public class BonusControllerTests extends CrudControllerTests<Bonus, BonusDTO> {
 
     @Autowired
     private MockMvc mockMvc;
@@ -50,7 +50,7 @@ public class BonusControllerTests extends CrudControllerTests<Bonus, Long, Bonus
     }
 
     @Override
-    protected CrudService<Bonus, Long, BonusDTO> getService() {
+    protected CrudService<Bonus, BonusDTO> getService() {
         return bonusService;
     }
 

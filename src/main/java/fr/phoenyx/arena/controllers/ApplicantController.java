@@ -13,13 +13,13 @@ import fr.phoenyx.arena.services.CrudService;
 
 @RestController
 @RequestMapping(ROOT_APPLICANTS)
-public class ApplicantController extends CrudController<Applicant, Long, ApplicantDTO> {
+public class ApplicantController extends CrudController<Applicant, ApplicantDTO> {
 
     @Autowired
     private ApplicantService applicantService;
 
     @Override
-    protected CrudService<Applicant, Long, ApplicantDTO> getService() {
+    protected CrudService<Applicant, ApplicantDTO> getService() {
         return applicantService;
     }
 }

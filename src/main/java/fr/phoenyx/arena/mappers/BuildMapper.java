@@ -9,10 +9,4 @@ public class BuildMapper implements Mapper<Build, BuildDTO> {
     public BuildDTO entityToDto(Build entity) {
         return new BuildDTO(entity);
     }
-
-    @Override
-    public Build dtoToEntity(BuildDTO dto) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

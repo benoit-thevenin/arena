@@ -10,10 +10,4 @@ public class ItemMapper implements Mapper<Item, ItemDTO> {
     public ItemDTO entityToDto(Item entity) {
         return new ItemDTO(entity);
     }
-
-    @Override
-    public Item dtoToEntity(ItemDTO dto) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

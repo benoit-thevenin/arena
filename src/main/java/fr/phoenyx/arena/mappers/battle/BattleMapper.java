@@ -10,10 +10,4 @@ public class BattleMapper implements Mapper<Battle, BattleDTO> {
     public BattleDTO entityToDto(Battle entity) {
         return new BattleDTO(entity);
     }
-
-    @Override
-    public Battle dtoToEntity(BattleDTO dto) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

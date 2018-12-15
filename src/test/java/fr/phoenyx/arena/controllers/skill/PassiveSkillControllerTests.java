@@ -34,7 +34,7 @@ import fr.phoenyx.arena.services.skill.PassiveSkillService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PassiveSkillControllerTests extends CrudControllerTests<PassiveSkill, Long, PassiveSkillDTO> {
+public class PassiveSkillControllerTests extends CrudControllerTests<PassiveSkill, PassiveSkillDTO> {
 
     @Autowired
     private MockMvc mockMvc;
@@ -51,7 +51,7 @@ public class PassiveSkillControllerTests extends CrudControllerTests<PassiveSkil
     }
 
     @Override
-    protected CrudService<PassiveSkill, Long, PassiveSkillDTO> getService() {
+    protected CrudService<PassiveSkill, PassiveSkillDTO> getService() {
         return passiveSkillService;
     }
 

@@ -40,7 +40,7 @@ import fr.phoenyx.arena.services.CrudService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class BuildControllerTests extends CrudControllerTests<Build, Long, BuildDTO> {
+public class BuildControllerTests extends CrudControllerTests<Build, BuildDTO> {
 
     @Autowired
     private MockMvc mockMvc;
@@ -57,7 +57,7 @@ public class BuildControllerTests extends CrudControllerTests<Build, Long, Build
     }
 
     @Override
-    protected CrudService<Build, Long, BuildDTO> getService() {
+    protected CrudService<Build, BuildDTO> getService() {
         return buildService;
     }
 

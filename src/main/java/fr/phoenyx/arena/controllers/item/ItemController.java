@@ -21,13 +21,13 @@ import fr.phoenyx.arena.services.item.ItemService;
 
 @RestController
 @RequestMapping(ROOT_ITEMS)
-public class ItemController extends CrudController<Item, Long, ItemDTO> {
+public class ItemController extends CrudController<Item, ItemDTO> {
 
     @Autowired
     private ItemService itemService;
 
     @Override
-    protected CrudService<Item, Long, ItemDTO> getService() {
+    protected CrudService<Item, ItemDTO> getService() {
         return itemService;
     }
 

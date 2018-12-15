@@ -35,7 +35,7 @@ import fr.phoenyx.arena.services.skill.ActiveSkillService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ActiveSkillControllerTests extends CrudControllerTests<ActiveSkill, Long, ActiveSkillDTO> {
+public class ActiveSkillControllerTests extends CrudControllerTests<ActiveSkill, ActiveSkillDTO> {
 
     @Autowired
     private MockMvc mockMvc;
@@ -52,7 +52,7 @@ public class ActiveSkillControllerTests extends CrudControllerTests<ActiveSkill,
     }
 
     @Override
-    protected CrudService<ActiveSkill, Long, ActiveSkillDTO> getService() {
+    protected CrudService<ActiveSkill, ActiveSkillDTO> getService() {
         return activeSkillService;
     }
 

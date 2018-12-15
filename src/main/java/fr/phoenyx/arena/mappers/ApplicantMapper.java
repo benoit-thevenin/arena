@@ -9,10 +9,4 @@ public class ApplicantMapper implements Mapper<Applicant, ApplicantDTO> {
     public ApplicantDTO entityToDto(Applicant entity) {
         return new ApplicantDTO(entity);
     }
-
-    @Override
-    public Applicant dtoToEntity(ApplicantDTO dto) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

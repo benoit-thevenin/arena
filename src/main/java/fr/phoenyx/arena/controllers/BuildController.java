@@ -13,13 +13,13 @@ import fr.phoenyx.arena.services.CrudService;
 
 @RestController
 @RequestMapping(ROOT_BUILDS)
-public class BuildController extends CrudController<Build, Long, BuildDTO> {
+public class BuildController extends CrudController<Build, BuildDTO> {
 
     @Autowired
     private BuildService buildService;
 
     @Override
-    protected CrudService<Build, Long, BuildDTO> getService() {
+    protected CrudService<Build, BuildDTO> getService() {
         return buildService;
     }
 }

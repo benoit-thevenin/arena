@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.NotImplementedException;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -17,6 +19,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import fr.phoenyx.arena.builders.skill.PassiveSkillBuilder;
 import fr.phoenyx.arena.dtos.skill.PassiveSkillDTO;
 import fr.phoenyx.arena.enums.skill.PassiveSkillEnum;
+import fr.phoenyx.arena.exceptions.BadRequestException;
+import fr.phoenyx.arena.exceptions.EntityNotFoundException;
 import fr.phoenyx.arena.mappers.Mapper;
 import fr.phoenyx.arena.mappers.skill.PassiveSkillMapper;
 import fr.phoenyx.arena.models.Build;
@@ -28,7 +32,7 @@ import fr.phoenyx.arena.services.CrudServiceTests;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PassiveSkillServiceTests extends CrudServiceTests<PassiveSkill, Long, PassiveSkillDTO> {
+public class PassiveSkillServiceTests extends CrudServiceTests<PassiveSkill, PassiveSkillDTO> {
 
     @Mock
     private PassiveSkillRepository passiveSkillRepository;
@@ -42,7 +46,7 @@ public class PassiveSkillServiceTests extends CrudServiceTests<PassiveSkill, Lon
     }
 
     @Override
-    protected CrudService<PassiveSkill, Long, PassiveSkillDTO> getService() {
+    protected CrudService<PassiveSkill, PassiveSkillDTO> getService() {
         return passiveSkillService;
     }
 
@@ -75,5 +79,46 @@ public class PassiveSkillServiceTests extends CrudServiceTests<PassiveSkill, Lon
     @Override
     protected List<PassiveSkill> buildEntities() {
         return Arrays.asList(buildEntity());
+    }
+
+    @Override
+    @Test
+    public void create_shouldReturnDTO_whenOK() throws BadRequestException, EntityNotFoundException {
+        // TODO Auto-generated method stub
+        throw new NotImplementedException("Not Yet Implemented");
+    }
+
+    @Override
+    @Test
+    public void create_shouldThrowNotFoundException_whenNotExists() throws BadRequestException, EntityNotFoundException {
+        // TODO Auto-generated method stub
+        throw new NotImplementedException("Not Yet Implemented");
+    }
+
+    @Override
+    @Test
+    public void create_shouldThrowBadRequestException_whenKO() throws BadRequestException, EntityNotFoundException {
+        // TODO Auto-generated method stub
+        throw new NotImplementedException("Not Yet Implemented");
+    }
+
+    @Override
+    public void update_shouldReturnDTO_whenOK() throws BadRequestException, EntityNotFoundException {
+        // TODO Auto-generated method stub
+        throw new NotImplementedException("Not Yet Implemented");
+    }
+
+    @Override
+    @Test
+    public void update_shouldThrowNotFoundException_whenNotExists() throws BadRequestException, EntityNotFoundException {
+        // TODO Auto-generated method stub
+        throw new NotImplementedException("Not Yet Implemented");
+    }
+
+    @Override
+    @Test
+    public void update_shouldThrowBadRequestException_whenKO() throws BadRequestException, EntityNotFoundException {
+        // TODO Auto-generated method stub
+        throw new NotImplementedException("Not Yet Implemented");
     }
 }

@@ -14,13 +14,13 @@ import fr.phoenyx.arena.services.battle.BattleService;
 
 @RestController
 @RequestMapping(ROOT_BATTLES)
-public class BattleController extends CrudController<Battle, Long, BattleDTO> {
+public class BattleController extends CrudController<Battle, BattleDTO> {
 
     @Autowired
     private BattleService battleService;
 
     @Override
-    protected CrudService<Battle, Long, BattleDTO> getService() {
+    protected CrudService<Battle, BattleDTO> getService() {
         return battleService;
     }
 }

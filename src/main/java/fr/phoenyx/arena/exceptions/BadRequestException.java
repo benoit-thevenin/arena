@@ -1,5 +1,6 @@
 package fr.phoenyx.arena.exceptions;
 
+import fr.phoenyx.arena.dtos.GenericEntityDTO;
 
 public class BadRequestException extends Exception {
 
@@ -7,5 +8,9 @@ public class BadRequestException extends Exception {
 
     public BadRequestException(String message) {
         super(message);
+    }
+
+    public BadRequestException(String message, GenericEntityDTO entity) {
+        this(String.join(" ", message, entity.toString()));
     }
 }

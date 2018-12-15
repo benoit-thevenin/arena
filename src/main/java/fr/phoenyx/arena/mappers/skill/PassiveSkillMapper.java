@@ -10,10 +10,4 @@ public class PassiveSkillMapper implements Mapper<PassiveSkill, PassiveSkillDTO>
     public PassiveSkillDTO entityToDto(PassiveSkill entity) {
         return new PassiveSkillDTO(entity);
     }
-
-    @Override
-    public PassiveSkill dtoToEntity(PassiveSkillDTO dto) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }
