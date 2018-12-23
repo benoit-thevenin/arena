@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
+import fr.phoenyx.arena.models.social.Player;
 import lombok.Data;
 
 @Data

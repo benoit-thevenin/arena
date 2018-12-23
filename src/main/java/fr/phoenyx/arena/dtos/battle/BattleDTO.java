@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import fr.phoenyx.arena.dtos.GenericEntityDTO;
-import fr.phoenyx.arena.dtos.TeamDTO;
+import fr.phoenyx.arena.dtos.social.TeamDTO;
 import fr.phoenyx.arena.models.battle.Battle;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

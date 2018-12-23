@@ -26,10 +26,10 @@ import fr.phoenyx.arena.advices.GenericAdvice;
 import fr.phoenyx.arena.builders.battle.BattleBuilder;
 import fr.phoenyx.arena.controllers.CrudControllerTests;
 import fr.phoenyx.arena.dtos.battle.BattleDTO;
-import fr.phoenyx.arena.models.Player;
-import fr.phoenyx.arena.models.Team;
 import fr.phoenyx.arena.models.battle.Battle;
 import fr.phoenyx.arena.models.battle.Round;
+import fr.phoenyx.arena.models.social.Player;
+import fr.phoenyx.arena.models.social.Team;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.battle.BattleService;
 

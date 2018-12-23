@@ -24,8 +24,8 @@ import fr.phoenyx.arena.advices.GenericAdvice;
 import fr.phoenyx.arena.builders.skill.StrategyBuilder;
 import fr.phoenyx.arena.controllers.CrudControllerTests;
 import fr.phoenyx.arena.dtos.skill.StrategyDTO;
-import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.skill.Strategy;
+import fr.phoenyx.arena.models.social.Player;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.skill.StrategyService;
 

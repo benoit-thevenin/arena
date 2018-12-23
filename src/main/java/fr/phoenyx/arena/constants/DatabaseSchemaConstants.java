@@ -8,6 +8,7 @@ public class DatabaseSchemaConstants {
     public static final String TABLE_ACTIONS_HEROES = "ACTIONS_HEROES";
     public static final String TABLE_ACTIVE_SKILLS = "ACTIVE_SKILLS";
     public static final String TABLE_APPLICANTS = "APPLICANTS";
+    public static final String TABLE_ATTACHMENTS = "ATTACHEMENTS";
     public static final String TABLE_BATTLES = "BATTLES";
     public static final String TABLE_BONUSES = "BONUSES";
     public static final String TABLE_BUILDS = "BUILDS";
@@ -19,6 +20,7 @@ public class DatabaseSchemaConstants {
     public static final String TABLE_HERO_BUILDS = "HERO_BUILDS";
     public static final String TABLE_HERO_BUILDS_ITEMS = "HERO_BUILDS_ITEMS";
     public static final String TABLE_ITEMS = "ITEMS";
+    public static final String TABLE_MESSAGES = "MESSAGES";
     public static final String TABLE_PASSIVE_SKILLS = "PASSIVE_SKILLS";
     public static final String TABLE_PLAYERS = "PLAYERS";
     public static final String TABLE_PLAYERS_FRIENDS = "PLAYERS_FRIENDS";
@@ -27,6 +29,7 @@ public class DatabaseSchemaConstants {
     public static final String TABLE_SHEETS_EFFECTS = "SHEETS_EFFECTS";
     public static final String TABLE_STRATEGIES = "STRATEGIES";
     public static final String TABLE_TEAMS = "TEAMS";
+    public static final String TABLE_TRADE_OFFERS = "TRADE_OFFERS";
 
     public static final String COLUMN_ACTION_ORDER = "ACTION_ORDER";
     public static final String COLUMN_ACTIVE_SKILL = "ACTIVE_SKILL";

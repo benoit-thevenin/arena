@@ -4,8 +4,6 @@ import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
 import static org.mockito.Mockito.mock;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.junit.Test;
@@ -18,13 +16,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import fr.phoenyx.arena.builders.item.BonusBuilder;
 import fr.phoenyx.arena.dtos.item.BonusDTO;
-import fr.phoenyx.arena.enums.Characteristic;
+import fr.phoenyx.arena.enums.item.Characteristic;
 import fr.phoenyx.arena.exceptions.BadRequestException;
 import fr.phoenyx.arena.exceptions.EntityNotFoundException;
 import fr.phoenyx.arena.mappers.Mapper;
 import fr.phoenyx.arena.mappers.item.BonusMapper;
-import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.item.Bonus;
+import fr.phoenyx.arena.models.social.Player;
 import fr.phoenyx.arena.repositories.item.BonusRepository;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.CrudServiceTests;
@@ -73,11 +71,6 @@ public class BonusServiceTests extends CrudServiceTests<Bonus, BonusDTO> {
                 .dateCreation(LocalDateTime.now())
                 .dateModification(LocalDateTime.now())
                 .modifier(mock(Player.class)).build();
-    }
-
-    @Override
-    protected List<Bonus> buildEntities() {
-        return Arrays.asList(buildEntity());
     }
 
     @Override

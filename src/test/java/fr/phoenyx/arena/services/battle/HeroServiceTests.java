@@ -4,8 +4,6 @@ import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
 import static org.mockito.Mockito.mock;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.junit.Test;
@@ -22,10 +20,10 @@ import fr.phoenyx.arena.exceptions.BadRequestException;
 import fr.phoenyx.arena.exceptions.EntityNotFoundException;
 import fr.phoenyx.arena.mappers.Mapper;
 import fr.phoenyx.arena.mappers.battle.HeroMapper;
-import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.battle.Hero;
 import fr.phoenyx.arena.models.battle.HeroBuild;
 import fr.phoenyx.arena.models.battle.Sheet;
+import fr.phoenyx.arena.models.social.Player;
 import fr.phoenyx.arena.repositories.battle.HeroRepository;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.CrudServiceTests;
@@ -75,11 +73,6 @@ public class HeroServiceTests extends CrudServiceTests<Hero, HeroDTO> {
                 .dateCreation(LocalDateTime.now())
                 .dateModification(LocalDateTime.now())
                 .modifier(mock(Player.class)).build();
-    }
-
-    @Override
-    protected List<Hero> buildEntities() {
-        return Arrays.asList(buildEntity());
     }
 
     @Override

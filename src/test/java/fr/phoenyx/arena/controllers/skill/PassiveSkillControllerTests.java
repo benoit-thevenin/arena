@@ -25,9 +25,9 @@ import fr.phoenyx.arena.builders.skill.PassiveSkillBuilder;
 import fr.phoenyx.arena.controllers.CrudControllerTests;
 import fr.phoenyx.arena.dtos.skill.PassiveSkillDTO;
 import fr.phoenyx.arena.enums.skill.PassiveSkillEnum;
-import fr.phoenyx.arena.models.Build;
-import fr.phoenyx.arena.models.Player;
+import fr.phoenyx.arena.models.battle.Build;
 import fr.phoenyx.arena.models.skill.PassiveSkill;
+import fr.phoenyx.arena.models.social.Player;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.skill.PassiveSkillService;
 

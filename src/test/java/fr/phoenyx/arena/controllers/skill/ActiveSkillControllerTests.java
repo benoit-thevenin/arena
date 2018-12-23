@@ -25,10 +25,10 @@ import fr.phoenyx.arena.builders.skill.ActiveSkillBuilder;
 import fr.phoenyx.arena.controllers.CrudControllerTests;
 import fr.phoenyx.arena.dtos.skill.ActiveSkillDTO;
 import fr.phoenyx.arena.enums.skill.ActiveSkillEnum;
-import fr.phoenyx.arena.models.Build;
-import fr.phoenyx.arena.models.Player;
+import fr.phoenyx.arena.models.battle.Build;
 import fr.phoenyx.arena.models.skill.ActiveSkill;
 import fr.phoenyx.arena.models.skill.Strategy;
+import fr.phoenyx.arena.models.social.Player;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.skill.ActiveSkillService;
 

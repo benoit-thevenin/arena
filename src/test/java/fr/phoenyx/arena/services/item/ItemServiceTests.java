@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.NotImplementedException;
@@ -28,8 +27,8 @@ import fr.phoenyx.arena.exceptions.BadRequestException;
 import fr.phoenyx.arena.exceptions.EntityNotFoundException;
 import fr.phoenyx.arena.mappers.Mapper;
 import fr.phoenyx.arena.mappers.item.ItemMapper;
-import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.item.Item;
+import fr.phoenyx.arena.models.social.Player;
 import fr.phoenyx.arena.repositories.item.ItemRepository;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.CrudServiceTests;
@@ -82,11 +81,6 @@ public class ItemServiceTests extends CrudServiceTests<Item, ItemDTO> {
                 .dateCreation(LocalDateTime.now())
                 .dateModification(LocalDateTime.now())
                 .modifier(mock(Player.class)).build();
-    }
-
-    @Override
-    protected List<Item> buildEntities() {
-        return Arrays.asList(buildEntity());
     }
 
     @Override

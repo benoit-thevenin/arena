@@ -3,9 +3,9 @@ package fr.phoenyx.arena.builders.battle;
 import java.util.Set;
 
 import fr.phoenyx.arena.builders.GenericEntityBuilder;
-import fr.phoenyx.arena.models.Team;
 import fr.phoenyx.arena.models.battle.Battle;
 import fr.phoenyx.arena.models.battle.Round;
+import fr.phoenyx.arena.models.social.Team;
 
 public class BattleBuilder extends GenericEntityBuilder<Battle> {
 

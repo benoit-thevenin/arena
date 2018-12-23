@@ -6,7 +6,6 @@ import static org.mockito.Mockito.mock;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.junit.Test;
@@ -23,10 +22,10 @@ import fr.phoenyx.arena.exceptions.BadRequestException;
 import fr.phoenyx.arena.exceptions.EntityNotFoundException;
 import fr.phoenyx.arena.mappers.Mapper;
 import fr.phoenyx.arena.mappers.battle.BattleMapper;
-import fr.phoenyx.arena.models.Player;
-import fr.phoenyx.arena.models.Team;
 import fr.phoenyx.arena.models.battle.Battle;
 import fr.phoenyx.arena.models.battle.Round;
+import fr.phoenyx.arena.models.social.Player;
+import fr.phoenyx.arena.models.social.Team;
 import fr.phoenyx.arena.repositories.battle.BattleRepository;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.CrudServiceTests;
@@ -76,11 +75,6 @@ public class BattleServiceTests extends CrudServiceTests<Battle, BattleDTO> {
                 .dateCreation(LocalDateTime.now())
                 .dateModification(LocalDateTime.now())
                 .modifier(mock(Player.class)).build();
-    }
-
-    @Override
-    protected List<Battle> buildEntities() {
-        return Arrays.asList(buildEntity());
     }
 
     @Override

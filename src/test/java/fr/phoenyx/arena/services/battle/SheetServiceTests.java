@@ -5,7 +5,6 @@ import static org.mockito.Mockito.mock;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.junit.Test;
@@ -23,9 +22,9 @@ import fr.phoenyx.arena.exceptions.BadRequestException;
 import fr.phoenyx.arena.exceptions.EntityNotFoundException;
 import fr.phoenyx.arena.mappers.Mapper;
 import fr.phoenyx.arena.mappers.battle.SheetMapper;
-import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.battle.Hero;
 import fr.phoenyx.arena.models.battle.Sheet;
+import fr.phoenyx.arena.models.social.Player;
 import fr.phoenyx.arena.repositories.battle.SheetRepository;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.CrudServiceTests;
@@ -81,11 +80,6 @@ public class SheetServiceTests extends CrudServiceTests<Sheet, SheetDTO> {
                 .dateCreation(LocalDateTime.now())
                 .dateModification(LocalDateTime.now())
                 .modifier(mock(Player.class)).build();
-    }
-
-    @Override
-    protected List<Sheet> buildEntities() {
-        return Arrays.asList(buildEntity());
     }
 
     @Override

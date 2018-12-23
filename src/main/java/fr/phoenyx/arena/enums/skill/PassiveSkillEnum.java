@@ -1,6 +1,6 @@
 package fr.phoenyx.arena.enums.skill;
 
-import fr.phoenyx.arena.enums.Characteristic;
+import fr.phoenyx.arena.enums.item.Characteristic;
 
 public enum PassiveSkillEnum {
     BRUTE("Brute", "Increase strength by 20%", Characteristic.STRENGTH, null);

@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
-import fr.phoenyx.arena.enums.Characteristic;
+import fr.phoenyx.arena.enums.item.Characteristic;
 import fr.phoenyx.arena.models.GenericEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

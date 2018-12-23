@@ -1,7 +1,7 @@
 package fr.phoenyx.arena.dtos.skill;
 
-import fr.phoenyx.arena.dtos.CharacteristicDTO;
 import fr.phoenyx.arena.dtos.GenericEntityDTO;
+import fr.phoenyx.arena.dtos.item.CharacteristicDTO;
 import fr.phoenyx.arena.enums.skill.PassiveSkillEnum;
 import fr.phoenyx.arena.models.skill.PassiveSkill;
 import lombok.Data;

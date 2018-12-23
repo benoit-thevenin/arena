@@ -17,8 +17,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import fr.phoenyx.arena.enums.skill.ActiveSkillEnum;
-import fr.phoenyx.arena.models.Build;
 import fr.phoenyx.arena.models.GenericEntity;
+import fr.phoenyx.arena.models.battle.Build;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

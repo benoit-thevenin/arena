@@ -1,6 +1,6 @@
 package fr.phoenyx.arena.enums.skill;
 
-import fr.phoenyx.arena.enums.Type;
+import fr.phoenyx.arena.enums.battle.Type;
 
 public enum ActiveSkillEnum {
     PHYSICAL_STRIKE("Physical strike", "A basic physical strike", 0, 0, 10, 1, false, Type.PHYSICAL, null),

@@ -4,8 +4,6 @@ import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
 import static org.mockito.Mockito.mock;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.junit.Test;
@@ -23,9 +21,9 @@ import fr.phoenyx.arena.exceptions.BadRequestException;
 import fr.phoenyx.arena.exceptions.EntityNotFoundException;
 import fr.phoenyx.arena.mappers.Mapper;
 import fr.phoenyx.arena.mappers.skill.PassiveSkillMapper;
-import fr.phoenyx.arena.models.Build;
-import fr.phoenyx.arena.models.Player;
+import fr.phoenyx.arena.models.battle.Build;
 import fr.phoenyx.arena.models.skill.PassiveSkill;
+import fr.phoenyx.arena.models.social.Player;
 import fr.phoenyx.arena.repositories.skill.PassiveSkillRepository;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.CrudServiceTests;
@@ -74,11 +72,6 @@ public class PassiveSkillServiceTests extends CrudServiceTests<PassiveSkill, Pas
                 .dateCreation(LocalDateTime.now())
                 .dateModification(LocalDateTime.now())
                 .modifier(mock(Player.class)).build();
-    }
-
-    @Override
-    protected List<PassiveSkill> buildEntities() {
-        return Arrays.asList(buildEntity());
     }
 
     @Override

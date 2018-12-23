@@ -1,7 +1,7 @@
 package fr.phoenyx.arena.builders.item;
 
 import fr.phoenyx.arena.builders.GenericEntityBuilder;
-import fr.phoenyx.arena.enums.Characteristic;
+import fr.phoenyx.arena.enums.item.Characteristic;
 import fr.phoenyx.arena.models.item.Bonus;
 
 public class BonusBuilder extends GenericEntityBuilder<Bonus> {

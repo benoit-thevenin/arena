@@ -1,7 +1,7 @@
 package fr.phoenyx.arena.dtos.skill;
 
 import fr.phoenyx.arena.dtos.GenericEntityDTO;
-import fr.phoenyx.arena.dtos.TypeDTO;
+import fr.phoenyx.arena.dtos.battle.TypeDTO;
 import fr.phoenyx.arena.enums.skill.ActiveSkillEnum;
 import fr.phoenyx.arena.models.skill.ActiveSkill;
 import lombok.Data;

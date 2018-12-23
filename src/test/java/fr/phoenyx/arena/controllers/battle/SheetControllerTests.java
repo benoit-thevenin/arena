@@ -26,9 +26,9 @@ import fr.phoenyx.arena.builders.battle.SheetBuilder;
 import fr.phoenyx.arena.controllers.CrudControllerTests;
 import fr.phoenyx.arena.dtos.battle.SheetDTO;
 import fr.phoenyx.arena.enums.skill.Effect;
-import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.battle.Hero;
 import fr.phoenyx.arena.models.battle.Sheet;
+import fr.phoenyx.arena.models.social.Player;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.battle.SheetService;
 

@@ -2,7 +2,7 @@ package fr.phoenyx.arena.builders.skill;
 
 import fr.phoenyx.arena.builders.GenericEntityBuilder;
 import fr.phoenyx.arena.enums.skill.PassiveSkillEnum;
-import fr.phoenyx.arena.models.Build;
+import fr.phoenyx.arena.models.battle.Build;
 import fr.phoenyx.arena.models.skill.PassiveSkill;
 
 

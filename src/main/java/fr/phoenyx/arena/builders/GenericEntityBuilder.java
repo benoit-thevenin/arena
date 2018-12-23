@@ -3,7 +3,7 @@ package fr.phoenyx.arena.builders;
 import java.time.LocalDateTime;
 
 import fr.phoenyx.arena.models.GenericEntity;
-import fr.phoenyx.arena.models.Player;
+import fr.phoenyx.arena.models.social.Player;
 
 public abstract class GenericEntityBuilder<E extends GenericEntity> {
 

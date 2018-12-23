@@ -24,9 +24,9 @@ import fr.phoenyx.arena.advices.GenericAdvice;
 import fr.phoenyx.arena.builders.item.BonusBuilder;
 import fr.phoenyx.arena.controllers.CrudControllerTests;
 import fr.phoenyx.arena.dtos.item.BonusDTO;
-import fr.phoenyx.arena.enums.Characteristic;
-import fr.phoenyx.arena.models.Player;
+import fr.phoenyx.arena.enums.item.Characteristic;
 import fr.phoenyx.arena.models.item.Bonus;
+import fr.phoenyx.arena.models.social.Player;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.item.BonusService;
 

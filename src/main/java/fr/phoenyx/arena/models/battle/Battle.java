@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import fr.phoenyx.arena.models.GenericEntity;
-import fr.phoenyx.arena.models.Team;
+import fr.phoenyx.arena.models.social.Team;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

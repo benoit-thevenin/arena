@@ -4,8 +4,6 @@ import static fr.phoenyx.arena.constants.GlobalConstants.GENERIC_ID;
 import static org.mockito.Mockito.mock;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.junit.Test;
@@ -22,8 +20,8 @@ import fr.phoenyx.arena.exceptions.BadRequestException;
 import fr.phoenyx.arena.exceptions.EntityNotFoundException;
 import fr.phoenyx.arena.mappers.Mapper;
 import fr.phoenyx.arena.mappers.skill.StrategyMapper;
-import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.skill.Strategy;
+import fr.phoenyx.arena.models.social.Player;
 import fr.phoenyx.arena.repositories.skill.StrategyRepository;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.CrudServiceTests;
@@ -73,11 +71,6 @@ public class StrategyServiceTests extends CrudServiceTests<Strategy, StrategyDTO
                 .dateCreation(LocalDateTime.now())
                 .dateModification(LocalDateTime.now())
                 .modifier(mock(Player.class)).build();
-    }
-
-    @Override
-    protected List<Strategy> buildEntities() {
-        return Arrays.asList(buildEntity());
     }
 
     @Override

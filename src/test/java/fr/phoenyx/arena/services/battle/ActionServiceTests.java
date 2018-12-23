@@ -7,7 +7,6 @@ import static org.mockito.Mockito.when;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.junit.Test;
@@ -25,10 +24,10 @@ import fr.phoenyx.arena.exceptions.BadRequestException;
 import fr.phoenyx.arena.exceptions.EntityNotFoundException;
 import fr.phoenyx.arena.mappers.Mapper;
 import fr.phoenyx.arena.mappers.battle.ActionMapper;
-import fr.phoenyx.arena.models.Player;
 import fr.phoenyx.arena.models.battle.Action;
 import fr.phoenyx.arena.models.battle.Hero;
 import fr.phoenyx.arena.models.skill.ActiveSkill;
+import fr.phoenyx.arena.models.social.Player;
 import fr.phoenyx.arena.repositories.battle.ActionRepository;
 import fr.phoenyx.arena.services.CrudService;
 import fr.phoenyx.arena.services.CrudServiceTests;
@@ -82,11 +81,6 @@ public class ActionServiceTests extends CrudServiceTests<Action, ActionDTO> {
                 .dateCreation(LocalDateTime.now())
                 .dateModification(LocalDateTime.now())
                 .modifier(mock(Player.class)).build();
-    }
-
-    @Override
-    protected List<Action> buildEntities() {
-        return Arrays.asList(buildEntity());
     }
 
     @Override
